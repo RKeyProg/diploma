@@ -1,0 +1,177 @@
+.side-bar {
+	min-width: 227px;
+	height: 100vh;
+	background-color: #303F9F;
+	padding: 25px 0 15px;
+	color: #fff;
+}
+
+.side-bar__container {
+	width: 85%;
+	height: 100%;
+	margin: 0 auto;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.side-bar__title {
+	font-weight: 500;
+	font-size: 21px;
+	line-height: 156%;
+	letter-spacing: 0.04em;
+}
+
+.side-bar__decor {
+	pointer-events: none;
+}
+
+.side-bar__vert-text {
+	display: flex;
+	position: absolute;
+	bottom: 0;
+	flex-direction: column;
+	margin-bottom: -10vh;
+	margin-left: -1.5vw;
+
+	& p {
+		font-size: 200px;
+		font-weight: 700;
+		color: rgba(255, 255, 255, 0.03);
+		line-height: 260px;
+	}
+}
+
+.side-bar__socials-list {
+	display: flex;
+	justify-content: flex-end;
+}
+
+.side-bar__header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	width: 100%;
+}
+
+.side-bar__logo {
+	width: 50px;
+	height: 50px;
+}
+
+.side-bar__logo-img {
+	fill: none;
+	stroke: #fff;
+	stroke-width: 3;
+	stroke-linecap: round;
+	stroke-miterlimit: 10;
+	filter: drop-shadow(1px 2px 4px rgba(0, 0, 0, 0.25));
+}
+
+.side-bar__buttons {
+	display: flex;
+}
+
+.side-bar__btn {
+	font-weight: 600;
+	font-size: 12px;
+	text-transform: uppercase;
+	margin-right: 10px;
+
+	&.active {
+		color: #FF4081;
+	}
+
+	&:last-child {
+		margin-right: 0;
+	}
+
+	&:hover {
+		text-decoration: underline;
+		cursor: pointer;
+	}
+}
+
+.socials-list__item {
+	width: 20px;
+	height: 20px;
+	margin-right: 7px;
+
+	&:last-child {
+		margin-right: 0;
+	}
+
+	&:hover {
+		.socials-list__icon {
+			fill: #FF4081;
+		}
+	}
+}
+
+.socials-list__icon {
+	transition: all .3s ease;
+	fill: #fff;
+	filter: drop-shadow(1px 2px 4px rgba(0, 0, 0, 0.25));
+}
+
+.links-list {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+}
+
+.links-list__item {
+	width: 100%;
+	margin-bottom: 30px;
+
+	&:last-child {
+		margin-bottom: 0;
+	}
+}
+
+.links-list__link {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.links-list__icon {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: relative;
+	bottom: 0;
+	width: 80px;
+	height: 80px;
+	margin-bottom: 10px;
+}
+
+.links-list__gear-border, .links-list__itschool-comp, .links-list__courses {
+	fill: #fff;
+	position: absolute;
+}
+
+.links-list__gear_pink, .links-list__itschool_pink, .links-list__courses_pink { 
+	fill: #FF4081;
+	position: absolute;
+}
+
+.links-list__itschool {
+	fill: #FF4081;
+
+	& #comp {
+		fill: #fff;
+	}
+}
+
+#itschool {
+	fill: #000;
+}
+
+.links-list__item-name {
+	font-size: 14px;
+	font-weight: bold;
+	line-height: 150.69%;
+	letter-spacing: 0.05em;
+}

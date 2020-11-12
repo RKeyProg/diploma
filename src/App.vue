@@ -1,32 +1,37 @@
-<template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view />
-  </div>
+<template lang="pug">
+  .app-container
+    router-view(name="sideBar")
+    .content
+      router-view.component
 </template>
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+<style lang="scss" scoped>
+  .app-container {
+    display: flex;
+  }
 
-#nav {
-  padding: 30px;
+  .content {
+    width: calc(100vw - 227px);
+    background: url("./images/content/BG.jpg");
+    position: relative;
+    z-index: 5;
 
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
+    &::before {
+      content: '';
+      display: block;
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      background: rgba(255, 255, 255, .97);
     }
   }
-}
+
+  .component {
+    position: relative;
+    z-index: 10;
+  }
 </style>
+
+<style lang="scss" src="./App.scss"></style>

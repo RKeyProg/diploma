@@ -1,0 +1,22 @@
+.main-header__user {
+	display: flex;
+}
+
+.main-header__user-data {
+	font-size: 16px;
+	line-height: 19px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+.main-header__user-name {
+	font-weight: 500;
+	color: #212121;
+	margin-bottom: 5px;
+}
+
+.main-header__user-group {
+	font-weight: normal;
+	color: #757575;
+}

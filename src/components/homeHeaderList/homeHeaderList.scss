@@ -1,0 +1,51 @@
+.list {
+	width: 58vw;
+	height: 100%;
+	border-radius: 15px;
+	overflow: hidden;
+	box-shadow: 0px 0px 0px 1px rgba(189, 189, 189, 1);
+	display: flex;
+	justify-content: space-between;
+}
+
+.item {
+	height: 100%;
+	width: 100%;
+	background: #fff;
+	display: flex;
+	align-items: center;
+	color: #757575;
+	font-weight: 500;
+	font-size: 14px;
+	line-height: 170%;
+	text-align: center;
+	letter-spacing: 0.1em;
+
+	&.active {
+		background: #FF4081;
+		color: #212121;
+		border-right: 1px solid #BDBDBD;
+	}
+
+	&:hover {
+		color: #212121;
+	}
+	
+	&:last-child, &.active {
+		&::after {
+			display: none;
+		}
+	}
+
+	&::after {
+		content: '';
+		display: block;
+		width: 1px;
+		height: 25px;
+		background: #BDBDBD;
+	}
+}
+
+.link {
+	width: 100%;
+}
