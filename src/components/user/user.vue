@@ -1,9 +1,9 @@
 <template lang="pug">
-	router-link(to="/about").main-header__user
+	router-link(to="/login").main-header__user
 		.main-header__user-data
 			.main-header__user-name Кирилл Радкевич
 			.main-header__user-group 8к2411
-		avatar
+		avatar(active)
 </template>
 
 <script>

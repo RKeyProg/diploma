@@ -21,6 +21,14 @@ const routes = [
       default: () => import("../views/About.vue"),
       sideBar: sideBar
     }
+  },
+  {
+    path: "/login",
+    name: "Login",
+    components: {
+      default: () => import("../views/Login.vue"),
+      sideBar: sideBar
+    }
   }
 ];
 

@@ -2,6 +2,8 @@
 	.container
 		ul.list
 			li.item
+				task(add)
+			li.item
 				task
 			li.item
 				task
@@ -24,16 +26,4 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-.list {
-	overflow: hidden;
-}
-
-.item {
-	margin-right: 20px;
-
-	&:last-child {
-		margin-right: 0;
-	}
-}
-</style>
+<style lang="scss" scoped src="./homeTaskList.scss"></style>
