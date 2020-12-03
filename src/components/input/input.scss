@@ -1,0 +1,44 @@
+.input {
+	font-weight: 500;
+	font-size: 16px;
+	line-height: 170%;
+	letter-spacing: 0.1em;
+	color: #757575;
+	padding: 1.33vh 1.736vw;
+	border-radius: 15px;
+	width: 28.125vw;
+	outline: none;
+	border: 1px solid #BDBDBD;
+	margin-bottom: 2.22vh;
+}
+
+.checkbox {
+	display: none;
+
+	&:checked {
+		~ .check-picture .check-picture_active {
+			display: block;
+		}
+	}
+}
+
+.check-picture {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 16px;
+	height: 16px;
+	background: #fff;
+	border: 1px solid #bdbdbd;
+
+	&_active {
+		display: none;
+		width: 12px;
+		height: 12px;
+		fill: #FF4081;
+	}
+
+	&:hover {
+		cursor: pointer;
+	}
+}

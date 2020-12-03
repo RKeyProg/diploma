@@ -1,0 +1,12 @@
+.list {
+	overflow: hidden;
+	height: 25.55vh;
+}
+
+.item {
+	margin-right: 1.736vw;
+
+	&:last-child {
+		margin-right: 0;
+	}
+}

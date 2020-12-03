@@ -1,0 +1,73 @@
+.day {
+	width: 6.25vw;
+	height: 13.33vh;
+	background-color: #3F51B5;
+	border-radius: 15px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	font-weight: 500;
+	line-height: 140%;
+	letter-spacing: 0.1em;
+	padding: 1.33vh 0.347vw;
+	transition-property: width, height;
+	transition: width .5s ease, height .5s ease;
+	overflow: hidden;
+
+	&.active {
+		width: 13.888vw;
+		height: 25.55vh;
+		background-color: #fff;
+		justify-content: space-between;
+
+		& .day-name {
+			font-size: 14px;
+			color: #757575;
+		}
+
+		& .number {
+			color: #757575;
+		}
+	}
+
+	&:hover {
+		cursor: pointer;
+	}
+}
+
+.text {
+	font-size: 14px;
+	text-align: center;
+}
+
+.number {
+	font-size: 16px;
+	color: #fff;
+	margin-bottom: 5px;
+}
+
+.day-name {
+	font-size: 18px;
+	color: #fff;
+}
+
+.date {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	color: #757575;
+}
+
+.fade-enter, .fade-leave-to {
+	opacity: 0;
+}
+
+.fade-enter-to, .fade-leave {
+	opacity: 1;
+}
+
+.fade-enter-active {
+	transition: all .5s ease .5s;
+}

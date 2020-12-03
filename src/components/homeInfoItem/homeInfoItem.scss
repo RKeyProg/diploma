@@ -1,5 +1,8 @@
 .container {
-	width: 340px;
+	margin: 0 1.736vw;
+	padding: 5px 0;
+	width: 20.138vw;
+	max-height: 100%;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -8,15 +11,15 @@
 	font-size: 16px;
 	line-height: 140%;
 	letter-spacing: 0.1em;
-	border-right: 1px solid #BDBDBD;
 }
 
 .date {
 	color: #757575;
-	margin-bottom: 7px;
+	margin-bottom: 0.77vh;
 }
 
 .text {
-	width: 290px;
+	width: 100%;
 	color: #212121;
+	text-overflow: ellipsis;
 }

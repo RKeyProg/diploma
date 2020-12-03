@@ -1,7 +1,7 @@
 <template lang="pug">
 	.info
-		sectionTitle(title="Объявления").title
-		homeInfoList
+		section-title(title="Объявления")
+		home-info-list
 </template>
 
 <script>
@@ -14,8 +14,4 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-.info {
-	margin-bottom: 20px;
-}
-</style>
+<style lang="scss" scoped src="./homeInfo.scss"></style>

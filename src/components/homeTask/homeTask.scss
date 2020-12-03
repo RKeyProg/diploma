@@ -1,0 +1,33 @@
+.task__container {
+	width: 28.125vw;
+	height: 26.666vh;
+	border-radius: 15px;
+	background: #3F51B5;
+	flex-shrink: 0;
+}
+
+.task__container_add {
+	background: #fff;
+	box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.25);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	&::after {
+		content: '+';
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		font-size: 50px;
+		font-weight: 100;
+		width: 7vw;
+		height: 7vw;
+		border-radius: 50%;
+		color: #FF4081;
+		border: 2px solid #FF4081;
+	}
+
+	&:hover {
+		cursor: pointer;
+	}
+}

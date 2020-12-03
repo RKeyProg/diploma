@@ -1,0 +1,33 @@
+.photo {
+	width: 3.47vw;
+	height: 3.47vw;
+	margin-left: 1.18vw;
+	overflow: hidden;
+	position: relative;
+
+	&-img {
+		border-radius: 50%;
+	}
+}
+
+.photo-active {
+	width: 1.11vw;
+	height: 1.11vw;
+	border-radius: 50%;
+	background: #F9FAFB;
+	position: absolute;
+	top: 0;
+	right: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	&::after {
+		content: '';
+		display: block;
+		width: 0.694vw;
+		height: 0.694vw;
+		border-radius: 50%;
+		background: #FF4081;
+	}
+}

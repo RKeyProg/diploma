@@ -1,20 +1,18 @@
 <template lang="pug">
 	.photo
 		img(src="../../images/content/avatar.jpg").photo-img
+		div(v-show="active").photo-active
 </template>
 
 <script>
 export default {
-
+	props: {
+		active: {
+			type: Boolean,
+			default: false,
+		}
+	}
 }
 </script>
 
-<style lang="scss" scoped>
-.photo {
-	width: 42px;
-	height: 100%;
-	border-radius: 50%;
-	margin-left: 17px;
-	overflow: hidden;
-}
-</style>
+<style lang="scss" scoped src="./avatar.scss"></style>
