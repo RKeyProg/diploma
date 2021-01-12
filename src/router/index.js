@@ -23,6 +23,14 @@ const routes = [
     }
   },
   {
+    path: "/tasks",
+    name: "Tasks",
+    components: {
+      default: () => import("../views/Tasks.vue"),
+      sideBar: sideBar
+    }
+  },
+  {
     path: "/login",
     name: "Login",
     components: {

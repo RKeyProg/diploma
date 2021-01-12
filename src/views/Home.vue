@@ -1,9 +1,9 @@
 <template lang="pug">
-  .home
-    homeHeader
-    homeTaskList
-    homeInfo
-    homeCelendar
+.home
+  homeHeader(activePage="1")
+  homeTaskList
+  homeInfo
+  homeCelendar
 </template>
 
 <script>
@@ -14,7 +14,10 @@ import homeCelendar from "../components/homeСalendar";
 export default {
   name: "Home",
   components: {
-    homeHeader, homeTaskList, homeInfo, homeCelendar
+    homeHeader,
+    homeTaskList,
+    homeInfo,
+    homeCelendar
   }
 };
 </script>

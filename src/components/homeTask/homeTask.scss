@@ -1,9 +1,35 @@
 .task__container {
+	padding: 15px;
 	width: 28.125vw;
 	height: 26.666vh;
 	border-radius: 15px;
 	background: #3F51B5;
 	flex-shrink: 0;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.task__container-image {
+	width: 30px;
+	height: 30px;
+	fill: #fff;
+	align-self: flex-start;
+}
+
+.task__container-send {
+	width: 20px;
+	height: 20px;
+	fill: #FF4081;
+	align-self: flex-end;
+}
+
+.task__container-title {
+	color: #fff;
+	font-weight: normal;
+	font-size: 22px;
+	line-height: 26px;
 }
 
 .task__container_add {

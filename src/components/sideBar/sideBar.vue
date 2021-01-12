@@ -3,7 +3,7 @@
 		.side-bar__container
 			.side-bar__header
 				.side-bar__logo
-					svg(class='side-bar__logo-img' viewBox="0 0 50 50" preserveAspectRatio="none")
+					svg(class='side-bar__logo-img' viewBox="0 0 50.001 50.001" preserveAspectRatio="none")
 						use(xlink:href=`../../images/icons/logo.svg#logo`)
 				.side-bar__lenguages
 					.side-bar__buttons
@@ -14,17 +14,17 @@
 				li.links-list__item
 					router-link(to="/about").links-list__link
 						.links-list__icon
-							svg(class='links-list__icon-border-img links-list__gear-border' viewBox="0 0 170.000000 173.000000" preserveAspectRatio="none")
+							svg(class='links-list__icon-border-img links-list__gear-border' viewBox="0 0 170.001 173.001" preserveAspectRatio="none")
 								use(xlink:href=`../../images/icons/gearBorder.svg#gearBorder`)
-							svg(class='links-list__icon-gear-img links-list__gear_pink' viewBox="0 0 170.000000 173.000000" preserveAspectRatio="none")
+							svg(class='links-list__icon-gear-img links-list__gear_pink' viewBox="0 0 170.001 173.001" preserveAspectRatio="none")
 								use(xlink:href=`../../images/icons/gear.svg#gear`)
 						.links-list__item-name Ресурсный центр
 				li.links-list__item
 					a(href="#").links-list__link
 						.links-list__icon
-							svg(class='links-list__itschool-comp' viewBox="0 0 211.000000 161.000000" preserveAspectRatio="none")
+							svg(class='links-list__itschool-comp' viewBox="0 0 211.001 161.001" preserveAspectRatio="none")
 								use(xlink:href=`../../images/icons/itschoolComp.svg#itschoolComp`)
-							svg(class='links-list__itschool_pink' viewBox="0 0 211.000000 161.000000" preserveAspectRatio="none")
+							svg(class='links-list__itschool_pink' viewBox="0 0 211.001 161.001" preserveAspectRatio="none")
 								use(xlink:href=`../../images/icons/itschoolSquere.svg#itschoolSquere`)
 						.links-list__item-name IT школа МРК
 				li.links-list__item
@@ -38,15 +38,15 @@
 			ul.side-bar__socials-list
 				li.socials-list__item
 					a(href="#").socials-list__link
-						svg(class='socials-list__icon' viewBox="0 0 512 512" preserveAspectRatio="none")
+						svg(class='socials-list__icon' viewBox="0 0 512.001 512.001" preserveAspectRatio="none")
 							use(xlink:href=`../../images/icons/twitter.svg#twitter`)
 				li.socials-list__item
 					a(href="#").socials-list__link
-						svg(class='socials-list__icon' viewBox="0 0 512 512" preserveAspectRatio="none")
+						svg(class='socials-list__icon' viewBox="0 0 512.001 512.001" preserveAspectRatio="none")
 							use(xlink:href=`../../images/icons/facebook.svg#facebook`)
 				li.socials-list__item
 					a(href="#").socials-list__link
-						svg(class='socials-list__icon' viewBox="0 0 512 512" preserveAspectRatio="none")
+						svg(class='socials-list__icon' viewBox="0 0 512.001 512.001" preserveAspectRatio="none")
 							use(xlink:href=`../../images/icons/instagram.svg#instagram`)
 		.side-bar__decor
 			.side-bar__vert-text

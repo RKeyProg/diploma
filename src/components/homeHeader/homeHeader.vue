@@ -1,19 +1,26 @@
 <template lang="pug">
-	.header
-		.header__container
-			homeHeaderList
-			user
+.header
+  .header__container
+    homeHeaderList(:activePage="activePage")
+    user
 </template>
 
 <script>
-import user from '../user';
-import homeHeaderList from '../homeHeaderList';
+import user from "../user";
+import homeHeaderList from "../homeHeaderList";
 export default {
-	name: "homeHeader",
-	components: {
-		user, homeHeaderList
-	}
-}
+  name: "homeHeader",
+  props: {
+    activePage: {
+      type: String,
+      default: "1"
+    }
+  },
+  components: {
+    user,
+    homeHeaderList
+  }
+};
 </script>
 
 <style lang="scss" scoped src="./homeHeader.scss"></style>
