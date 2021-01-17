@@ -2,7 +2,7 @@
 	section.side-bar
 		.side-bar__container
 			.side-bar__header
-				.side-bar__logo
+				router-link(to="/").side-bar__logo
 					svg(class='side-bar__logo-img' viewBox="0 0 50.001 50.001" preserveAspectRatio="none")
 						use(xlink:href=`../../images/icons/logo.svg#logo`)
 				.side-bar__lenguages
@@ -12,7 +12,7 @@
 			.side-bar__title Минский #[br] радиотехнический #[br] колледж
 			ul.side-bar__list.links-list
 				li.links-list__item
-					router-link(to="/about").links-list__link
+					router-link(to="/Visualization").links-list__link
 						.links-list__icon
 							svg(class='links-list__icon-border-img links-list__gear-border' viewBox="0 0 170.001 173.001" preserveAspectRatio="none")
 								use(xlink:href=`../../images/icons/gearBorder.svg#gearBorder`)

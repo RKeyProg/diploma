@@ -15,10 +15,10 @@ const routes = [
     }
   },
   {
-    path: "/about",
-    name: "About",
+    path: "/Visualization",
+    name: "Visualization",
     components: {
-      default: () => import("../views/About.vue"),
+      default: () => import("../views/Visualization.vue"),
       sideBar: sideBar
     }
   },

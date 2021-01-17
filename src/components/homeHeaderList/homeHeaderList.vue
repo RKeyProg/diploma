@@ -12,7 +12,7 @@ nav.nav
 <script>
 export default {
   props: {
-    activePage: String,
+    activePage: String
   },
   data() {
     return {
@@ -21,33 +21,33 @@ export default {
           id: 1,
           title: "Главная",
           active: false,
-          page: "/",
+          page: "/"
         },
         {
           id: 2,
           title: "Задания",
           active: false,
-          page: "/tasks",
+          page: "/tasks"
         },
         {
           id: 3,
           title: "Материалы",
           active: false,
-          page: "/materials",
+          page: "/materials"
         },
         {
           id: 4,
           title: "Методичка",
           active: false,
-          page: "/manual",
+          page: "/manual"
         },
         {
           id: 5,
           title: "Контакты",
           active: false,
-          page: "/contacts",
-        },
-      ],
+          page: "/contacts"
+        }
+      ]
     };
   }
 };
