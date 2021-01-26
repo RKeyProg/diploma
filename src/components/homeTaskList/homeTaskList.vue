@@ -1,28 +1,43 @@
 <template lang="pug">
-.container
-  ul.list
-    li.item
-      task(add)
-    li.item
-      task(taskType='brain')
-    li.item
-      task(taskType='settings')
-    li.item
-      task
-    li.item
-      task
-    li.item
-      task
-    li.item
-      task
+.task-container
+  splide(:options="options")
+    splide-slide
+      task(taskType="brain" link="/")
+    splide-slide
+      task(taskType="settings" link="/")
+    splide-slide
+      task(link="/")
+    splide-slide
+      task(link="/")
+    splide-slide
+      task(link="/")
 </template>
 
 <script>
 import task from "../homeTask";
+import { Splide, SplideSlide } from "@splidejs/vue-splide";
+
 export default {
   components: {
-    task
-  }
+    task,
+    Splide,
+    SplideSlide,
+  },
+  data() {
+    return {
+      options: {
+        autoWidth: true,
+        arrows: false,
+        pagination: false,
+        rewind: true,
+        gap: "25px",
+        padding: {
+          left: "2.08vw",
+          right: "2.08vw",
+        },
+      },
+    };
+  },
 };
 </script>
 

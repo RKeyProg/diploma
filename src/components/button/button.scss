@@ -14,4 +14,34 @@
 	&:hover {
 		background: #FF4081;
 	}
+
+	&:disabled {
+		background: #bdbdbd;
+
+		&:hover {
+			background: #bdbdbd;
+		}
+	}
+}
+
+.btn-type {
+	align-self: center;
+	justify-self: center;
+	width: 25px;
+	height: 25px;
+	border-radius: 50%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background: #303F9F;
+
+	&__img {
+		width: 13px;
+		height: 13px;
+		fill: #fff;
+	}
+
+	&_exit {
+		background: #FF4081;
+	}
 }

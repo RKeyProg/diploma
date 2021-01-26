@@ -32,7 +32,6 @@ export default {
   height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   overflow: hidden;
 }
 </style>

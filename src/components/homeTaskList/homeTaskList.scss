@@ -1,11 +1,8 @@
-.item {
-	margin-right: 1.736vw;
+* {
+	outline: none;
+}
 
-	&:last-child {
-		margin-right: 0;
-	}
-
-	&:first-child {
-		margin-left: 2.08vw;
-	}
+.task-container {
+	user-select: none;
+	margin-bottom: 2.7vh;
 }

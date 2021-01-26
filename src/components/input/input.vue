@@ -4,20 +4,23 @@ label
     :placeholder="title",
     v-bind="$attrs",
     :type="fieldType",
-    :class="['input', { checkbox: fieldType === 'checkBox' }]",
+    :class="['input', { checkbox: fieldType === 'checkBox', error: !!errorMessage }]",
     :value="value",
     @input="$emit('input', $event.target.value)"
   )
-  span.check-picture(
-    v-if="fieldType === 'checkBox'",
-    :value="value",
-    @input="$emit('input', $event.target.value)"
-  )
-    svg.check-picture_active(
-      viewBox="0 0 352.62 352.62",
-      preserveAspectRatio="none"
+  .input__error-message {{ errorMessage }}
+
+  div(v-if="fieldType === 'checkBox'").check-input
+    span.check-picture(
+      :value="value",
+      @input="$emit('input', $event.target.value)"
     )
-      use(xlink:href=`../../images/icons/checkMark.svg#check`)
+      svg.check-picture_active(
+        viewBox="0 0 352.62 352.62",
+        preserveAspectRatio="none"
+      )
+        use(xlink:href=`../../images/icons/checkMark.svg#check`)
+    .check-text {{ title }}
 </template>
 
 <script>
@@ -32,6 +35,10 @@ export default {
       default: "text"
     },
     value: {
+      type: String,
+      default: ""
+    },
+    errorMessage: {
       type: String,
       default: ""
     }

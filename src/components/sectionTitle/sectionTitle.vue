@@ -1,16 +1,16 @@
 <template lang="pug">
-	.title {{title}}
+.title {{ title }}
 </template>
 
 <script>
 export default {
-	props: {
-		title: {
+  props: {
+    title: {
       type: String,
       default: ""
     }
-	}
-}
+  }
+};
 </script>
 
 <style lang="scss" scoped src="./sectionTitle.scss"></style>

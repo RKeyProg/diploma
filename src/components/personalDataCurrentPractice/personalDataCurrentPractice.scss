@@ -1,0 +1,18 @@
+.current-practice__data {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.current-practice__title {
+	font-weight: 500;
+	font-size: 22px;
+	margin-bottom: 5px;
+}
+
+.current-practice__date {
+	font-weight: normal;
+	font-size: 18px;
+	line-height: 21px;
+	color: #757575;
+}

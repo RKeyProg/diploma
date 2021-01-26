@@ -8,6 +8,9 @@
 <script>
 import homeHeader from "../components/homeHeader";
 import * as THREE from "three";
+import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
+import { OBJLoader } from "three/examples/jsm/loaders/OBJLoader";
+import { MTLLoader } from "three/examples/jsm/loaders/MTLLoader";
 
 export default {
   name: "Visualization",
@@ -27,44 +30,99 @@ export default {
       const canvas = document.querySelector("#canvas");
       const renderer = new THREE.WebGLRenderer({ canvas });
 
-      const fov = 75;
+      const fov = 45;
       const aspect = 2; // the canvas default
       const near = 0.1;
-      const far = 5;
+      const far = 100;
       const camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
-      camera.position.z = 2;
+      camera.position.set(0, 10, 20);
+
+      const controls = new OrbitControls(camera, canvas);
+      controls.target.set(0, 5, 0);
+      controls.update();
 
       const scene = new THREE.Scene();
+      scene.background = new THREE.Color("white");
+
+      {
+        const skyColor = 0xb1e1ff; // light blue
+        const groundColor = 0xbdbdbd; // brownish orange
+        const intensity = 1;
+        const light = new THREE.HemisphereLight(
+          skyColor,
+          groundColor,
+          intensity
+        );
+        scene.add(light);
+      }
 
       {
         const color = 0xffffff;
         const intensity = 1;
         const light = new THREE.DirectionalLight(color, intensity);
-        light.position.set(-1, 2, 4);
+        light.position.set(5, 10, 2);
         scene.add(light);
+        scene.add(light.target);
       }
 
-      const boxWidth = 1;
-      const boxHeight = 1;
-      const boxDepth = 1;
-      const geometry = new THREE.BoxGeometry(boxWidth, boxHeight, boxDepth);
+      function frameArea(sizeToFitOnScreen, boxSize, boxCenter, camera) {
+        const halfSizeToFitOnScreen = sizeToFitOnScreen * 0.5;
+        const halfFovY = THREE.MathUtils.degToRad(camera.fov * 0.5);
+        const distance = halfSizeToFitOnScreen / Math.tan(halfFovY);
+        // compute a unit vector that points in the direction the camera is now
+        // in the xz plane from the center of the box
+        const direction = new THREE.Vector3()
+          .subVectors(camera.position, boxCenter)
+          .multiply(new THREE.Vector3(1, 0, 1))
+          .normalize();
 
-      function makeInstance(geometry, color, x) {
-        const material = new THREE.MeshPhongMaterial({ color });
+        // move the camera to a position distance units way from the center
+        // in whatever direction the camera was from the center already
 
-        const cube = new THREE.Mesh(geometry, material);
-        scene.add(cube);
+        camera.position.copy(direction.multiplyScalar(distance).add(boxCenter));
+        // pick some near and far values for the frustum that
+        // will contain the box.
+        camera.near = boxSize / 100;
+        camera.far = boxSize * 100;
 
-        cube.position.x = x;
+        camera.updateProjectionMatrix();
 
-        return cube;
+        // point the camera to look at the center of the box
+        camera.lookAt(boxCenter.x, boxCenter.y, boxCenter.z);
       }
 
-      const cubes = [
-        makeInstance(geometry, 0x44aa88, 0),
-        makeInstance(geometry, 0x8844aa, -2),
-        makeInstance(geometry, 0xaa8844, 2),
-      ];
+      {
+        const mtlLoader = new MTLLoader();
+        mtlLoader.load(
+          "./assets/Objects/Motherboard/Motherboard.mtl",
+          (mtl) => {
+            mtl.preload();
+            const objLoader = new OBJLoader();
+            objLoader.setMaterials(mtl);
+            objLoader.load(
+              "./assets/Objects/Motherboard/Motherboard.obj",
+              (root) => {
+                scene.add(root);
+
+                // compute the box that contains all the stuff
+                // from root and below
+                const box = new THREE.Box3().setFromObject(root);
+
+                const boxSize = box.getSize(new THREE.Vector3()).length();
+                const boxCenter = box.getCenter(new THREE.Vector3());
+
+                // set the camera to frame the box
+                frameArea(boxSize * 1.2, boxSize, boxCenter, camera);
+
+                // update the Trackball controls to handle the new size
+                controls.maxDistance = boxSize * 10;
+                controls.target.copy(boxCenter);
+                controls.update();
+              }
+            );
+          }
+        );
+      }
 
       function resizeRendererToDisplaySize(renderer) {
         const canvas = renderer.domElement;
@@ -77,21 +135,12 @@ export default {
         return needResize;
       }
 
-      function render(time) {
-        time *= 0.001;
-
+      function render() {
         if (resizeRendererToDisplaySize(renderer)) {
           const canvas = renderer.domElement;
           camera.aspect = canvas.clientWidth / canvas.clientHeight;
           camera.updateProjectionMatrix();
         }
-
-        cubes.forEach((cube, ndx) => {
-          const speed = 1 + ndx * 0.1;
-          const rot = time * speed;
-          cube.rotation.x = rot;
-          cube.rotation.y = rot;
-        });
 
         renderer.render(scene, camera);
 
@@ -113,7 +162,6 @@ export default {
   height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   overflow: hidden;
 }
 

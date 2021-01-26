@@ -1,16 +1,10 @@
-.list {
-	overflow: hidden;
-	height: 25.55vh;
+* {
+	outline: none;
 }
 
-.item {
-	margin-right: 1.736vw;
-
-	&:last-child {
-		margin-right: 0;
-	}
-
-	&:first-child {
-		margin-left: 2.08vw;
-	}
+.list {
+	user-select: none;
+	display: flex;
+	align-items: center;
+	height: 25.55vh;
 }

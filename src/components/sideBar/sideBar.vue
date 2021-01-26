@@ -12,7 +12,7 @@
 			.side-bar__title Минский #[br] радиотехнический #[br] колледж
 			ul.side-bar__list.links-list
 				li.links-list__item
-					router-link(to="/Visualization").links-list__link
+					router-link(to="/visualization").links-list__link
 						.links-list__icon
 							svg(class='links-list__icon-border-img links-list__gear-border' viewBox="0 0 170.001 173.001" preserveAspectRatio="none")
 								use(xlink:href=`../../images/icons/gearBorder.svg#gearBorder`)

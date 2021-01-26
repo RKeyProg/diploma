@@ -7,6 +7,7 @@
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
+	text-align: center;
 	margin-bottom: 1.666vh;
 
 	&::before {
@@ -14,6 +15,7 @@
 		display: block;
 		height: 1px;
 		width: 3%;
+		margin-right: 20px;
 		background: #FF4081;
 	}
 
@@ -21,7 +23,8 @@
 		content: '';
 		display: block;
 		height: 1px;
-		width: 86%;
+		flex: 1;
+		margin-left: 20px;
 		background: #FF4081;
 	}
 }

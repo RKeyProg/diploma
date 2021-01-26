@@ -9,14 +9,13 @@
 	width: 28.125vw;
 	outline: none;
 	border: 1px solid #BDBDBD;
-	margin-bottom: 2.22vh;
 }
 
 .checkbox {
 	display: none;
 
 	&:checked {
-		~ .check-picture .check-picture_active {
+		~ div .check-picture .check-picture_active {
 			display: block;
 		}
 	}
@@ -31,6 +30,7 @@
 	background: #fff;
 	border: 1px solid #bdbdbd;
 	border-radius: 5px;
+	margin-right: 5px;
 
 	&_active {
 		display: none;
@@ -38,6 +38,35 @@
 		height: 12px;
 		fill: #FF4081;
 	}
+
+	&:hover {
+		cursor: pointer;
+	}
+}
+
+.error {
+	border: 1px solid #FF4081;
+}
+
+label {
+	position: relative;
+	margin-bottom: 2.22vh;
+}
+
+.input__error-message {
+	width: fit-content;
+	position: absolute;
+	right: calc(100% + 10px);
+	top: 50%;
+	transform: translate(0, -50%);
+	color: #FF4081;
+	font-size: 18px;
+	font-weight: 500;
+}
+
+.check-input {
+	display: flex;
+	align-items: center;
 
 	&:hover {
 		cursor: pointer;

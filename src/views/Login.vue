@@ -3,19 +3,26 @@
   h4.h4 Вход в аккаунт
   form.form(@submit.prevent="handleSubmit")
     .inputs
-      app-input(title="E-Mail", v-model="user.mail")
-      app-input(fieldType="password", title="Пароль", v-model="user.password")
-    btn(text="Войти")
+      app-input(
+        title="E-Mail",
+        v-model="user.name",
+        :errorMessage="validation.firstError('user.name')"
+      )
+      app-input(
+        fieldType="password",
+        title="Пароль",
+        v-model="user.password",
+        :errorMessage="validation.firstError('user.password')"
+      )
+    btn(text="Войти", :disabled="isSubmitDisabled")
     .param
       a.link-remember(href="#") Забыли пароль?
-      label.save-password
-        app-input(fieldType="checkBox", checked)
-        span Запомнить пароль
+      app-input(fieldType="checkBox", checked title="Запомнить пароль")
 </template>
 
 <script>
 import { Validator } from "simple-vue-validator";
-import axios from "axios";
+import $axios from "../request";
 import appInput from "../components/input";
 import btn from "../components/button";
 
@@ -26,7 +33,7 @@ export default {
   },
   mixins: [require("simple-vue-validator").mixin],
   validators: {
-    "user.mail"(value) {
+    "user.name"(value) {
       return Validator.value(value).required("Введите email");
     },
     "user.password"(value) {
@@ -36,17 +43,30 @@ export default {
   data() {
     return {
       user: {
-        mail: "",
-        password: "",
-        savePassword: false
-      }
+        name: "",
+        password: ""
+      },
+      isSubmitDisabled: false
     };
   },
   methods: {
-    handleSubmit() {
-      axios.get("http://172.20.10.4:3000").then(response => {
-        console.log(response);
-      });
+    async handleSubmit() {
+      if ((await this.$validate()) === false) return;
+
+      this.isSubmitDisabled = true;
+
+      try {
+        const response = await $axios.post("/login", this.user);
+
+        const token = response.data.token;
+        localStorage.setItem("token", token);
+        $axios.defaults.headers["Authorization"] = `Bearer ${token}`;
+        this.$router.replace("/personalAccount");
+      } catch (error) {
+        console.log(error.response.data.error);
+      } finally {
+        this.isSubmitDisabled = false;
+      }
     }
   }
 };
