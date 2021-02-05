@@ -7,13 +7,13 @@
         title="E-Mail",
         v-model="user.name",
         :errorMessage="validation.firstError('user.name')"
-      )
+      ).login-input
       app-input(
         fieldType="password",
         title="Пароль",
         v-model="user.password",
         :errorMessage="validation.firstError('user.password')"
-      )
+      ).login-input
     btn(text="Войти", :disabled="isSubmitDisabled")
     .param
       a.link-remember(href="#") Забыли пароль?
@@ -130,5 +130,9 @@ export default {
   &:hover {
     cursor: pointer;
   }
+}
+
+.login-input {
+  margin-bottom: 2.22vh;
 }
 </style>

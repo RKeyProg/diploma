@@ -16,19 +16,20 @@ export default {
     day: String,
     dayName: {
       type: String,
-      default: ""
-    }
+      default: "",
+    },
   },
   data() {
     return {
       isActive: {
         type: Boolean,
-        default: false
-      }
+        default: false,
+      },
     };
   },
   methods: {
-    changeActive() {
+    changeActive(e) {
+      this.$emit("changeActive", e);
       this.isActive = !this.isActive;
     }
   },

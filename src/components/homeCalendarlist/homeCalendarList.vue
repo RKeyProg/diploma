@@ -31,7 +31,7 @@ export default {
   components: {
     homeCalendarItem,
     Splide,
-    SplideSlide,
+    SplideSlide
   },
   data() {
     return {

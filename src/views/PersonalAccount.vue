@@ -2,8 +2,9 @@
 .account-container
   homeHeader(activePage="1")
   personalDataHeader(:user="user")
-  personalDataCurrentPractice.personal-dat__row
-  personalDataCurrentTask.personal-dat__row
+  personalDataCurrentPractice.personal-data__row
+  personalDataCurrentTask.personal-data__row
+  personalDataChanges.personal-data__row
 </template>
 
 <script>
@@ -11,6 +12,7 @@ import homeHeader from "../components/homeHeader";
 import personalDataHeader from "../components/personalDataHeader";
 import personalDataCurrentPractice from "../components/personalDataCurrentPractice";
 import personalDataCurrentTask from "../components/personalDataCurrentTask";
+import personalDataChanges from "../components/personalDataChanges";
 
 export default {
   name: "PersonalAccount",
@@ -18,7 +20,8 @@ export default {
     homeHeader,
     personalDataHeader,
     personalDataCurrentPractice,
-    personalDataCurrentTask
+    personalDataCurrentTask,
+    personalDataChanges
   },
   data() {
     return {
@@ -42,8 +45,8 @@ export default {
   overflow: hidden;
 }
 
-.personal-dat__row {
-  margin-bottom: 20px;
+.personal-data__row {
+  margin-bottom: 30px;
 
   &:last-child {
     margin-bottom: 0;

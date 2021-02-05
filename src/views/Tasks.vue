@@ -1,6 +1,7 @@
 <template lang="pug">
 .tasks
-  homeHeader(activePage="2")
+  home-header(activePage="2")
+  add-task(isTeacher)
   splide.task__list(:options="options")
     splide-slide
       task.task(taskType="brain", link="/")
@@ -12,10 +13,19 @@
       task.task(link="/")
     splide-slide
       task.task(link="/")
+    splide-slide
+      task.task(link="/")
+    splide-slide
+      task.task(link="/")
+    splide-slide
+      task.task(link="/")
+    splide-slide
+      task.task(link="/")
 </template>
 
 <script>
 import homeHeader from "../components/homeHeader";
+import addTask from "../components/addTask";
 import task from "../components/homeTask";
 import { Splide, SplideSlide } from "@splidejs/vue-splide";
 
@@ -23,9 +33,10 @@ export default {
   name: "Tasks",
   components: {
     homeHeader,
+    addTask,
     task,
     Splide,
-    SplideSlide,
+    SplideSlide
   },
   data() {
     return {
@@ -38,11 +49,11 @@ export default {
         gap: "25px",
         padding: {
           left: "2.08vw",
-          right: "2.08vw",
-        },
-      },
+          right: "2.08vw"
+        }
+      }
     };
-  },
+  }
 };
 </script>
 
@@ -60,13 +71,28 @@ export default {
 }
 
 .task__list {
+  user-select: none;
   overflow: hidden;
   height: 100%;
+
+  & .splide__track {
+    height: 100% !important;
+    padding: 0 2.08vw;
+  }
+
+  & .splide__slide {
+    width: fit-content !important;
+  }
+
+  & .task__container {
+    width: 27vw;
+  }
 }
 
 .task__list ul {
   width: 100%;
   display: flex;
   flex-wrap: wrap;
+  justify-content: space-between;
 }
 </style>

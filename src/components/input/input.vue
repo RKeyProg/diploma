@@ -4,7 +4,7 @@ label
     :placeholder="title",
     v-bind="$attrs",
     :type="fieldType",
-    :class="['input', { checkbox: fieldType === 'checkBox', error: !!errorMessage }]",
+    :class="['input', { checkbox: fieldType === 'checkBox', error: !!errorMessage, 'input_size_small': smallSize }]",
     :value="value",
     @input="$emit('input', $event.target.value)"
   )
@@ -41,6 +41,10 @@ export default {
     errorMessage: {
       type: String,
       default: ""
+    },
+    smallSize: {
+      type: Boolean,
+      default: false
     }
   }
 };

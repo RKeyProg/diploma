@@ -1,9 +1,14 @@
 <template lang="pug">
 button.btn(v-if="type === 'Text'", :disabled="disabled") {{ text }}
-button.btn-type(v-else-if="type === 'Edit'")
-  svg.btn-type__img(viewBox="0 0 528.899 528.899")
+button.btn-type(v-else-if="type === 'Edit'", @click.prevent="editClick")
+  svg.btn-type__img(v-if="!isEdit", viewBox="0 0 528.899 528.899")
     use(xlink:href=`../../images/icons/pencil.svg#pencil`)
-button.btn-type.btn-type_exit(v-else-if="type === 'Exit'" @click="logout")
+  svg.btn-type__img(v-else, viewBox="0 0 352.62 352.62")
+    use(xlink:href=`../../images/icons/checkMark.svg#check`)
+button.btn-type.btn-type_exit(v-else-if="type === 'Close'", @click.prevent="editClick")
+  svg.btn-type__img(viewBox="0 0 329.26933 329")
+    use(xlink:href=`../../images/icons/close.svg#close`)
+button.btn-type.btn-type_exit(v-else-if="type === 'Exit'", @click="logout")
   svg.btn-type__img(viewBox="0 0 512.001 512.001")
     use(xlink:href=`../../images/icons/logout.svg#logout`)
 </template>
@@ -25,11 +30,18 @@ export default {
       type: String,
       default: "Text",
     },
+    isEdit: {
+      type: Boolean,
+      default: false,
+    },
   },
   methods: {
     ...mapActions({
       logout: "user/logout",
     }),
+    editClick() {
+      this.$emit("wasClick");
+    },
   },
 };
 </script>

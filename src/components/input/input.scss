@@ -9,6 +9,11 @@
 	width: 28.125vw;
 	outline: none;
 	border: 1px solid #BDBDBD;
+
+	&_size_small {
+		padding: 7px 14px;
+		width: 250px;
+	}
 }
 
 .checkbox {
@@ -50,7 +55,6 @@
 
 label {
 	position: relative;
-	margin-bottom: 2.22vh;
 }
 
 .input__error-message {

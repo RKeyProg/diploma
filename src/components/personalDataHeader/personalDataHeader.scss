@@ -1,10 +1,25 @@
 .personal-data__header {
+  height: 130px;
   position: relative;
+  margin-bottom: 30px;
+  transition: height .5s ease;
+
+  &.editing {
+    height: 150px;
+  }
+}
+
+.personal-data__content {
   display: grid;
   grid-template: 1fr 1fr / 1fr 130px 1fr;
   grid-column-gap: 60px;
   grid-row-gap: 10px;
-  margin-bottom: 30px;
+
+  &_edit {
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+    grid-gap: 25px;
+  }
 }
 
 .personal-data_as_start {
@@ -60,4 +75,60 @@
   &:last-child {
     margin-bottom: 0;
   }
+}
+
+.personal-data__new-photo {
+  justify-self: flex-end;
+  width: 150px;
+  height: 150px;
+  background: #fff;
+  border-radius: 50%;
+  border: 1px solid #bdbdbd;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &-icon {
+    width: 70px;
+    height: 70px;
+    fill: #FF4081;
+  }
+}
+
+.personal-data__inputs {
+  display: grid;
+  align-content: center;
+  grid-template-rows: repeat(2, 30px);
+  grid-column-gap: 15px;
+  grid-row-gap: 25px;
+  align-items: center;
+
+  & div {
+    display: grid;
+    grid-template-columns: 85px 250px;
+    grid-gap: 25px;
+    align-items: center;
+  }
+
+  & span {
+    font-weight: 500;
+    font-size: 18px;
+  }
+}
+
+.editor-enter-active,
+.static-enter-active {
+	transition: all .5s ease .2s;
+}
+
+.editor-enter,
+.editor-leave-to,
+.static-enter,
+.static-leave-to {
+	opacity: 0;
+}
+
+.editor-leave,
+.static-leave {
+	display: none;
 }

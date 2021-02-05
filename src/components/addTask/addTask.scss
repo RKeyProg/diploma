@@ -1,0 +1,195 @@
+.add-task__wrapper {
+	padding: 0 2.08vw;
+	margin-bottom: 20px;
+
+	&.disabled {
+		display: none;
+	}
+}
+
+.add-task {
+	overflow: hidden;
+	width: 100%;
+	height: 100px;
+	background: #fff;
+	border-radius: 15px;
+	box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.25);
+	display: flex;
+	justify-content: center;
+	transition-property: height;
+	transition: height .5s ease;
+
+	&.active {
+		height: 193px;
+		padding: 25px 30px;
+	}
+}
+
+.add-task__button {
+	position: relative;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	&-cross {
+		width: 50px;
+		height: 50px;
+		border-radius: 50%;
+		border: 2px solid #FF4081;
+
+		&::after,
+		&::before {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			content: '';
+			display: block;
+			width: 14px;
+			height: 2px;
+			background: #FF4081;
+		}
+
+		&::after {
+			transform: translate(-50%, -50%) rotate(90deg);
+		}
+	}
+
+	&:hover {
+		cursor: pointer;
+	}
+}
+
+.add-task__editor {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.editor-enter-active,
+.btn-enter-active {
+	transition: all .5s ease .2s;
+}
+
+.editor-enter,
+.editor-leave-to,
+.btn-enter,
+.btn-leave-to {
+	opacity: 0;
+}
+
+.editor-leave,
+.btn-leave {
+	display: none;
+}
+
+.editor__title {
+	font-weight: normal;
+	font-size: 20px;
+	line-height: 23px;
+	color: #757575;
+	margin-bottom: 15px;
+}
+
+.editor__form {
+	width: 100%;
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	grid-column-gap: 35px;
+}
+
+.editor__column {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+
+	& input[type="text"] {
+		width: 100%;
+		border-radius: 15px;
+		border: 1px solid #bdbdbd;
+		font-weight: normal;
+		font-size: 14px;
+		line-height: 16px;
+		padding: 7px 18px;
+		color: #757575;
+	}
+}
+
+.column__title {
+	font-weight: normal;
+	font-size: 16px;
+	line-height: 18px;
+	color: #757575;
+	margin-bottom: 20px;
+}
+
+.editor__task-type {
+	align-self: flex-start;
+
+	& label {
+		display: flex;
+		align-items: center;
+		margin-bottom: 10px;
+
+		& input[type="radio"] {
+			display: none;
+
+			&:checked {
+				&~.editor__radio-view::after {
+					display: block;
+				}
+			}
+		}
+
+		&:hover {
+			cursor: pointer;
+		}
+
+		&:last-child {
+			margin-bottom: 0;
+		}
+	}
+}
+
+.editor__radio-view {
+	width: 14px;
+	height: 14px;
+	border-radius: 50%;
+	border: 1px solid #BDBDBD;
+	margin-right: 5px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	&::after {
+		content: '';
+		display: none;
+		width: 7px;
+		height: 7px;
+		background: #FF4081;
+		border-radius: 50%;
+	}
+}
+
+.editor__radio-name {
+	font-weight: normal;
+	font-size: 14px;
+	line-height: 16px;
+	color: #757575;
+}
+
+.editor__add-buttons {
+	align-self: flex-end;
+}
+
+.editor__add-btn {
+	margin-bottom: 10px;
+
+	&:last-child {
+		margin-bottom: 0;
+	}
+}

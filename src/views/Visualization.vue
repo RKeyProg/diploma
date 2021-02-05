@@ -175,5 +175,6 @@ export default {
   width: 100%;
   height: 100%;
   border-radius: 20px;
+  box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.25);
 }
 </style>

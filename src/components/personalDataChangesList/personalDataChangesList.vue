@@ -20,11 +20,10 @@ import homeInfoItem from "../homeInfoItem";
 export default {
   data() {
     return {
-      text:
-        "Изменение аудитории. Практика будет проходить в 7 корпусе БГУИР, 702 аудитория",
-      text1: "Изменение расписания. 20.09.2020 практика начинается с 13.55.",
-      text2: "Объявление. До 20.09.2020 принести паспорта",
-      text3: "Замена. 17.09.2020 занятия будет проводить Иванов Иван Иванович",
+      text: "Добавлено новое задание",
+      text1: "Выполненное задание проверено. Отправлено на доработку",
+      text2: "Добавлено новое задание",
+      text3: "Выполненное задание проверено.",
       options: {
         autoHeight: true,
         autoWidth: true,
@@ -47,4 +46,4 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped src="./homeInfoList.scss"></style>
+<style lang="scss" scoped src="./personalDataChangesList.scss"></style>

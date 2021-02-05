@@ -50,6 +50,14 @@ const routes = [
       default: () => import("../views/Tasks.vue"),
       sideBar: sideBar
     }
+  },
+  {
+    path: "/materials",
+    name: "Materials",
+    components: {
+      default: () => import("../views/Materials.vue"),
+      sideBar: sideBar
+    }
   }
 ];
 
