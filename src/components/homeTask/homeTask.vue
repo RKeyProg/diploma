@@ -13,7 +13,31 @@
       preserveAspectRatio="none"
     )
       use(xlink:href=`../../images/icons/settings.svg#settings`)
-  .task__container-title Работа с Microsoft Excel
+  .task__container-image(v-else-if="taskType === 'clipboard'")
+    svg.task__container-icon(
+      viewBox="-77 0 512 512",
+      preserveAspectRatio="none"
+    )
+      use(xlink:href=`../../images/icons/clipboard.svg#clipboard`)
+  .task__container-image(v-else-if="taskType === 'manual'")
+    svg.task__container-icon(
+      viewBox="0 0 512 512",
+      preserveAspectRatio="none"
+    )
+      use(xlink:href=`../../images/icons/manual.svg#manual`)
+  .task__container-image(v-else-if="taskType === 'letter'")
+    svg.task__container-icon(
+      viewBox="0 0 512 512",
+      preserveAspectRatio="none"
+    )
+      use(xlink:href=`../../images/icons/letter.svg#letter`)
+  .task__container-image(v-else-if="taskType === 'contract'")
+    svg.task__container-icon(
+      viewBox="0 0 512 512",
+      preserveAspectRatio="none"
+    )
+      use(xlink:href=`../../images/icons/contract.svg#contract`)
+  .task__container-title {{taskName}}
   app-link.task__container-send(send, :link="link")
 </template>
 
@@ -28,6 +52,10 @@ export default {
     add: {
       type: Boolean,
       default: false,
+    },
+    taskName: {
+      type: String,
+      default: ""
     },
     taskType: {
       type: String,

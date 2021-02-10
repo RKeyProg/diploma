@@ -2,15 +2,15 @@
 .task-container
   splide(:options="options")
     splide-slide
-      task(taskType="brain" link="/")
+      task(taskName="Работа с Microsoft Excel" taskType="brain" link="/")
     splide-slide
-      task(taskType="settings" link="/")
+      task(taskName="Работа с Microsoft Excel" taskType="settings" link="/")
     splide-slide
-      task(link="/")
+      task(taskName="Работа с Microsoft Excel" link="/")
     splide-slide
-      task(link="/")
+      task(taskName="Работа с Microsoft Excel" link="/")
     splide-slide
-      task(link="/")
+      task(taskName="Работа с Microsoft Excel" link="/")
 </template>
 
 <script>

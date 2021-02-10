@@ -12,15 +12,15 @@
 }
 
 .task__container-image {
-	width: 30px;
-	height: 30px;
+	width: 40px;
+	height: 40px;
 	fill: #fff;
 	align-self: flex-start;
 }
 
 .task__container-send {
-	width: 20px;
-	height: 20px;
+	width: 30px;
+	height: 30px;
 	fill: #FF4081;
 	align-self: flex-end;
 }
@@ -30,6 +30,7 @@
 	font-weight: normal;
 	font-size: 22px;
 	line-height: 26px;
+	text-align: center;
 }
 
 .task__container_add {

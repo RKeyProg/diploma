@@ -87,11 +87,20 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  background-size: cover;
 
   &-icon {
     width: 70px;
     height: 70px;
     fill: #FF4081;
+  }
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  &.hovered {
+    border: 4px solid #FF4081;
   }
 }
 

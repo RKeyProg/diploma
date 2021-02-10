@@ -4,23 +4,23 @@
   add-task(isTeacher)
   splide.task__list(:options="options")
     splide-slide
-      task.task(taskType="brain", link="/")
+      task.task(taskName="Работа с Microsoft Excel" taskType="clipboard", link="/")
     splide-slide
-      task.task(taskType="settings", link="/")
+      task.task(taskName="Работа с Microsoft Excel" taskType="settings", link="/")
     splide-slide
-      task.task(link="/")
+      task.task(taskName="Работа с Microsoft Excel" link="/")
     splide-slide
-      task.task(link="/")
+      task.task(taskName="Работа с Microsoft Excel" link="/")
     splide-slide
-      task.task(link="/")
+      task.task(taskName="Работа с Microsoft Excel" link="/")
     splide-slide
-      task.task(link="/")
+      task.task(taskName="Работа с Microsoft Excel" link="/")
     splide-slide
-      task.task(link="/")
+      task.task(taskName="Работа с Microsoft Excel" link="/")
     splide-slide
-      task.task(link="/")
+      task.task(taskName="Работа с Microsoft Excel" link="/")
     splide-slide
-      task.task(link="/")
+      task.task(taskName="Работа с Microsoft Excel" link="/")
 </template>
 
 <script>

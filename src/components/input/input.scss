@@ -14,6 +14,10 @@
 		padding: 7px 14px;
 		width: 250px;
 	}
+
+	&::placeholder {
+		color: #bdbdbd;
+	}
 }
 
 .checkbox {
@@ -60,7 +64,7 @@ label {
 .input__error-message {
 	width: fit-content;
 	position: absolute;
-	right: calc(100% + 10px);
+	left: calc(100% + 10px);
 	top: 50%;
 	transform: translate(0, -50%);
 	color: #FF4081;
