@@ -28,6 +28,14 @@ const routes = [
     }
   },
   {
+    path: "/contacts",
+    name: "Contacts",
+    components: {
+      default: () => import("../views/Contacts.vue"),
+      sideBar: sideBar
+    }
+  },
+  {
     path: "/visualization",
     name: "Visualization",
     components: {
