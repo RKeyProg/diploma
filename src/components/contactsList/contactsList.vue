@@ -2,7 +2,8 @@
 .contacts
   ul.contacts__list
     li.contacts__item(v-for="contact in contacts", :key="contact.id") 
-      img.contact__photo(src="../../images/content/naumenko.jpg")
+      .contact__photo
+        img.contact__photo-img(src="../../images/content/naumenko.jpg")
       .contact__info
         .contact__name {{ contact.name }}
         .contact__post {{ contact.post }}

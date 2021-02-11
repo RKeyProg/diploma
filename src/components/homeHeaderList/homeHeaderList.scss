@@ -21,14 +21,18 @@
 	text-align: center;
 	letter-spacing: 0.1em;
 
+	&:hover {
+		color: #212121;
+	}
+
 	&.active {
 		background: #FF4081;
 		color: #fff;
 		border-right: 1px solid #BDBDBD;
 	}
 
-	&:hover {
-		color: #212121;
+	&.prev::after {
+		display: none;
 	}
 	
 	&:last-child, &.active {

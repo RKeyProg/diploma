@@ -7,6 +7,23 @@
 	}
 }
 
+.photo__empty {
+	width: 100%;
+	height: 100%;
+	border: 1px solid #bdbdbd;
+	background: #fff;
+	border-radius: 50%;
+	display: flex;
+  justify-content: center;
+  align-items: center;
+
+	&-icon {
+    width: 50%;
+    height: 50%;
+    fill: #FF4081;
+  }
+}
+
 .photo-active {
 	width: 16px;
 	height: 16px;

@@ -4,7 +4,7 @@ nav.nav
     li(
       v-for="item in items",
       :key="item.id",
-      :class="['item', { active: +activePage === item.id}]"
+      :class="['item', { active: +activePage === item.id, prev: +activePage === item.id + 1 }]"
     )
       router-link.link(:to="item.page") {{ item.title }}
 </template>
@@ -35,12 +35,12 @@ export default {
           active: false,
           page: "/materials"
         },
-        {
-          id: 4,
-          title: "Методичка",
-          active: false,
-          page: "/manual"
-        },
+        // {
+        //   id: 4,
+        //   title: "Методичка",
+        //   active: false,
+        //   page: "/manual"
+        // },
         {
           id: 5,
           title: "Контакты",
