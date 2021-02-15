@@ -36,10 +36,10 @@ const routes = [
     }
   },
   {
-    path: "/visualization",
-    name: "Visualization",
+    path: "/visualizationTask",
+    name: "VisualizationTask",
     components: {
-      default: () => import("../views/Visualization.vue"),
+      default: () => import("../views/VisualizationTask.vue"),
       sideBar: sideBar
     }
   },

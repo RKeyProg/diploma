@@ -1,22 +1,15 @@
 <template lang="pug">
-.task-3d
-  homeHeader(activePage="2")
-  .task-3d__container
-    canvas#canvas
+.task-3d__container
+	canvas#canvas
 </template>
 
 <script>
-import homeHeader from "../components/homeHeader";
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { OBJLoader } from "three/examples/jsm/loaders/OBJLoader";
 import { MTLLoader } from "three/examples/jsm/loaders/MTLLoader";
 
 export default {
-  name: "Visualization",
-  components: {
-    homeHeader,
-  },
   data() {
     return {
       cube: null,
@@ -156,25 +149,4 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-.task-3d {
-  padding: 2.77vh 0;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-}
-
-.task-3d__container {
-  padding: 0 2.08vw;
-  width: 100%;
-  height: 70%;
-}
-
-#canvas {
-  width: 100%;
-  height: 100%;
-  border-radius: 20px;
-  box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.25);
-}
-</style>
+<style lang="scss" src="./visualization.scss" scoped></style>
