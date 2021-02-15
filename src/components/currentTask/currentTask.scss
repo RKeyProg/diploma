@@ -1,0 +1,66 @@
+.current-task__content {
+	display: flex;
+	justify-content: space-between;
+}
+
+.current-task__content {
+	padding: 0 2.08vw;
+	margin-bottom: 50px;
+}
+
+.current-task__wording {
+	flex: 2;
+	position: relative;
+	padding: 15px 25px 15px 0;
+	margin-right: 45px;
+	width: 70%;
+	font-weight: 500;
+	font-size: 16px;
+	line-height: 27px;
+	letter-spacing: 0.1em;
+	color: #212121;
+
+	&::after {
+		content: '';
+		position: absolute;
+		right: 0;
+		top: 0;
+		display: block;
+		height: 100%;
+		width: 2px;
+		background: #bdbdbd;
+	}
+}
+
+.current-task__note-list {
+	flex: 1.5;
+	padding: 15px 0;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+}
+
+.current-task__note-item {
+	position: relative;
+	margin-bottom: 5px;
+	font-weight: 500;
+	font-size: 16px;
+	line-height: 24px;
+	color: #757575;
+
+	&::before {
+		content: '';
+		display: block;
+		width: 10px;
+		height: 2px;
+		background: #FF4081;
+		position: absolute;
+		left: -20px;
+		top: 10px;
+	}
+}
+
+.current-task__btn {
+	padding: 1vh 45px;
+	margin-left: 2.08vw;
+}

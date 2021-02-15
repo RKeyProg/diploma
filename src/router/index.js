@@ -60,6 +60,14 @@ const routes = [
     }
   },
   {
+    path: "/task",
+    name: "Task",
+    components: {
+      default: () => import("../views/CurrentTaskPage.vue"),
+      sideBar: sideBar
+    }
+  },
+  {
     path: "/materials",
     name: "Materials",
     components: {
