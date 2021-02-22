@@ -1,5 +1,5 @@
 <template lang="pug">
-button.btn(v-if="type === 'Text'", :disabled="disabled") {{ text }}
+button.btn(v-if="type === 'Text'", @click="$emit('handleClick')" :disabled="disabled") {{ text }}
 button.btn-type(
   v-else-if="type === 'Edit'",
   @click.prevent="editClick"

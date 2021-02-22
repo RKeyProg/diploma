@@ -2,7 +2,6 @@
 div.photo(v-if="photo")
   //- img.photo-img(:src="this.photo")
   img.photo-img(src="../../images/content/avatar.jpg")
-  .photo-active(v-show="active")
 div.photo__empty(v-else)
   svg.photo__empty-icon(
     viewBox="0 0 512.001 512.001",
@@ -14,10 +13,6 @@ div.photo__empty(v-else)
 <script>
 export default {
   props: {
-    active: {
-      type: Boolean,
-      default: false,
-    },
     photo: {
       type: String,
       default: "",

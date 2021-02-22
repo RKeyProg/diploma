@@ -1,6 +1,6 @@
 <template lang="pug">
 .task-3d__container
-	canvas#canvas
+  canvas(:class="[className, 'canvas']")
 </template>
 
 <script>
@@ -10,6 +10,15 @@ import { OBJLoader } from "three/examples/jsm/loaders/OBJLoader";
 import { MTLLoader } from "three/examples/jsm/loaders/MTLLoader";
 
 export default {
+  props: {
+    className: {
+      type: String,
+      default: "",
+    },
+    objectWay: {
+      type: Array,
+    },
+  },
   data() {
     return {
       cube: null,
@@ -20,7 +29,7 @@ export default {
   },
   methods: {
     init: function () {
-      const canvas = document.querySelector("#canvas");
+      const canvas = document.querySelector(`.${this.className}`);
       const renderer = new THREE.WebGLRenderer({ canvas });
 
       const fov = 45;
@@ -50,7 +59,7 @@ export default {
       }
 
       {
-        const color = 0xffffff;
+        const color = this.objectWay[2];
         const intensity = 1;
         const light = new THREE.DirectionalLight(color, intensity);
         light.position.set(5, 10, 2);
@@ -86,35 +95,29 @@ export default {
 
       {
         const mtlLoader = new MTLLoader();
-        mtlLoader.load(
-          "./assets/Objects/Motherboard/Motherboard.mtl",
-          (mtl) => {
-            mtl.preload();
-            const objLoader = new OBJLoader();
-            objLoader.setMaterials(mtl);
-            objLoader.load(
-              "./assets/Objects/Motherboard/Motherboard.obj",
-              (root) => {
-                scene.add(root);
+        mtlLoader.load(`./assets/Objects/${this.objectWay[0]}`, (mtl) => {
+          mtl.preload();
+          const objLoader = new OBJLoader();
+          objLoader.setMaterials(mtl);
+          objLoader.load(`./assets/Objects/${this.objectWay[1]}`, (root) => {
+            scene.add(root);
 
-                // compute the box that contains all the stuff
-                // from root and below
-                const box = new THREE.Box3().setFromObject(root);
+            // compute the box that contains all the stuff
+            // from root and below
+            const box = new THREE.Box3().setFromObject(root);
 
-                const boxSize = box.getSize(new THREE.Vector3()).length();
-                const boxCenter = box.getCenter(new THREE.Vector3());
+            const boxSize = box.getSize(new THREE.Vector3()).length();
+            const boxCenter = box.getCenter(new THREE.Vector3());
 
-                // set the camera to frame the box
-                frameArea(boxSize * 1.2, boxSize, boxCenter, camera);
+            // set the camera to frame the box
+            frameArea(boxSize * 1.2, boxSize, boxCenter, camera);
 
-                // update the Trackball controls to handle the new size
-                controls.maxDistance = boxSize * 10;
-                controls.target.copy(boxCenter);
-                controls.update();
-              }
-            );
-          }
-        );
+            // update the Trackball controls to handle the new size
+            controls.maxDistance = boxSize * 10;
+            controls.target.copy(boxCenter);
+            controls.update();
+          });
+        });
       }
 
       function resizeRendererToDisplaySize(renderer) {
@@ -141,6 +144,11 @@ export default {
       }
 
       requestAnimationFrame(render);
+    },
+  },
+  watch: {
+    objectWay: function () {
+      this.init();
     },
   },
   mounted() {

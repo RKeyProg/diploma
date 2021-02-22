@@ -10,9 +10,12 @@ form(
       .personal-data__param.personal-data_as_end
         span Телефон:
         span {{ user.phone }}
-      .personal-data__param.personal-data_js_end.personal-data_as_start
+      div(v-if="user.post == 'Студент'").personal-data__param.personal-data_js_end.personal-data_as_start
         span Группа:
         span {{ user.group }}
+      div(v-else).personal-data__param.personal-data_js_end.personal-data_as_start
+        span
+        span {{ user.post }}
       .personal-data__param.personal-data_as_start
         span E-Mail:
         span {{ user.mail }}

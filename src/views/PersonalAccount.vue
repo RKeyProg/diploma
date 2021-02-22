@@ -1,10 +1,16 @@
 <template lang="pug">
 .account-container
   homeHeader(activePage="1")
-  personalDataHeader(:user="user")
-  personalDataCurrentPractice.personal-data__row
-  personalDataCurrentTask.personal-data__row
-  personalDataChanges.personal-data__row
+  personal-data-header(:user="user")
+  .for-student(v-if="user.post == 'Учащийся'")
+    personal-data-current-practice.personal-data__row
+    personal-data-current-task.personal-data__row
+    personal-data-changes.personal-data__row
+  .for-admin(v-else-if="user.post == 'Администратор'")
+    personal-data-management(:userPost="user.post")
+  .for-teacher(v-else-if="user.post == 'Преподаватель'")
+    personal-data-current-practice.personal-data__row
+    personal-data-management(:userPost="user.post")
 </template>
 
 <script>
@@ -13,6 +19,7 @@ import personalDataHeader from "../components/personalDataHeader";
 import personalDataCurrentPractice from "../components/personalDataCurrentPractice";
 import personalDataCurrentTask from "../components/personalDataCurrentTask";
 import personalDataChanges from "../components/personalDataChanges";
+import personalDataManagement from "../components/personalDataManagement";
 
 export default {
   name: "PersonalAccount",
@@ -21,11 +28,13 @@ export default {
     personalDataHeader,
     personalDataCurrentPractice,
     personalDataCurrentTask,
-    personalDataChanges
+    personalDataChanges,
+    personalDataManagement
   },
   data() {
     return {
       user: {
+        post: "Администратор",
         name: "Радкевич Кирилл Александрович",
         group: "8к2411",
         phone: "+375 (29) 183-38-27",

@@ -1,0 +1,81 @@
+.pc {
+  padding: 30px 2.08vw 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+.pc__component-info {
+  width: 30%;
+  padding: 20px 25px 20px 0;
+  margin-right: 25px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+
+  &::after {
+    content: "";
+    display: block;
+    position: absolute;
+    right: 0;
+    top: 0;
+    background: #bdbdbd;
+    width: 2px;
+    height: 100%;
+  }
+}
+
+.pc__component-name {
+  font-weight: 500;
+  font-size: 26px;
+  line-height: 28px;
+  color: #212121;
+  margin-bottom: 20px;
+}
+
+.pc__component-desc {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  color: #757575;
+  margin-bottom: 40px;
+}
+
+.pc__right-column {
+  padding: 20px 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.pc__components-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-self: flex-start;
+  margin-bottom: -15px;
+}
+
+.pc__components-item {
+  margin-right: 15px;
+  margin-bottom: 15px;
+
+  & button {
+    background: #3f51b5;
+    border-radius: 15px;
+    padding: 7px 40px;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+    color: #fff;
+    letter-spacing: 0.05em;
+    transition: background 0.3s ease;
+
+    &.active {
+      background: #ff4081;
+    }
+  }
+}
+
+.pc__component-open-btn {
+  margin-bottom: 15px;
+}

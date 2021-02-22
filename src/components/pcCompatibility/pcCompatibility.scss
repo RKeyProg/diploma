@@ -1,0 +1,49 @@
+.pc-compatibility {
+  display: flex;
+	flex-direction: column;
+  align-items: center;
+	width: 100%;
+}
+
+.pc-compatibility__inputs {
+	padding: 60px 0 90px;
+	width: 50%;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.pc-compatibility__input {
+	width: 325px;
+}
+
+.pc-compatibility__icon {
+	width: 30px;
+	height: 30px;
+
+	& svg {
+		fill: #3F51B5;
+	}
+}
+
+.pc-compatibility__visualizations {
+	display: flex;
+	width: 100%;
+	justify-content: space-between;
+	margin-bottom: 35px;
+}
+
+.pc-compatibility__controls {
+	padding: 0 2.08vw;
+	width: 100%;
+	display: flex;
+	justify-content: flex-start;
+
+	& button {
+		margin-right: 10px;
+
+		&:last-child {
+			margin: 0;
+		}
+	}
+}

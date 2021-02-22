@@ -3,21 +3,21 @@
   h4.h4 Вход в аккаунт
   form.form(@submit.prevent="handleSubmit")
     .inputs
-      app-input(
+      app-input.login-input(
         title="E-Mail",
         v-model="user.name",
         :errorMessage="validation.firstError('user.name')"
-      ).login-input
-      app-input(
+      )
+      app-input.login-input(
         fieldType="password",
         title="Пароль",
         v-model="user.password",
         :errorMessage="validation.firstError('user.password')"
-      ).login-input
+      )
     btn(text="Войти", :disabled="isSubmitDisabled")
     .param
       a.link-remember(href="#") Забыли пароль?
-      app-input(fieldType="checkBox", checked title="Запомнить пароль")
+      app-input(fieldType="checkBox", checked, title="Запомнить пароль")
 </template>
 
 <script>
@@ -29,24 +29,24 @@ import btn from "../components/button";
 export default {
   components: {
     appInput,
-    btn
+    btn,
   },
   mixins: [require("simple-vue-validator").mixin],
   validators: {
     "user.name"(value) {
-      return Validator.value(value).required("Введите email");
+      return Validator.value(value).required("Введите name");
     },
     "user.password"(value) {
       return Validator.value(value).required("Введите пароль");
-    }
+    },
   },
   data() {
     return {
       user: {
         name: "",
-        password: ""
+        password: "",
       },
-      isSubmitDisabled: false
+      isSubmitDisabled: false,
     };
   },
   methods: {
@@ -61,14 +61,14 @@ export default {
         const token = response.data.token;
         localStorage.setItem("token", token);
         $axios.defaults.headers["Authorization"] = `Bearer ${token}`;
-        this.$router.replace("/personalAccount");
+        this.$router.replace("/");
       } catch (error) {
         console.log(error.response.data.error);
       } finally {
         this.isSubmitDisabled = false;
       }
-    }
-  }
+    },
+  },
 };
 </script>
 

@@ -23,25 +23,3 @@
     fill: #FF4081;
   }
 }
-
-.photo-active {
-	width: 16px;
-	height: 16px;
-	border-radius: 50%;
-	background: #F9FAFB;
-	position: absolute;
-	top: 0;
-	right: 0;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-
-	&::after {
-		content: '';
-		display: block;
-		width: 10px;
-		height: 10px;
-		border-radius: 50%;
-		background: #FF4081;
-	}
-}
