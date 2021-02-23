@@ -82,6 +82,7 @@ export default {
           "Видеокарта",
         ],
         ram: ["RAM/RAM.mtl", "RAM/RAM.obj", 0xffffff, "Оперативная память"],
+        body: ["Body/Body.mtl", "Body/Body.obj", 0xffffff, "Корпус"],
       },
     };
   },

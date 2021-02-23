@@ -12,3 +12,20 @@
 		}
 	}
 }
+
+.editor-enter-active,
+.static-enter-active {
+	transition: all .5s ease .2s;
+}
+
+.editor-enter,
+.editor-leave-to,
+.static-enter,
+.static-leave-to {
+	opacity: 0;
+}
+
+.editor-leave,
+.static-leave {
+	display: none;
+}

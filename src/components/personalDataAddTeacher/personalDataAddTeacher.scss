@@ -1,0 +1,45 @@
+.add-teacher {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: 0 2.08vw;
+}
+
+.add-teacher__title {
+	font-weight: 500;
+	font-size: 22px;
+	color: #212121;
+	margin-bottom: 20px;
+}
+
+.add-teacher__form {
+	display: grid;
+	grid-gap: 20px;
+	grid-template: repeat(3, 1fr) / repeat(2, 1fr);
+	margin-bottom: 30px;
+}
+
+.add-teacher__row {
+	display: flex;
+	align-items: center;
+	justify-self: flex-end;
+}
+
+.add-teacher__input-title {
+	font-weight: 500;
+	font-size: 18px;
+	color: #212121;
+	margin-right: 15px;
+}
+
+.add-teacher__buttons {
+	align-self: flex-start;
+}
+
+.add-teacher__btn {
+	margin-right: 15px;
+
+	&:last-child {
+		margin-right: 0;
+	}
+}
