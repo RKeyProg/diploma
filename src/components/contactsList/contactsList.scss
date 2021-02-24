@@ -4,7 +4,8 @@
 
 .contacts__list {
 	display: grid;
-	grid-template-columns: repeat(auto-fit, 510px);
+	margin-top: 20px;
+	grid-template-columns: repeat(auto-fit, 784px);
 	grid-gap: 45px;
 	justify-items: center;
 	justify-content: center;

@@ -5,8 +5,8 @@
     .inputs
       app-input.login-input(
         title="E-Mail",
-        v-model="user.email",
-        :errorMessage="validation.firstError('user.email')"
+        v-model="user.name",
+        :errorMessage="validation.firstError('user.name')"
       )
       app-input.login-input(
         fieldType="password",
@@ -33,8 +33,8 @@ export default {
   },
   mixins: [require("simple-vue-validator").mixin],
   validators: {
-    "user.email"(value) {
-      return Validator.value(value).required("Введите email");
+    "user.name"(value) {
+      return Validator.value(value).required("Введите name");
     },
     "user.password"(value) {
       return Validator.value(value).required("Введите пароль");
@@ -43,7 +43,7 @@ export default {
   data() {
     return {
       user: {
-        email: "",
+        name: "",
         password: "",
       },
       isSubmitDisabled: false,

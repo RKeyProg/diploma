@@ -1,0 +1,18 @@
+.student {
+	display: flex;
+	align-items: center;
+}
+
+.photo {
+	flex-shrink: 0;
+	width: 70px;
+	height: 70px;
+	margin-right: 10px;
+}
+
+.student__name {
+	font-weight: 500;
+	font-size: 18px;
+	line-height: 20px;
+	color: #212121;
+}

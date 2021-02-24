@@ -35,12 +35,12 @@ export default {
           active: false,
           page: "/materials"
         },
-        // {
-        //   id: 4,
-        //   title: "Методичка",
-        //   active: false,
-        //   page: "/manual"
-        // },
+        {
+          id: 4,
+          title: "Группа",
+          active: false,
+          page: "/group"
+        },
         {
           id: 5,
           title: "Контакты",
