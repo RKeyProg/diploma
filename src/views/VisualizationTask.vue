@@ -1,9 +1,16 @@
 <template lang="pug">
 .task-3d
   homeHeader(activePage="2")
-  pc-task(v-if="!isCompatibility && !isComponent" @checkCompatibility="checkCompatibility" @checkComponent="checkComponent")
-  pc-compatibility(v-else-if="isCompatibility" @changeCompatibility="isCompatibility = false")
-  pc-component(v-else-if="isComponent" @changeComponent="isComponent = false")
+  pc-task(
+    v-if="!isCompatibility && !isComponent",
+    @checkCompatibility="checkCompatibility",
+    @checkComponent="checkComponent"
+  )
+  pc-compatibility(
+    v-else-if="isCompatibility",
+    @changeCompatibility="isCompatibility = false"
+  )
+  pc-component(v-else-if="isComponent", @changeComponent="isComponent = false" :component="this.currentComponent")
 </template>
 
 <script>
@@ -20,22 +27,26 @@ export default {
     visualization,
     pcTask,
     pcCompatibility,
-    pcComponent
+    pcComponent,
   },
   data() {
     return {
       isCompatibility: false,
       isComponent: false,
-    }
+      currentComponent: "",
+    };
   },
   methods: {
     checkCompatibility() {
       this.isCompatibility = true;
     },
-    checkComponent() {
+    checkComponent(componentName) {
+      console.log(componentName);
+
+      this.currentComponent = componentName;
       this.isComponent = true;
-    }
-  }
+    },
+  },
 };
 </script>
 
