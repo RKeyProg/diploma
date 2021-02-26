@@ -1,7 +1,10 @@
 <template lang="pug">
 .component
   .component__visual
-    visualization(className="canvas1", :objectWay="objectWay[this.component]")
+    visualization(
+      className="canvas1",
+      :objectWay="this.objectWay[this.object]"
+    )
   .component__control
     app-btn(@handleClick="$emit('changeComponent')", text="Назад")
 </template>
@@ -18,33 +21,66 @@ export default {
   data() {
     return {
       objectWay: {
-        motherboard: [
-          "Motherboard/Motherboard.mtl",
-          "Motherboard/Motherboard.obj",
-          0xffffff,
-          "Материнская плата",
-        ],
-        CPU: ["CPU/CPU.mtl", "CPU/CPU.obj", 0x212121, "Процессор"],
-        powerBlock: [
-          "PowerBlock/block.mtl",
-          "PowerBlock/block.obj",
-          0xffffff,
-          "Блок питания",
-        ],
-        videoCard: [
-          "VideoCard/card.mtl",
-          "VideoCard/card.obj",
-          0xffffff,
-          "Видеокарта",
-        ],
-        ram: ["RAM/RAM.mtl", "RAM/RAM.obj", 0xffffff, "Оперативная память"],
-        body: ["Body/Body.mtl", "Body/Body.obj", 0xffffff, "Корпус"],
+        motherboard: {
+          name: "motherboard",
+          mtl: "Motherboard/Motherboard.mtl",
+          obj: "Motherboard/Motherboard.obj",
+          color: 0xffffff,
+          nameRus: "Материнская плата",
+          compatibillity: "body",
+        },
+        CPU: {
+          name: "CPU",
+          mtl: "CPU/CPU.mtl",
+          obj: "CPU/CPU.obj",
+          color: 0x212121,
+          nameRus: "Процессор",
+          compatibillity: "motherboard",
+        },
+        powerBlock: {
+          name: "powerBlock",
+          mtl: "PowerBlock/block.mtl",
+          obj: "PowerBlock/block.obj",
+          color: 0xffffff,
+          nameRus: "Блок питания",
+          compatibillity: "motherboard",
+        },
+        videoCard: {
+          name: "videoCard",
+          mtl: "VideoCard/card.mtl",
+          obj: "VideoCard/card.obj",
+          color: 0xffffff,
+          nameRus: "Видеокарта",
+          compatibillity: "motherboard",
+        },
+        ram: {
+          name: "ram",
+          mtl: "RAM/RAM.mtl",
+          obj: "RAM/RAM.obj",
+          color: 0xffffff,
+          nameRus: "Оперативная память",
+          compatibillity: "motherboard",
+        },
+        body: {
+          name: "body",
+          mtl: "Body/Body.mtl",
+          obj: "Body/Body.obj",
+          color: 0xffffff,
+          nameRus: "Корпус",
+        },
       },
     };
   },
   props: {
-    component: String,
-  }
+    object: {
+      type: String,
+    },
+  },
+  watch: {
+    object: function () {
+      console.log(this.objectWay[this.object]);
+    },
+  },
 };
 </script>
 

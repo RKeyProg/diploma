@@ -128,7 +128,7 @@ export default {
   },
   methods: {
     choiceComponent(id) {
-      this.componentsList.forEach((el) => {
+      this.componentsList.forEach(el => {
         el.isActive = false;
       });
 

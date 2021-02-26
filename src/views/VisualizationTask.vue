@@ -10,7 +10,11 @@
     v-else-if="isCompatibility",
     @changeCompatibility="isCompatibility = false"
   )
-  pc-component(v-else-if="isComponent", @changeComponent="isComponent = false" :component="this.currentComponent")
+  pc-component(
+    :class="['component', {hidden: !isComponent}]"
+    @changeComponent="isComponent = false",
+    :object="this.currentComponent"
+  )
 </template>
 
 <script>
@@ -41,8 +45,6 @@ export default {
       this.isCompatibility = true;
     },
     checkComponent(componentName) {
-      console.log(componentName);
-
       this.currentComponent = componentName;
       this.isComponent = true;
     },
@@ -104,5 +106,11 @@ export default {
   display: flex;
   flex-direction: column;
   overflow: hidden;
+}
+
+.component {
+  &.hidden {
+    display: none;
+  }
 }
 </style>
