@@ -69,6 +69,7 @@
 <script>
 import appInput from "../input";
 import appBtn from "../button";
+import $axios from "../../request";
 
 export default {
   components: {
@@ -90,8 +91,16 @@ export default {
     };
   },
   methods: {
-    addTeacher() {
-      console.log("add new student");
+    async addTeacher() {
+      try {
+        const response = await $axios.post("/register/worker", this.user);
+
+        console.log(response);
+      } catch (error) {
+        console.log(error.response.data.error);
+      } finally {
+        this.isSubmitDisabled = false;
+      }
     },
   },
 };

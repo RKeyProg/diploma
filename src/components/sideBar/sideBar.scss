@@ -1,9 +1,43 @@
+@import "../../mixins.scss";
+
+.side-bar__wrapper {
+	@include tablets {
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		z-index: 3;
+		background: rgba($color: #212121, $alpha: 0);
+		transition: all .5s ease;
+
+		&.active {
+			z-index: 10;
+			background: rgba($color: #212121, $alpha: .5);
+		}
+	}
+}
+
 .side-bar {
 	min-width: 227px;
 	height: 100vh;
 	background-color: #303F9F;
 	padding: 25px 0 15px;
 	color: #fff;
+	transition: all .5s ease;
+
+	@include desktop {
+		min-width: 200px;
+	}
+
+	@include tablets {
+		position: absolute;
+		top: 0;
+		left: -300px;
+		z-index: 110;
+
+		&.isSideBarView {
+			left: 0;
+		}
+	}
 }
 
 .side-bar__container {
@@ -18,8 +52,13 @@
 .side-bar__title {
 	font-weight: 500;
 	font-size: 21px;
-	line-height: 156%;
+	line-height: 33px;
 	letter-spacing: 0.04em;
+
+	@include desktop {
+		font-size: 18px;
+		line-height: 28px;
+	}
 }
 
 .side-bar__decor {
@@ -175,4 +214,45 @@
 	font-weight: bold;
 	line-height: 150.69%;
 	letter-spacing: 0.05em;
+}
+
+.hamburger-wrapper {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  background: #fff;
+  border-radius: 15px;
+  border: 1px solid #bdbdbd;
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  z-index: 100;
+
+	@include tablets {
+		display: flex;
+	}
+
+	@include phones {
+		top: 15px;
+		left: 15px;
+	}
+}
+
+.hamburger {
+  width: 50%;
+  height: 50%;
+}
+
+.side-bar__close {
+	position: absolute;
+	top: 40px;
+	right: 30px;
+	width: 20px;
+	height: 20px;
+
+	&-icon {
+		fill: #fff;
+	}
 }

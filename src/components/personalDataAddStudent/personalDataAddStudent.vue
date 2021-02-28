@@ -93,7 +93,7 @@ export default {
   methods: {
     async addStudent() {
       try {
-        const response = await $axios.post("/register", this.user);
+        const response = await $axios.post("/register/student", this.user);
 
         console.log(response);
       } catch (error) {

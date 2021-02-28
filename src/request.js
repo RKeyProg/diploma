@@ -1,7 +1,7 @@
 import axios from "axios";
 
-axios.defaults.baseURL = "https://webdev-api.loftschool.com";
-//axios.defaults.baseURL = "http://172.20.10.4:8000/api";
+// axios.defaults.baseURL = "https://webdev-api.loftschool.com";
+axios.defaults.baseURL = "http://172.20.10.4:8000/api";
 
 const token = localStorage.getItem("token");
 

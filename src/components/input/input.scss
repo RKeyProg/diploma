@@ -1,12 +1,14 @@
+@import "../../mixins.scss";
+
 .input {
 	font-weight: 500;
 	font-size: 16px;
-	line-height: 170%;
+	line-height: 27px;
 	letter-spacing: 0.1em;
 	color: #757575;
-	padding: 1.33vh 1.736vw;
+	padding: 10px 20px;
 	border-radius: 15px;
-	width: 28.125vw;
+	width: 540px;
 	outline: none;
 	border: 1px solid #BDBDBD;
 
@@ -17,6 +19,21 @@
 
 	&::placeholder {
 		color: #bdbdbd;
+	}
+
+	@include desktop {
+		width: 420px;
+		padding: 10px 15px;
+		font-size: 14px;
+		line-height: 22px;
+	}
+
+	@include tablets {
+		width: 370px;
+	}
+
+	@include phones {
+		width: 290px;
 	}
 }
 

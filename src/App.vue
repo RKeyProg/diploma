@@ -5,14 +5,28 @@
     router-view.component
 </template>
 
+<script>
+export default {
+  data() {
+    return {
+      isSideBarView: false,
+    }
+  }
+}
+</script>
+
 <style lang="scss" scoped>
+@import "./mixins.scss";
+
 .app-container {
   display: flex;
+  position: relative;
+  height: 100%;
+  width: 100%;
 }
 
 .content {
   width: calc(100vw - 227px);
-  background: url("./images/content/BG.jpg");
   position: relative;
   z-index: 5;
 
@@ -25,6 +39,14 @@
     top: 0;
     bottom: 0;
     background: rgba(255, 255, 255, 0.97);
+  }
+
+  @include desktop {
+    width: calc(100vw - 20px);
+  }
+
+  @include tablets {
+    width: 100%;
   }
 }
 

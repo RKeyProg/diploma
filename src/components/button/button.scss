@@ -1,3 +1,5 @@
+@import "../../mixins.scss";
+
 .btn {
 	padding: 10px 2vw;
 	text-align: center;
@@ -20,6 +22,11 @@
 		&:hover {
 			background: #bdbdbd;
 		}
+	}
+
+	@include desktop {
+		font-size: 14px;
+		line-height: 18px;
 	}
 }
 
@@ -46,7 +53,7 @@
 }
 
 .btn-file-input {
-  position: absolute;
-  top: 0;
-  left: -9999px;
+	position: absolute;
+	top: 0;
+	left: -9999px;
 }

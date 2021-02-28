@@ -5,8 +5,8 @@
     .inputs
       app-input.login-input(
         title="E-Mail",
-        v-model="user.name",
-        :errorMessage="validation.firstError('user.name')"
+        v-model="user.email",
+        :errorMessage="validation.firstError('user.email')"
       )
       app-input.login-input(
         fieldType="password",
@@ -33,8 +33,8 @@ export default {
   },
   mixins: [require("simple-vue-validator").mixin],
   validators: {
-    "user.name"(value) {
-      return Validator.value(value).required("Введите name");
+    "user.email"(value) {
+      return Validator.value(value).required("Введите email");
     },
     "user.password"(value) {
       return Validator.value(value).required("Введите пароль");
@@ -43,7 +43,7 @@ export default {
   data() {
     return {
       user: {
-        name: "",
+        email: "",
         password: "",
       },
       isSubmitDisabled: false,
@@ -57,7 +57,7 @@ export default {
 
       try {
         const response = await $axios.post("/login", this.user);
-        
+
         const token = response.data.token;
         localStorage.setItem("token", token);
         $axios.defaults.headers["Authorization"] = `Bearer ${token}`;
@@ -73,6 +73,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "../mixins.scss";
+
 .login {
   width: 100%;
   height: 100%;
@@ -87,6 +89,18 @@ export default {
   font-size: 26px;
   color: #212121;
   margin-bottom: 20px;
+
+  @include desktop {
+    font-size: 20px;
+  }
+
+  @include tablets {
+    font-size: 18px;
+  }
+
+  @include phones {
+    font-size: 16px;
+  }
 }
 
 .form {
@@ -98,7 +112,7 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 1.66vh;
+  margin-bottom: 20px;
 
   &::after {
     content: "";
@@ -106,6 +120,10 @@ export default {
     width: 99%;
     height: 1px;
     background-color: #ff4081;
+  }
+
+  @include desktop {
+    margin-bottom: 15px;
   }
 }
 
@@ -117,6 +135,18 @@ export default {
   font-size: 16px;
   color: #757575;
   user-select: none;
+
+  @include desktop {
+    font-size: 14px;
+  }
+
+  @include phones {
+    flex-direction: column;
+
+    & .link-remember {
+      margin-bottom: 10px;
+    }
+  }
 }
 
 .save-password {
@@ -133,6 +163,10 @@ export default {
 }
 
 .login-input {
-  margin-bottom: 2.22vh;
+  margin-bottom: 20px;
+
+  @include desktop {
+    margin-bottom: 15px;
+  }
 }
 </style>
