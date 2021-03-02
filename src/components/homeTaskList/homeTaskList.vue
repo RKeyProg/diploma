@@ -30,7 +30,7 @@ export default {
         arrows: false,
         pagination: false,
         rewind: true,
-        gap: "25px",
+        gap: "20px",
         padding: {
           left: "2.08vw",
           right: "2.08vw",

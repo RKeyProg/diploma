@@ -1,3 +1,5 @@
+@import "../../mixins.scss";
+
 * {
 	outline: none;
 }
@@ -7,4 +9,12 @@
 	display: flex;
 	align-items: center;
 	height: 25.55vh;
+
+	@include desktop {
+		height: 23vh;
+	}
+
+	@include tablets {
+		height: 20vh;
+	}
 }

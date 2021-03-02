@@ -1,6 +1,11 @@
+@import "../../mixins.scss";
+
 .task__container {
 	padding: 15px;
+	min-width: 470px;
 	width: 28.125vw;
+	min-height: 240px;
+	max-height: 300px;
 	height: 26.666vh;
 	border-radius: 15px;
 	background: #3F51B5;
@@ -9,6 +14,27 @@
 	flex-direction: column;
 	justify-content: space-between;
 	align-items: center;
+
+	@include desktop {
+		min-height: 180px;
+		max-height: 270px;
+		height: 23vh;
+		min-width: 370px;
+	}
+
+	@include tablets {
+		padding: 10px;
+		min-height: 150px;
+		max-height: 250px;
+		height: 20vh;
+		min-width: 320px;
+		width: 25vw;
+	}
+
+	@include phones {
+		min-width: 100%;
+		width: calc(100vw - 12px);
+	}
 }
 
 .task__container-image {
@@ -16,6 +42,21 @@
 	height: 40px;
 	fill: #fff;
 	align-self: flex-start;
+
+	@include desktop {
+		width: 35px;
+		height: 35px;
+	}
+
+	@include tablets {
+		width: 30px;
+		height: 30px;
+	}
+
+	@include phones {
+		width: 20px;
+		height: 20px;
+	}
 }
 
 .task__container-send {
@@ -23,6 +64,16 @@
 	height: 30px;
 	fill: #FF4081;
 	align-self: flex-end;
+
+	@include tablets {
+		width: 20px;
+		height: 20px;
+	}
+
+	@include phones {
+		width: 15px;
+		height: 15px;
+	}
 }
 
 .task__container-title {
@@ -31,6 +82,21 @@
 	font-size: 22px;
 	line-height: 26px;
 	text-align: center;
+
+	@include desktop {
+		font-size: 18px;
+		line-height: 20px;
+	}
+
+	@include tablets {
+		font-size: 16px;
+		line-height: 18px;
+	}
+
+	@include phones {
+		font-size: 14px;
+		line-height: 16px;
+	}
 }
 
 .task__container_add {

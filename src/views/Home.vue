@@ -3,7 +3,7 @@
   homeHeader(activePage="1")
   homeTaskList
   homeInfo
-  homeCelendar
+  //- homeCelendar
 </template>
 
 <script>

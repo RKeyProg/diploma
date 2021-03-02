@@ -109,10 +109,25 @@ export default {
 <style lang="scss" src="./personalDataAddTeacher.scss" scoped></style>
 
 <style lang="scss">
+@import "../../mixins.scss";
+
 .add-teacher__input {
   & .input {
     max-width: 350px;
+    min-width: 250px;
+    width: 27vw;
     padding: 10px 15px;
+
+    @include tablets {
+      max-width: 300px;
+      min-width: 200px;
+      width: 42vw;
+    }
+
+    @include phones {
+      max-width: 100%;
+      width: 60vw;
+    }
   }
 }
 </style>

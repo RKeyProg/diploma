@@ -2,7 +2,7 @@
 .header
   .header__container
     homeHeaderList(:activePage="activePage")
-    user
+    user.user
 </template>
 
 <script>

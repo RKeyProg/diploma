@@ -16,10 +16,6 @@ div
             preserveAspectRatio="none"
           )
             use(xlink:href=`../../images/icons/logo.svg#logo`)
-        .side-bar__lenguages
-          .side-bar__buttons
-            .side-bar__btn.buttons__ru.active ru
-            .side-bar__btn.buttons__en en
       .side-bar__title Минский #[br] радиотехнический #[br] колледж
       ul.side-bar__list.links-list
         li.links-list__item

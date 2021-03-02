@@ -3,6 +3,8 @@
 }
 
 .task-container {
+	flex-shrink: 0;
+	overflow: hidden;
 	user-select: none;
 	margin-bottom: 2.7vh;
 }

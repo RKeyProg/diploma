@@ -91,8 +91,8 @@ const router = new VueRouter({
 });
 
 const guard = axios.create({
-  // baseURL: "https://webdev-api.loftschool.com/"
-  baseURL: "http://172.20.10.4:8000/api"
+  baseURL: "https://webdev-api.loftschool.com/"
+  // baseURL: "http://172.20.10.4:8000/api"
 });
 
 router.beforeEach(async (to, from, next) => {
@@ -105,8 +105,8 @@ router.beforeEach(async (to, from, next) => {
     guard.defaults.headers["Authorization"] = `Bearer ${token}`;
 
     try {
-      const response = await guard.get("/user/profile");
-      // const response = await guard.get("/user");
+      // const response = await guard.get("/user/profile");
+      const response = await guard.get("/user");
 
       store.dispatch("user/login", await response.data.user);
       next();

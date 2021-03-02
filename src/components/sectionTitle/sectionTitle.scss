@@ -1,3 +1,5 @@
+@import "../../mixins.scss";
+
 .title {
 	font-weight: 500;
 	font-size: 16px;
@@ -17,6 +19,10 @@
 		width: 3%;
 		margin-right: 20px;
 		background: #FF4081;
+
+		@include tablets {
+			margin-right: 10px;
+		}
 	}
 
 	&::after {
@@ -26,5 +32,21 @@
 		flex: 1;
 		margin-left: 20px;
 		background: #FF4081;
+
+		@include tablets {
+			margin-left: 10px;
+		}
+	}
+
+	@include desktop {
+		font-size: 14px;
+	}
+
+	@include tablets {
+		font-size: 12px;
+	}
+
+	@include phones {
+		font-size: 10px;
 	}
 }

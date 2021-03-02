@@ -8,32 +8,47 @@
 	color: #757575;
 	padding: 10px 20px;
 	border-radius: 15px;
-	width: 540px;
+	max-width: 520px;
+	width: 28vw;
 	outline: none;
 	border: 1px solid #BDBDBD;
 
-	&_size_small {
-		padding: 7px 14px;
-		width: 250px;
-	}
-
-	&::placeholder {
-		color: #bdbdbd;
-	}
-
 	@include desktop {
-		width: 420px;
+		max-width: 450px;
+		min-width: 370px;
+		width: 37vw;
 		padding: 10px 15px;
 		font-size: 14px;
 		line-height: 22px;
 	}
 
 	@include tablets {
-		width: 370px;
+		max-width: 370px;
+		min-width: 300px;
+		width: 60vw;
+		font-size: 14px;
+		line-height: 16px;
 	}
 
 	@include phones {
+		font-size: 12px;
+		line-height: 14px;
 		width: 290px;
+	}
+
+	&_size_small {
+		padding: 7px 14px;
+		max-width: 335px;
+		min-width: 200px;
+		width: 17.5vw;
+
+		@include phones {
+			width: 100%;
+		}
+	}
+
+	&::placeholder {
+		color: #bdbdbd;
 	}
 }
 
@@ -41,7 +56,7 @@
 	display: none;
 
 	&:checked {
-		~ div .check-picture .check-picture_active {
+		~div .check-picture .check-picture_active {
 			display: block;
 		}
 	}
