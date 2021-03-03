@@ -1,8 +1,15 @@
+@import "../../mixins.scss";
+
 .link-send {
 	width: 20px;
 	height: 20px;
 
 	&__img {
 		fill: #FF4081;
+	}
+
+	@include phones {
+		width: 15px;
+		height: 15px;
 	}
 }

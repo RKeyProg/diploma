@@ -2,7 +2,7 @@
 .management
   section-title(title="Управление")
   transition(name="static")
-    .management-buttons(v-if="!isStudentAdding && !isTeacherAdding")
+    .management-buttons(v-if="!isStudentAdding && !isTeacherAdding && !isInfoAdding")
       .buttons(v-if="userPost == 'Администратор'")
         appBtn(
           text="Добавить учащегося",
@@ -10,9 +10,9 @@
         )
         appBtn(text="Добавить преподавателя", @handleClick="changeTeacherAdingView")
       .buttons(v-else-if="userPost == 'Преподаватель'")
-        appBtn(text="Добавить объявление", @handleClick="addInfo")
+        appBtn(text="Добавить объявление", @handleClick="changeInfoAdingView")
   transition(name="editor")
-    .management-content(v-if="isStudentAdding || isTeacherAdding")
+    .management-content(v-if="isStudentAdding || isTeacherAdding || isInfoAdding")
       personal-data-add-student(
         v-if="isStudentAdding",
         @changeIsStudentAdding="changeStudentAdingView"
@@ -21,6 +21,10 @@
         v-else-if="isTeacherAdding",
         @changeIsTeacherAdding="changeTeacherAdingView"
       )
+      personal-data-add-info(
+        v-else-if="isInfoAdding",
+        @changeIsInfoAdding="changeInfoAdingView"
+      )
 </template>
 
 <script>
@@ -28,13 +32,15 @@ import sectionTitle from "../sectionTitle";
 import appBtn from "../button";
 import personalDataAddStudent from "../personalDataAddStudent";
 import personalDataAddTeacher from "../personalDataAddTeacher";
+import personalDataAddInfo from "../personalDataAddInfo";
 
 export default {
   components: {
     sectionTitle,
     appBtn,
     personalDataAddStudent,
-    personalDataAddTeacher
+    personalDataAddTeacher,
+    personalDataAddInfo
   },
   props: {
     userPost: String,
@@ -43,6 +49,7 @@ export default {
     return {
       isStudentAdding: false,
       isTeacherAdding: false,
+      isInfoAdding: false,
     };
   },
   methods: {
@@ -52,9 +59,9 @@ export default {
     changeTeacherAdingView() {
       this.isTeacherAdding = !this.isTeacherAdding;
     },
-    addInfo() {
-      console.log("info");
-    },
+    changeInfoAdingView() {
+      this.isInfoAdding = !this.isInfoAdding;
+    }
   },
 };
 </script>

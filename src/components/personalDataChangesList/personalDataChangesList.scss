@@ -1,3 +1,5 @@
+@import "../../mixins.scss";
+
 * {
 	outline: none;
 }
@@ -5,11 +7,21 @@
 .item {
 	display: flex;
 	align-items: flex-start;
+	justify-content: center;
+	min-width: 210px;
 	max-width: 23.61vw;
 	height: 100%;
 	border-right: 1px solid #BDBDBD;
 
 	&:last-child {
 		border: 0;
+	}
+
+	@include desktop {
+		min-width: 200px;
+	}
+
+	@include phones {
+		min-width: 150px;
 	}
 }

@@ -1,3 +1,5 @@
+@import "../../mixins.scss";
+
 .current-practice__data {
 	display: flex;
 	flex-direction: column;
@@ -8,6 +10,18 @@
 	font-weight: 500;
 	font-size: 22px;
 	margin-bottom: 5px;
+
+	@include desktop {
+		font-size: 20px;
+	}
+
+	@include tablets {
+		font-size: 18px;
+	}
+
+	@include phones {
+		font-size: 16px;
+	}
 }
 
 .current-practice__date {
@@ -15,4 +29,12 @@
 	font-size: 18px;
 	line-height: 21px;
 	color: #757575;
+
+	@include tablets {
+		font-size: 16px;
+	}
+
+	@include phones {
+		font-size: 14px;
+	}
 }

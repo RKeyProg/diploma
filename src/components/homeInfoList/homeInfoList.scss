@@ -20,4 +20,8 @@
 	@include desktop {
 		min-width: 200px;
 	}
+
+	@include phones {
+		min-width: 150px;
+	}
 }

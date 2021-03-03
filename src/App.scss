@@ -8,9 +8,14 @@ html {
   @include desktop {
     font-size: 13px;
   }
+
   @include tablets {
     font-size: 12px;
   }
+}
+
+::selection {
+  background: #bdbdbd;
 }
 
 body,
@@ -26,7 +31,8 @@ body {
   -moz-osx-font-smoothing: grayscale;
   color: $text-color_light;
   overflow: hidden;
-  background: url("./images/content/BG.jpg") center center / cover no-repeat;;
+  background: url("./images/content/BG.jpg") center center / cover no-repeat;
+  ;
 
   &::before {
     content: '';
@@ -96,7 +102,8 @@ a {
   transition: all .3s ease;
 }
 
-img, svg {
+img,
+svg {
   display: block;
   max-width: 100%;
   width: 100%;

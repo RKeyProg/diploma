@@ -1,3 +1,5 @@
+@import "../../mixins.scss";
+
 .current-task__data {
 	display: flex;
 	justify-content: center;
@@ -8,4 +10,16 @@
 	font-weight: 500;
 	font-size: 22px;
 	margin-right: 20px;
+
+	@include desktop {
+		font-size: 20px;
+	}
+
+	@include tablets {
+		font-size: 18px;
+	}
+
+	@include phones {
+		font-size: 16px;
+	}
 }

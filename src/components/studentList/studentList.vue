@@ -122,25 +122,41 @@ export default {
 <style lang="scss" src="./studentList.scss" scoped></style>
 
 <style lang="scss">
+@import "../../mixins.scss";
+
 .student__list {
   & .splide__track {
     height: 100% !important;
+    width: 100%;
   }
 
   & .splide__list {
-    flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: center;
+    display: grid !important;
+    grid-template-columns: repeat(auto-fit, 20.4vw);
+    grid-row-gap: 20px;
+    grid-column-gap: 15px;
+
+    @include desktop {
+      grid-template-columns: repeat(auto-fit, 23vw);
+    }
+
+    @include tablets {
+      grid-template-columns: repeat(auto-fit, 29vw);
+    }
+
+    @include phones {
+      grid-template-columns: repeat(auto-fit, 42vw);
+    }
   }
 
   & .splide__slide {
     outline: none;
-    width: calc(100% / 4 - 10px) !important;
+    width: fit-content !important;
     height: fit-content !important;
     display: flex;
-    justify-content: center;
-    margin-right: 10px;
-    margin-bottom: 50px;
     user-select: none;
+    margin-bottom: 0 !important;
   }
 }
 </style>

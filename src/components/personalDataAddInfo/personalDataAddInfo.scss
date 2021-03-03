@@ -1,0 +1,90 @@
+@import "../../mixins.scss";
+
+.add-info {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: 0 2.08vw;
+}
+
+.add-info__title {
+	font-weight: 500;
+	font-size: 22px;
+	color: #212121;
+	margin-bottom: 20px;
+
+	@include desktop {
+		font-size: 20px;
+	}
+
+	@include tablets {
+		font-size: 18px;
+	}
+
+	@include phones {
+		font-size: 16px;
+	}
+}
+
+.add-info__form {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+}
+
+.add-info__row {
+	width: 45%;
+	margin-bottom: 35px;
+
+	@include desktop {
+		width: 60%;
+	}
+
+	@include tablets {
+		margin-bottom: 25px;
+	}
+
+	@include phones {
+		margin-bottom: 15px;
+		width: 70%;
+	}
+}
+
+.add-info__textarea {
+	width: 100%;
+	height: 13vh;
+	border-radius: 15px;
+	border: 1px solid #bdbdbd;
+	outline: none;
+	resize: none;
+	padding: 15px;
+	font-weight: 500;
+	font-size: 14px;
+	line-height: 16px;
+	color: #757575;
+
+	&::placeholder {
+		color: rgba($color: #757575, $alpha: .5);
+	}
+
+	@include tablets {
+		height: 11vh;
+	}
+
+	@include phones {
+		font-size: 12px;
+		line-height: 14px;
+	}
+}
+
+.add-info__buttons {
+	align-self: flex-start;
+}
+
+.add-info__btn {
+	margin-right: 15px;
+
+	&:last-child {
+		margin-right: 0;
+	}
+}
