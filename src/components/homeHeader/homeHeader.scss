@@ -8,6 +8,7 @@
 	padding: 0 2.08vw;
 	display: flex;
 	justify-content: space-between;
+	align-items: center;
 	width: 100%;
 
 	@include desktop {
@@ -17,8 +18,10 @@
 }
 
 .user {
-	margin-bottom: 15px;
-
+	@include desktop {
+		margin-bottom: 15px;
+	}
+	
 	@include tablets {
 		align-self: flex-end;
 	}

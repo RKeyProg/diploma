@@ -34,10 +34,11 @@ export default {
       options: {
         direction: "ttb",
         height: "26.666vh",
+        autoHeight: true,
         arrows: false,
         pagination: false,
         rewind: true,
-        gap: "25px",
+        gap: "15px",
         padding: {
           left: "2.08vw",
           right: "2.08vw"

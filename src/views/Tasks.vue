@@ -4,23 +4,31 @@
   add-task(isTeacher)
   splide.task__list(:options="options")
     splide-slide
-      task.task(taskName="Работа с Microsoft Excel" taskType="clipboard", link="/task")
+      task.task(
+        taskName="Сборка компонентов компьютера с промежуточной визуализацией",
+        taskType="clipboard",
+        link="/task"
+      )
     splide-slide
-      task.task(taskName="Работа с Microsoft Excel" taskType="settings", link="/task")
+      task.task(
+        taskName="Работа с Microsoft Excel",
+        taskType="settings",
+        link="/task"
+      )
     splide-slide
-      task.task(taskName="Работа с Microsoft Excel" link="/task")
+      task.task(taskName="Работа с Microsoft Excel", link="/task")
     splide-slide
-      task.task(taskName="Работа с Microsoft Excel" link="/task")
+      task.task(taskName="Работа с Microsoft Excel", link="/task")
     splide-slide
-      task.task(taskName="Работа с Microsoft Excel" link="/task")
+      task.task(taskName="Работа с Microsoft Excel", link="/task")
     splide-slide
-      task.task(taskName="Работа с Microsoft Excel" link="/task")
+      task.task(taskName="Работа с Microsoft Excel", link="/task")
     splide-slide
-      task.task(taskName="Работа с Microsoft Excel" link="/task")
+      task.task(taskName="Работа с Microsoft Excel", link="/task")
     splide-slide
-      task.task(taskName="Работа с Microsoft Excel" link="/task")
+      task.task(taskName="Работа с Microsoft Excel", link="/task")
     splide-slide
-      task.task(taskName="Работа с Microsoft Excel" link="/task")
+      task.task(taskName="Работа с Microsoft Excel", link="/task")
 </template>
 
 <script>
@@ -36,34 +44,37 @@ export default {
     addTask,
     task,
     Splide,
-    SplideSlide
+    SplideSlide,
   },
   data() {
     return {
       options: {
         direction: "ttb",
-        height: "26.666vh",
+        height: "23vh",
+        autoHeight: true,
         arrows: false,
         pagination: false,
         rewind: true,
-        gap: "25px",
+        gap: "15px",
         padding: {
           left: "2.08vw",
-          right: "2.08vw"
-        }
-      }
+          right: "2.08vw",
+        },
+      },
     };
-  }
+  },
 };
 </script>
 
 <style lang="scss">
+@import "../mixins.scss";
+
 * {
   outline: none;
 }
 
 .tasks {
-  padding: 2.77vh 0;
+  padding: 2.77vh 0 0;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -81,18 +92,30 @@ export default {
   }
 
   & .splide__slide {
-    width: fit-content !important;
+    width: calc(100% / 3 - 10px) !important;
+    min-height: 240px;
+
+    @include desktop {
+      min-height: 180px;
+    }
+
+    @include phones {
+      width: calc(100% / 2 - 5px) !important;
+    }
   }
 
   & .task__container {
-    width: 27vw;
+    min-width: 0;
+    width: 100%;
+    height: 100%;
   }
-}
 
-.task__list ul {
-  width: 100%;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
+  & ul {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: stretch;
+  }
 }
 </style>

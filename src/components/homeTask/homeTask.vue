@@ -15,7 +15,7 @@
       use(xlink:href=`../../images/icons/settings.svg#settings`)
   .task__container-image(v-else-if="taskType === 'clipboard'")
     svg.task__container-icon(
-      viewBox="-77 0 512 512",
+      viewBox="0 0 512 512",
       preserveAspectRatio="none"
     )
       use(xlink:href=`../../images/icons/clipboard.svg#clipboard`)
