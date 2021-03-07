@@ -33,7 +33,7 @@
 	@include phones {
 		font-size: 12px;
 		line-height: 14px;
-		width: 290px;
+		width: 67vw;
 	}
 
 	&_size_small {
@@ -41,6 +41,10 @@
 		max-width: 335px;
 		min-width: 200px;
 		width: 17.5vw;
+
+		@include desktop {
+			min-width: 190px;
+		}
 
 		@include phones {
 			width: 100%;

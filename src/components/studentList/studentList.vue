@@ -1,6 +1,6 @@
 <template lang="pug">
 .students
-  .students__title {{ this.group }}
+  .students__title {{ getUserGroup }}
   splide.student__list(:options="options")
     splide-slide(v-for="student in this.students", :key="student.id")
       router-link(:to="student.page")
@@ -10,6 +10,7 @@
 <script>
 import student from "../student";
 import { Splide, SplideSlide } from "@splidejs/vue-splide";
+import store from "../../store";
 
 export default {
   components: {
@@ -19,7 +20,6 @@ export default {
   },
   data() {
     return {
-      group: "8к2411",
       students: [
         {
           id: 1,
@@ -116,6 +116,11 @@ export default {
       },
     };
   },
+  computed: {
+    getUserGroup() {
+      return store.state.user.user.id_group;
+    },
+  },
 };
 </script>
 
@@ -151,12 +156,21 @@ export default {
   }
 
   & .splide__slide {
+    margin-left: 5vw;
     outline: none;
     width: fit-content !important;
     height: fit-content !important;
     display: flex;
     user-select: none;
     margin-bottom: 0 !important;
+
+    @include desktop {
+      margin-left: 3vw;
+    }
+
+    @include tablets {
+      margin-left: 2vw;
+    }
   }
 }
 </style>

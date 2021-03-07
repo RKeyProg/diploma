@@ -85,3 +85,12 @@ export default {
 </script>
 
 <style lang="scss" src="./pcComponent.scss" scoped></style>
+
+<style lang="scss">
+.component__visual {
+  & > .task-3d__container {
+    height: 100% !important;
+    padding: 0 2.08vw !important;
+  }
+}
+</style>

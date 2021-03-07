@@ -6,60 +6,73 @@ form(
   transition(name="static")
     .personal-data__content(v-if="!isEdit")
       avatar.personal-data__photo
-      .personal-data__title.personal-data_js_end.personal-data_as_end {{ user.name }}
+      .personal-data__title.personal-data_js_end.personal-data_as_end {{ getUserName }}
       .personal-data__param.personal-data_as_end
         span Телефон:
         span {{ user.phone }}
-      div(v-if="user.post == 'Студент'").personal-data__param.personal-data_js_end.personal-data_as_start
+      .personal-data__param.personal-data_js_end.personal-data_as_start(
+        v-if="user.post == 'Студент'"
+      )
         span Группа:
         span {{ user.group }}
-      div(v-else).personal-data__param.personal-data_js_end.personal-data_as_start
+      .personal-data__param.personal-data_js_end.personal-data_as_start(v-else)
         span
-        span {{ user.post }}
+        span {{ post }}
       .personal-data__param.personal-data_as_start
         span E-Mail:
-        span {{ user.mail }}
+        span {{ user.email }}
   transition(name="editor")
     .personal-data__content_edit(v-if="isEdit")
+      .personal-data__inputs.personal-data__inputs_right
+        div
+          app-input.personal-data__input(
+            title="Телефон",
+            v-model="newPersonData.phone",
+            smallSize,
+            :errorMessage="validation.firstError('newPersonData.phone')"
+          )
+        div
+          app-input.personal-data__input(
+            title="E-Mail",
+            v-model="newPersonData.email",
+            smallSize,
+            :errorMessage="validation.firstError('newPersonData.email')"
+          )
       label.personal-data__new-photo(
-        :style="{ backgroundImage: `url(${newPersonData.preview})` }"
+        :style="{ backgroundImage: `url(${this.preview})` }"
       )
         app-btn(type="File", @change="handleChange")
-        div(v-if="!newPersonData.preview")
+        div(v-if="!this.preview")
           svg.personal-data__new-photo-icon(
             viewBox="0 0 512.001 512.001",
             preserveAspectRatio="none"
           )
             use(xlink:href=`../../images/icons/camera.svg#camera`)
-      .personal-data__inputs
+      .personal-data__inputs.personal-data__inputs_left
         div
-          span Телефон:
           app-input.personal-data__input(
-            title="+375291243249",
-            v-model="newPersonData.phone",
+            title="Пароль",
+            v-model="newPersonData.password",
             smallSize
-            :errorMessage="validation.firstError('newPersonData.phone')"
           )
         div
-          span E-Mail:
           app-input.personal-data__input(
-            title="name@mail.ru",
-            v-model="newPersonData.mail",
+            title="Подтвердите пароль",
+            v-model="newPersonData.password_confirmation",
             smallSize
-            :errorMessage="validation.firstError('newPersonData.mail')"
           )
   .personal-data__buttons
-    app-btn.personal-data__btn(
-      type="Edit",
-      @wasClick="editPersonalData",
-      v-if="!isEdit"
-    )
-    app-btn.personal-data__btn(
-      type="Submit"
-      v-else
-    )
-    app-btn.personal-data__btn(v-if="!isEdit", type="Exit")
-    app-btn.personal-data__btn(v-else, @wasClick="closeEditing", type="Close")
+    transition(name="btn")
+      .personal-data__buttons-group(v-if="!isEdit")
+        app-btn.personal-data__btn(type="Edit", @wasClick="editPersonalData")
+        app-btn.personal-data__btn(type="Exit")
+    transition(name="btn") 
+      .personal-data__buttons-group(v-if="isEdit")
+        app-btn.personal-data__btn(type="Submit")
+        app-btn.personal-data__btn(
+          @wasClick="closeEditing",
+          type="Close"
+        )
 </template>
 
 <script>
@@ -67,6 +80,7 @@ import { Validator } from "simple-vue-validator";
 import avatar from "../avatar";
 import appBtn from "../button";
 import appInput from "../input";
+import store from "../../store";
 
 export default {
   name: "personalDataHeader",
@@ -78,26 +92,29 @@ export default {
   mixins: [require("simple-vue-validator").mixin],
   validators: {
     "newPersonData.phone"(value) {
-      return Validator.value(value).required("Введите телефон");
+      return Validator.value(value).required("");
     },
-    "newPersonData.mail"(value) {
-      return Validator.value(value).required("Введите E-Mail");
-    }
+    "newPersonData.email"(value) {
+      return Validator.value(value).required("");
+    },
   },
   data() {
     return {
       isEdit: false,
       hovered: false,
       newPersonData: {
-        phone: "",
-        mail: "",
+        phone: this.user.phone,
+        email: this.user.email,
         photo: {},
-        preview: "",
+        password: "",
+        password_confirmation: "",
       },
+      preview: "",
     };
   },
   props: {
     user: Object,
+    post: String,
   },
   methods: {
     editPersonalData() {
@@ -106,13 +123,20 @@ export default {
     async handleSubmit() {
       if ((await this.$validate()) === false) return;
 
-      console.log("submit");
+      try {
+        store.dispatch("user/editData", await this.newPersonData);
+
+        this.isEdit = !this.isEdit;
+      } catch (error) {
+        console.log(error.response.data.error);
+      } finally {
+        this.isSubmitDisabled = false;
+      }
     },
     handleChange(event) {
       const file = event.target.files[0];
 
       this.newPersonData.photo = file;
-
       this.renderPhoto(file);
     },
     renderPhoto(file) {
@@ -120,15 +144,20 @@ export default {
 
       reader.readAsDataURL(file);
       reader.onloadend = () => {
-        this.newPersonData.preview = reader.result;
+        this.preview = reader.result;
       };
     },
     closeEditing() {
       this.isEdit = !this.isEdit;
-      this.newPersonData.phone = "";
-      this.newPersonData.mail = "";
+      this.newPersonData.phone = this.user.phone;
+      this.newPersonData.email = this.user.email;
       this.newPersonData.photo = {};
-      this.newPersonData.preview = "";
+      this.preview = "";
+    },
+  },
+  computed: {
+    getUserName() {
+      return `${this.user.surname} ${this.user.name} ${this.user.patronymic}`;
     },
   },
 };

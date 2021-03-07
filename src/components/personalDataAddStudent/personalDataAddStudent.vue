@@ -14,7 +14,14 @@
       app-input.add-student__input(
         v-model="user.name",
         fieldType="text",
-        title="Радкевич"
+        title="Кирилл"
+      )
+    .add-student__row
+      .add-student__input-title Отчество:
+      app-input.add-student__input(
+        v-model="user.patronymic",
+        fieldType="text",
+        title="Александрович"
       )
     .add-student__row
       .add-student__input-title Телефон:
@@ -40,7 +47,7 @@
     .add-student__row
       .add-student__input-title Практика:
       app-input.add-student__input(
-        v-model="user.practic",
+        v-model="user.practice",
         fieldType="text",
         title="Технологическая"
       )
@@ -81,10 +88,11 @@ export default {
       user: {
         name: "",
         surname: "",
+        patronymic: "",
         phone: "",
         group: "",
         email: "",
-        practic: "",
+        practice: "",
         password: "",
         password_confirmation: "",
       },

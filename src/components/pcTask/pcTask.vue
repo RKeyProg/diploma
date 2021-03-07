@@ -149,4 +149,3 @@ export default {
 </script>
 
 <style lang="scss" src="./pcTask.scss" scoped></style>
-

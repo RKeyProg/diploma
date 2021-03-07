@@ -19,6 +19,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "../mixins.scss";
+
 .task {
   padding: 2.77vh 0;
   height: 100%;
@@ -32,5 +34,13 @@ export default {
   font-weight: 500;
   font-size: 24px;
   color: #212121;
+
+  @include desktop {
+    font-size: 22px;
+  }
+
+  @include tablets {
+    font-size: 18px;
+  }
 }
 </style>

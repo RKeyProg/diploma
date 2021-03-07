@@ -1,11 +1,23 @@
+@import "../../mixins.scss";
+
 .pc {
   padding: 30px 2.08vw 0;
   display: flex;
   justify-content: space-between;
+
+  @include desktop {
+    padding: 20px 2.08vw 0;
+  }
+
+  @include phones {
+    padding: 0 2.08vw;
+    flex-direction: column;
+  }
 }
 
 .pc__component-info {
-  width: 30%;
+  width: 28vw;
+  min-width: 300px;
   padding: 20px 25px 20px 0;
   margin-right: 25px;
   display: flex;
@@ -21,6 +33,23 @@
     background: #bdbdbd;
     width: 2px;
     height: 100%;
+
+    @include phones {
+      display: none;
+    }
+  }
+
+  @include desktop {
+    min-width: 260px;
+  }
+
+  @include tablets {
+    min-width: 230px;
+  }
+
+  @include phones {
+    padding: 10px 0;
+    width: 100%;
   }
 }
 
@@ -30,6 +59,17 @@
   line-height: 28px;
   color: #212121;
   margin-bottom: 20px;
+
+  @include desktop {
+    font-size: 24px;
+    line-height: 26px;
+  }
+
+  @include tablets {
+    margin-bottom: 15px;
+    font-size: 22px;
+    line-height: 24px;
+  }
 }
 
 .pc__component-desc {
@@ -38,6 +78,22 @@
   line-height: 24px;
   color: #757575;
   margin-bottom: 40px;
+
+
+  @include desktop {
+    font-size: 16px;
+    line-height: 20px;
+    margin-bottom: 35px;
+  }
+
+  @include tablets {
+    font-size: 14px;
+    line-height: 18px;
+  }
+
+  @include phones {
+    margin-bottom: 20px;
+  }
 }
 
 .pc__right-column {
@@ -53,6 +109,10 @@
   flex-wrap: wrap;
   justify-self: flex-start;
   margin-bottom: -15px;
+
+  @include phones {
+    margin-bottom: 20px;
+  }
 }
 
 .pc__components-item {
@@ -73,6 +133,27 @@
     &.active {
       background: #ff4081;
     }
+
+    @include desktop {
+      padding: 7px 30px;
+      font-size: 14px;
+      line-height: 16px;
+    }
+
+    @include tablets {
+      padding: 10px 25px;
+      font-size: 12px;
+      line-height: 14px;
+    }
+
+    @include phones {
+
+    }
+  }
+
+  @include tablets {
+    margin-right: 10px;
+    margin-bottom: 10px;
   }
 }
 

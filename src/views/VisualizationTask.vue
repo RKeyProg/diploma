@@ -11,7 +11,7 @@
     @changeCompatibility="isCompatibility = false"
   )
   pc-component(
-    :class="['component', {hidden: !isComponent}]"
+    :class="['component', { hidden: !isComponent }]",
     @changeComponent="isComponent = false",
     :object="this.currentComponent"
   )
@@ -53,6 +53,8 @@ export default {
 </script>
 
 <style lang="scss">
+@import "../mixins.scss";
+
 .vs__dropdown-toggle {
   background: #fff;
 }
@@ -60,6 +62,10 @@ export default {
 .vs__open-indicator,
 .vs__clear > svg {
   width: 16px;
+
+  @include desktop {
+    width: 22px;
+  }
 }
 
 .vs__actions {
@@ -83,6 +89,15 @@ export default {
   font-size: 16px;
   line-height: 24px;
   color: #757575;
+
+  @include tablets {
+    font-size: 12px;
+    line-height: 16px;
+  }
+}
+
+.vs__selected-options {
+  flex-wrap: nowrap;
 }
 
 .vs__dropdown-option {
@@ -90,6 +105,14 @@ export default {
   font-size: 16px;
   line-height: 24px;
   color: #757575;
+
+  @include desktop {
+    font-size: 14px;
+  }
+
+  @include tablets {
+    font-size: 12px;
+  }
 }
 
 .vs__dropdown-option--highlight {
@@ -105,7 +128,7 @@ export default {
   height: 100%;
   display: flex;
   flex-direction: column;
-  overflow: hidden;
+  overflow-y: auto;
 }
 
 .component {

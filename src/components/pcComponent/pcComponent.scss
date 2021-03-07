@@ -1,10 +1,21 @@
+@import "../../mixins.scss";
+
 .component {
 	height: 70%;
 }
 
 .component__visual {
-	height: 700px;
+	height: 35vw;
 	margin-bottom: 35px;
+
+	@include desktop {
+		height: 550px;
+		margin-bottom: 20px;
+	}
+
+	@include phones {
+		height: 350px;
+	}
 }
 
 .component__control {

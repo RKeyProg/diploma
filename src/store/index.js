@@ -7,9 +7,6 @@ import tasks from "./modules/tasks";
 import user from "./modules/user";
 
 export default new Vuex.Store({
-  state: {},
-  mutations: {},
-  actions: {},
   modules: {
     tasks,
     user

@@ -1,16 +1,16 @@
 <template lang="pug">
 .account-container
   homeHeader(activePage="1")
-  personal-data-header(:user="user")
-  .for-student(v-if="user.post == 'Учащийся'")
+  personal-data-header(:user="getUser" :post="getUserPost")
+  .for-student(v-if="getUserPost == 'Учащийся'")
     personal-data-current-practice.personal-data__row
     personal-data-current-task.personal-data__row
     personal-data-changes.personal-data__row
-  .for-admin(v-else-if="user.post == 'Администратор'")
-    personal-data-management(:userPost="user.post")
-  .for-teacher(v-else-if="user.post == 'Преподаватель'")
+  .for-admin(v-else-if="getUserPost == 'Администратор'")
+    personal-data-management(:userPost="getUserPost")
+  .for-teacher(v-else-if="getUserPost == 'Преподаватель'")
     personal-data-current-practice.personal-data__row
-    personal-data-management(:userPost="user.post")
+    personal-data-management(:userPost="getUserPost")
 </template>
 
 <script>
@@ -20,6 +20,7 @@ import personalDataCurrentPractice from "../components/personalDataCurrentPracti
 import personalDataCurrentTask from "../components/personalDataCurrentTask";
 import personalDataChanges from "../components/personalDataChanges";
 import personalDataManagement from "../components/personalDataManagement";
+import store from "../store";
 
 export default {
   name: "PersonalAccount",
@@ -29,19 +30,27 @@ export default {
     personalDataCurrentPractice,
     personalDataCurrentTask,
     personalDataChanges,
-    personalDataManagement
+    personalDataManagement,
   },
-  data() {
-    return {
-      user: {
-        post: "Преподаватель",
-        name: "Радкевич Кирилл Александрович",
-        group: "8к2411",
-        phone: "+375 (29) 183-38-27",
-        mail: "RKey_rs@mail.ru"
+  computed: {
+    getUserPost() {
+      const post = store.getters["user/userGetPost"];
+      let postName = "";
+
+      if (post == "student") {
+        postName = "Учащийся";
+      } else if (post == "teacher") {
+        postName = "Преподаватель";
+      } else if (post == "admin") {
+        postName = "Администратор";
       }
-    };
-  }
+
+      return postName;
+    },
+    getUser() {
+      return store.state.user.user;
+    }
+  },
 };
 </script>
 

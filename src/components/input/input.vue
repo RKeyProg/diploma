@@ -8,7 +8,6 @@ label
     :value="value",
     @input="$emit('input', $event.target.value)"
   )
-  .input__error-message {{ errorMessage }}
 
   div(v-if="fieldType === 'checkBox'").check-input
     span.check-picture(

@@ -14,7 +14,14 @@
       app-input.add-teacher__input(
         v-model="user.name",
         fieldType="text",
-        title="Радкевич"
+        title="Кирилл"
+      )
+    .add-teacher__row
+      .add-teacher__input-title Отчество:
+      app-input.add-teacher__input(
+        v-model="user.patronymic",
+        fieldType="text",
+        title="Александрович"
       )
     .add-teacher__row
       .add-teacher__input-title Телефон:
@@ -40,7 +47,7 @@
     .add-teacher__row
       .add-teacher__input-title Практика:
       app-input.add-teacher__input(
-        v-model="user.practic",
+        v-model="user.practice",
         fieldType="text",
         title="Технологическая"
       )
@@ -81,10 +88,11 @@ export default {
       user: {
         name: "",
         surname: "",
+        patronymic: "",
         phone: "",
         group: "",
         email: "",
-        practic: "",
+        practice: "",
         password: "",
         password_confirmation: "",
       },
@@ -93,7 +101,7 @@ export default {
   methods: {
     async addTeacher() {
       try {
-        const response = await $axios.post("/register/worker", this.user);
+        const response = await $axios.post("/register/teacher", this.user);
 
         console.log(response);
       } catch (error) {

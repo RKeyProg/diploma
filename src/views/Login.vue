@@ -25,6 +25,7 @@ import { Validator } from "simple-vue-validator";
 import $axios from "../request";
 import appInput from "../components/input";
 import btn from "../components/button";
+import store from "../store";
 
 export default {
   components: {
@@ -57,6 +58,8 @@ export default {
 
       try {
         const response = await $axios.post("/login", this.user);
+
+        store.dispatch("user/addPost", await response.data.role);
 
         const token = response.data.token;
         localStorage.setItem("token", token);
