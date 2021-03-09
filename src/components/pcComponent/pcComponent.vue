@@ -76,11 +76,6 @@ export default {
       type: String,
     },
   },
-  watch: {
-    object: function () {
-      console.log(this.objectWay[this.object]);
-    },
-  },
 };
 </script>
 

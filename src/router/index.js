@@ -91,14 +91,14 @@ const router = new VueRouter({
 });
 
 const guard = axios.create({
-  baseURL: "https://webdev-api.loftschool.com/"
-  // baseURL: "http://172.20.10.4:8000/api"
+  // baseURL: "https://webdev-api.loftschool.com/"
+  baseURL: "http://172.20.10.4:8000/api"
 });
 
 router.beforeEach(async (to, from, next) => {
   const isPublicRoute = to.matched.some(route => route.meta.public);
   const isUserLoggedIn = store.getters["user/userIsLoggedIn"];
-  // const userPost = store.getters["user/userGetPost"];
+  const userPost = store.getters["user/userGetPost"];
 
   if (!isPublicRoute && !isUserLoggedIn) {
     const token = localStorage.getItem("token");
@@ -107,13 +107,11 @@ router.beforeEach(async (to, from, next) => {
 
     try {
       let response = null;
-      // if (userPost) {
-      //   response = await guard.get(`/${userPost}/profile`);
-      // } else {
-      //   next();
-      // }
-
-      response = await guard.get("/user");
+      if (userPost) {
+        response = await guard.get(`/${userPost}/profile`);
+      } else {
+        next();
+      }
 
       store.dispatch("user/login", await response.data.user);
       next();

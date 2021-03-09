@@ -5,8 +5,8 @@
     .inputs
       app-input.login-input(
         title="E-Mail",
-        v-model="user.name",
-        :errorMessage="validation.firstError('user.name')"
+        v-model="user.email",
+        :errorMessage="validation.firstError('user.email')"
       )
       app-input.login-input(
         fieldType="password",
@@ -34,8 +34,8 @@ export default {
   },
   mixins: [require("simple-vue-validator").mixin],
   validators: {
-    "user.name"(value) {
-      return Validator.value(value).required("Введите name");
+    "user.email"(value) {
+      return Validator.value(value).required("Введите email");
     },
     "user.password"(value) {
       return Validator.value(value).required("Введите пароль");
@@ -44,7 +44,7 @@ export default {
   data() {
     return {
       user: {
-        name: "",
+        email: "",
         password: "",
       },
       isSubmitDisabled: false,
@@ -63,6 +63,7 @@ export default {
 
         const token = response.data.token;
         localStorage.setItem("token", token);
+        localStorage.setItem("test", "asdasd");
         $axios.defaults.headers["Authorization"] = `Bearer ${token}`;
         this.$router.replace("/");
       } catch (error) {

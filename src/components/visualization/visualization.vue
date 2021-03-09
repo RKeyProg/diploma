@@ -163,10 +163,12 @@ export default {
   },
   mounted() {
     this.init();
-    this.setLight();
 
-    if (this.objectWay.length) {
-      this.setObject();
+    if (this.objectWay) {
+      if (this.objectWay.length) {
+        this.setLight();
+        this.setObject();
+      }
     }
   },
 };

@@ -12,20 +12,20 @@ div(:class="['add-task__wrapper', { disabled: !isTeacher }]")
             .column__title Тип задания
             .editor__task-type
               label
-                input(type="radio", name="task-type")
+                input(type="radio", value="intelligent" name="task-type" v-model="newTask.type")
                 .editor__radio-view
-                .editor__radio-name Интелектуальное
+                .editor__radio-name Интеллектуальное
               label
-                input(type="radio", name="task-type")
+                input(type="radio", value="practical" name="task-type" v-model="newTask.type")
                 .editor__radio-view
                 .editor__radio-name Практическое
               label
-                input(type="radio", name="task-type")
+                input(type="radio", value="visual" name="task-type" v-model="newTask.type")
                 .editor__radio-view
                 .editor__radio-name 3D
           .editor__column
             .column__title Название
-            input(type="text")
+            input(type="text" v-model="newTask.name")
           .editor__column
             .column__title Подтвердить
             .editor__add-buttons
@@ -43,6 +43,7 @@ div(:class="['add-task__wrapper', { disabled: !isTeacher }]")
 
 <script>
 import appBtn from "../button";
+import $axios from "../../request";
 
 export default {
   components: {
@@ -57,10 +58,18 @@ export default {
   data() {
     return {
       isEdit: false,
+      newTask: {
+        name: "",
+        type: "",
+      },
     };
   },
   methods: {
-    addTask() {
+    async addTask() {
+      await $axios.post("/task/add", this.newTask);
+
+      this.$emit("addTask");
+
       this.isEdit = !this.isEdit;
     },
   },

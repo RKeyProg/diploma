@@ -1,18 +1,23 @@
 <template lang="pug">
-.task__container.task__container_add(v-if="add", @click="addTask")
 .task__container(v-else)
-  .task__container-image(v-if="taskType === 'brain'")
+  .task__container-image(v-if="taskType === 'intelligent'")
     svg.task__container-icon(
       viewBox="0 0 512.001 512.001",
       preserveAspectRatio="none"
     )
       use(xlink:href=`../../images/icons/brain.svg#brain`)
-  .task__container-image(v-else-if="taskType === 'settings'")
+  .task__container-image(v-else-if="taskType === 'practical'")
     svg.task__container-icon(
       viewBox="0 0 512.001 512.001",
       preserveAspectRatio="none"
     )
       use(xlink:href=`../../images/icons/settings.svg#settings`)
+  .task__container-image(v-else-if="taskType === 'visual'")
+    svg.task__container-icon(
+      viewBox="0 0 24.001 24.001",
+      preserveAspectRatio="none"
+    )
+      use(xlink:href=`../../images/icons/3d.svg#3d`)
   .task__container-image(v-else-if="taskType === 'clipboard'")
     svg.task__container-icon(
       viewBox="0 0 512 512",
@@ -38,7 +43,7 @@
     )
       use(xlink:href=`../../images/icons/contract.svg#contract`)
   .task__container-title {{taskName}}
-  app-link.task__container-send(send, :link="link")
+  app-link.task__container-send(send, :link="link", :external="external" :task="task")
 </template>
 
 <script>
@@ -59,17 +64,20 @@ export default {
     },
     taskType: {
       type: String,
-      default: "brain",
+      default: "intelligent",
     },
     link: {
       type: String,
       default: "/",
     },
-  },
-  methods: {
-    addTask() {
-      console.log("Add new task");
+    external: {
+      type: Boolean,
+      default: false,
     },
+    task: {
+      type: Object,
+      default: null
+    }
   },
 };
 </script>

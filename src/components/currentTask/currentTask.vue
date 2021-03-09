@@ -1,16 +1,34 @@
 <template lang="pug">
 .curren-task
   section-title(title="Задание")
-  .current-task__content
-    .current-task__wording {{ currentTask.wording }}
-    ul.current-task__note-list
-      li.current-task__note-item(v-for="item in currentTask.note") {{ item }}
-  app-btn.current-task__btn(text="Приступить")
+  .current-task__content(v-if="post !== 'teacher'")
+    .current-task__wording {{ this.task.description }}
+    .current-task__note {{ this.task.help }}
+  .current-task__content(v-else)
+    .current-task__wording
+      textarea.current-task__textarea(
+        placeholder="Формулировка задания",
+        v-model="currentTask.description"
+      )
+    .current-task__note
+      textarea.current-task__textarea(
+        placeholder="Формулировка задания",
+        v-model="currentTask.help"
+      )
+  app-btn.current-task__btn(
+    v-if="post === 'teacher'",
+    text="Сохранить",
+    @handleClick="changeTask"
+  )
+  app-btn.current-task__btn(v-else, text="Приступить")
+  app-btn.current-task__btn(text="Назад" @click="")
 </template>
 
 <script>
 import sectionTitle from "../sectionTitle";
 import appBtn from "../button";
+import { mapState } from "vuex";
+import $axios from "../../request";
 
 export default {
   components: {
@@ -20,15 +38,32 @@ export default {
   data() {
     return {
       currentTask: {
-        wording:
-          "Выберите компоненты персонального компьютера, совместимые между собой. Определите последовательность подключения компонентов",
-        note: [
-          "Совместимость компонентов определить самостоятельно",
-          "Подключение комопонентов определяется размерами компонентов: от малых к большим. Например: процессор, потом материнская плата",
-        ],
+        description: "",
+        help: "",
       },
     };
   },
+  computed: {
+    ...mapState("user", {
+      post: (state) => state.post,
+    }),
+    ...mapState("task", {
+      task: (state) => state.currentTask,
+    }),
+  },
+  methods: {
+    async changeTask() {
+      console.log(this.task.description);
+      const response = await $axios.post(
+        `/task/edit/${this.task.id}`,
+        this.currentTask
+      );
+      console.log(response);
+    },
+  },
+  mounted() {
+    console.log(this.task);
+  }
 };
 </script>
 

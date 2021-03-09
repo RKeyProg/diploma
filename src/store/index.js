@@ -3,12 +3,12 @@ import Vuex from "vuex";
 
 Vue.use(Vuex);
 
-import tasks from "./modules/tasks";
 import user from "./modules/user";
+import task from "./modules/task";
 
 export default new Vuex.Store({
   modules: {
-    tasks,
-    user
+    user,
+    task
   }
 });

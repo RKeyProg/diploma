@@ -1,40 +1,18 @@
 <template lang="pug">
 .tasks
   home-header(activePage="2")
-  add-task(isTeacher)
-  splide.task__list(:options="options")
-    splide-slide
-      task.task(
-        taskName="Сборка компонентов компьютера с промежуточной визуализацией",
-        taskType="clipboard",
-        link="/task"
-      )
-    splide-slide
-      task.task(
-        taskName="Работа с Microsoft Excel",
-        taskType="settings",
-        link="/task"
-      )
-    splide-slide
-      task.task(taskName="Работа с Microsoft Excel", link="/task")
-    splide-slide
-      task.task(taskName="Работа с Microsoft Excel", link="/task")
-    splide-slide
-      task.task(taskName="Работа с Microsoft Excel", link="/task")
-    splide-slide
-      task.task(taskName="Работа с Microsoft Excel", link="/task")
-    splide-slide
-      task.task(taskName="Работа с Microsoft Excel", link="/task")
-    splide-slide
-      task.task(taskName="Работа с Microsoft Excel", link="/task")
-    splide-slide
-      task.task(taskName="Работа с Microsoft Excel", link="/task")
+  add-task(:isTeacher="isTeacher" @addTask="getTasks")
+  splide(:options="options" :slides="tasks").task__list
+    splide-slide(v-for="task in tasks", :key="task.id")
+      task.task(:taskName="task.name", :taskType="task.type", :task="task" link="/task")
 </template>
 
 <script>
 import homeHeader from "../components/homeHeader";
 import addTask from "../components/addTask";
 import task from "../components/homeTask";
+import store from "../store";
+import $axios from "../request";
 import { Splide, SplideSlide } from "@splidejs/vue-splide";
 
 export default {
@@ -61,7 +39,24 @@ export default {
           right: "2.08vw",
         },
       },
+      tasks: {},
     };
+  },
+  computed: {
+    isTeacher() {
+      if (store.state.user.post != "teacher") return false;
+      return true;
+    },
+  },
+  methods: {
+    async getTasks() {
+      const response = await $axios.get("/task/all");
+      console.log(response);
+      this.tasks = response.data;
+    },
+  },
+  async mounted() {
+    this.getTasks();
   },
 };
 </script>
@@ -86,21 +81,28 @@ export default {
   overflow: hidden;
   height: 100%;
 
+  & .splide__list {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fit, calc(100% / 3 - 15px));
+    grid-gap: 15px;
+
+    @include desktop {
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    }
+  }
+
   & .splide__track {
     height: 100% !important;
     padding: 0 2.08vw;
   }
 
   & .splide__slide {
-    width: calc(100% / 3 - 10px) !important;
+    max-width: 100% !important;
     min-height: 240px;
+    margin-bottom: 0 !important;
 
     @include desktop {
       min-height: 180px;
-    }
-
-    @include phones {
-      width: calc(100% / 2 - 5px) !important;
     }
   }
 

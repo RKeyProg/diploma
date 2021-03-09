@@ -30,6 +30,7 @@ export default {
 }
 
 .task__title {
+  padding: 0 2.08vw;
   margin: 0 auto 15px;
   font-weight: 500;
   font-size: 24px;
