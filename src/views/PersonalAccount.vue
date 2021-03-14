@@ -1,11 +1,11 @@
 <template lang="pug">
 .account-container
   homeHeader(activePage="1")
-  personal-data-header(:user="getUser" :post="getUserPost")
+  personal-data-header(:user="getUser" isUser :post="getUserPost")
   .for-student(v-if="getUserPost == 'Учащийся'")
     personal-data-current-practice.personal-data__row
     personal-data-current-task.personal-data__row
-    personal-data-changes.personal-data__row
+    //- personal-data-changes.personal-data__row
   .for-admin(v-else-if="getUserPost == 'Администратор'")
     personal-data-management(:userPost="getUserPost")
   .for-teacher(v-else-if="getUserPost == 'Преподаватель'")

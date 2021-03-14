@@ -39,7 +39,7 @@ export default {
           right: "2.08vw",
         },
       },
-      tasks: {},
+      tasks: [],
     };
   },
   computed: {
@@ -51,11 +51,11 @@ export default {
   methods: {
     async getTasks() {
       const response = await $axios.get("/task/all");
-      console.log(response);
+
       this.tasks = response.data;
     },
   },
-  async mounted() {
+  async created() {
     this.getTasks();
   },
 };

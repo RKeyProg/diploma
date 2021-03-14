@@ -1,30 +1,20 @@
 <template lang="pug">
 div
-  splide(:options="options")
-    splide-slide.item
-      homeInfoItem(date="13.11.2020", :text="text")
-    splide-slide.item
-      homeInfoItem(date="13.11.2020", :text="text1")
-    splide-slide.item
-      homeInfoItem(date="13.11.2020", :text="text2")
-    splide-slide.item
-      homeInfoItem(date="13.11.2020", :text="text3")
-    splide-slide.item
-      homeInfoItem(date="13.11.2020", :text="text")
+  splide(:options="options" :slides="info")
+    splide-slide(v-for="item in info" :key="item.id").item
+      homeInfoItem(:date="item.created_at", :text="item.description")
 </template>
 
 <script>
 import { Splide, SplideSlide } from "@splidejs/vue-splide";
 import homeInfoItem from "../homeInfoItem";
+import store from "../../store";
+import $axios from "../../request";
 
 export default {
   data() {
     return {
-      text:
-        "Изменение аудитории. Практика будет проходить в 7 корпусе БГУИР, 702 аудитория",
-      text1: "Изменение расписания. 20.09.2020 практика начинается с 13.55.",
-      text2: "Объявление. До 20.09.2020 принести паспорта",
-      text3: "Замена. 17.09.2020 занятия будет проводить Иванов Иван Иванович",
+      info: [],
       options: {
         autoHeight: true,
         autoWidth: true,
@@ -43,6 +33,12 @@ export default {
     homeInfoItem,
     Splide,
     SplideSlide,
+  },
+  async mounted() {
+    const response = await $axios.get("/info/all");
+
+    store.dispatch("info/setInfo", response.data);
+    this.info = response.data;
   },
 };
 </script>

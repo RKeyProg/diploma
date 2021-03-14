@@ -1,7 +1,7 @@
 <template lang="pug">
-.photo(v-if="cover")
-  //- img.photo-img(:src="this.photo")
-  img.photo-img(:src="cover")
+.photo(v-if="photo || user")
+  img.photo-img(v-if="photo" :src="coverWithPhoto")
+  img.photo-img(v-else-if="user" :src="cover")
 .photo__empty(v-else)
   svg.photo__empty-icon(
     viewBox="0 0 512.001 512.001",
@@ -19,6 +19,10 @@ export default {
       type: String,
       default: "",
     },
+    user: {
+      type: Boolean,
+      default: false,
+    }
   },
   computed: {
     cover() {
@@ -28,6 +32,9 @@ export default {
         return null;
       }
     },
+    coverWithPhoto() {
+      return `http://172.20.10.4:8000/${this.photo}`;
+    }
   },
 };
 </script>

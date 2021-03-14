@@ -1,16 +1,17 @@
 <template lang="pug">
 .students
-  .students__title {{ getUserGroup }}
+  .students__title 8к2411
   splide.student__list(:options="options")
     splide-slide(v-for="student in this.students", :key="student.id")
-      router-link(:to="student.page")
-        student(:name="student.name")
+      a(@click.prevent="setStudent(student)")
+        student(:name="student.name", :photo="student.photo")
 </template>
 
 <script>
 import student from "../student";
 import { Splide, SplideSlide } from "@splidejs/vue-splide";
-import store from "../../store";
+import { mapState, mapActions } from "vuex";
+import $axios from "../../request";
 
 export default {
   components: {
@@ -20,95 +21,16 @@ export default {
   },
   data() {
     return {
-      students: [
-        {
-          id: 1,
-          name: "Кирилл Радкевич",
-          page: "/personalAccount",
-        },
-        {
-          id: 2,
-          name: "Павел Бабич",
-          page: "/personalAccount",
-        },
-        {
-          id: 3,
-          name: "Никита Нестерук",
-          page: "/personalAccount",
-        },
-        {
-          id: 4,
-          name: "Антон Гунько",
-          page: "/personalAccount",
-        },
-        {
-          id: 5,
-          name: "Кирилл Радкевич",
-          page: "/personalAccount",
-        },
-        {
-          id: 6,
-          name: "Павел Бабич",
-          page: "/personalAccount",
-        },
-        {
-          id: 7,
-          name: "Никита Нестерук",
-          page: "/personalAccount",
-        },
-        {
-          id: 8,
-          name: "Антон Гунько",
-          page: "/personalAccount",
-        },
-        {
-          id: 9,
-          name: "Кирилл Радкевич",
-          page: "/personalAccount",
-        },
-        {
-          id: 10,
-          name: "Павел Бабич",
-          page: "/personalAccount",
-        },
-        {
-          id: 11,
-          name: "Никита Нестерук",
-          page: "/personalAccount",
-        },
-        {
-          id: 12,
-          name: "Антон Гунько",
-          page: "/personalAccount",
-        },
-        {
-          id: 13,
-          name: "Кирилл Радкевич",
-          page: "/personalAccount",
-        },
-        {
-          id: 14,
-          name: "Павел Бабич",
-          page: "/personalAccount",
-        },
-        {
-          id: 15,
-          name: "Никита Нестерук",
-          page: "/personalAccount",
-        },
-        {
-          id: 16,
-          name: "Антон Гунько",
-          page: "/personalAccount",
-        },
-      ],
+      students: [],
+      groupName: "",
       options: {
         direction: "ttb",
-        height: "26.666vh",
+        height: "23vh",
+        autoHeight: true,
         arrows: false,
         pagination: false,
         rewind: true,
-        gap: "25px",
+        gap: "15px",
         padding: {
           left: "2.08vw",
           right: "2.08vw",
@@ -117,9 +39,24 @@ export default {
     };
   },
   computed: {
-    getUserGroup() {
-      return store.state.user.user.id_group;
+    ...mapState("user", {
+      group: (state) => state.user.id_group,
+    }),
+  },
+  methods: {
+    ...mapActions({
+      setCurrentStudent: "student/setCurrentStudent",
+    }),
+    setStudent(student) {
+      this.setCurrentStudent(student);
+
+      this.$router.replace("/studentData");
     },
+  },
+  async mounted() {
+    const response = await $axios.get("/student/list");
+
+    this.students = response.data.students;
   },
 };
 </script>

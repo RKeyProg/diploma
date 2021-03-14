@@ -6,7 +6,6 @@ a.link-send(
   v-else-if="send && external",
   target="_blank",
   :href="link",
-  @click="handleClick"
 )
   svg.link-send__img(viewBox="0 0 485.725 485.725")
     use(xlink:href=`../../images/icons/send.svg#send`)
@@ -43,11 +42,7 @@ export default {
     ...mapActions({
       setCurrentTask: "task/setCurrentTask",
     }),
-    handleClick() {
-      console.log("asdasd");
-    },
     async setTask() {
-      console.log('asdas');
       this.$router.replace(this.link);
       await this.setCurrentTask(this.task);
     }

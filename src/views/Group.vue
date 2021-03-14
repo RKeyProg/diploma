@@ -12,8 +12,13 @@ export default {
   name: "Home",
   components: {
     homeHeader,
-    studentList
-  }
+    studentList,
+  },
+  data() {
+    return {
+      students: [],
+    };
+  },
 };
 </script>
 

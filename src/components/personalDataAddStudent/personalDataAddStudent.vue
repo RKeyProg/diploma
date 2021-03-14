@@ -101,9 +101,7 @@ export default {
   methods: {
     async addStudent() {
       try {
-        const response = await $axios.post("/register/student", this.user);
-
-        console.log(response);
+        await $axios.post("/register/student", this.user);
       } catch (error) {
         console.log(error.response.data.error);
       } finally {

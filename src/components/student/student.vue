@@ -1,6 +1,6 @@
 <template lang="pug">
 .student
-  avatar.photo(photo="have")
+  avatar(:photo="photo").photo
   .student__name {{ this.name }}
 </template>
 
@@ -16,6 +16,10 @@ export default {
       type: String,
       default: "Учащийся",
     },
+    photo: {
+      type: String,
+      default: "",
+    }
   },
 };
 </script>

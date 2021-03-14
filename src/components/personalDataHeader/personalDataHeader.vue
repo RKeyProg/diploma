@@ -5,7 +5,7 @@ form(
 )
   transition(name="static")
     .personal-data__content(v-if="!isEdit")
-      avatar.personal-data__photo
+      avatar.personal-data__photo(:user="isUser", :photo="this.user.photo")
       .personal-data__title.personal-data_js_end.personal-data_as_end {{ getUserName }}
       .personal-data__param.personal-data_as_end
         span Телефон:
@@ -61,7 +61,7 @@ form(
             v-model="newPersonData.password_confirmation",
             smallSize
           )
-  .personal-data__buttons
+  div.personal-data__buttons(v-if="!noControls")
     transition(name="btn")
       .personal-data__buttons-group(v-if="!isEdit")
         app-btn.personal-data__btn(type="Edit", @wasClick="editPersonalData")
@@ -69,10 +69,7 @@ form(
     transition(name="btn") 
       .personal-data__buttons-group(v-if="isEdit")
         app-btn.personal-data__btn(type="Submit")
-        app-btn.personal-data__btn(
-          @wasClick="closeEditing",
-          type="Close"
-        )
+        app-btn.personal-data__btn(@wasClick="closeEditing", type="Close")
 </template>
 
 <script>
@@ -115,6 +112,14 @@ export default {
   props: {
     user: Object,
     post: String,
+    noControls: {
+      type: Boolean,
+      default: false,
+    },
+    isUser: {
+      type: Boolean,
+      default: false,
+    }
   },
   methods: {
     editPersonalData() {

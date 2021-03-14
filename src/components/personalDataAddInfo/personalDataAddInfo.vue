@@ -3,7 +3,7 @@
   .add-info__title Добавить объявление
   form.add-info__form
     .add-info__row
-      textarea(placeholder="Текст объявления").add-info__textarea
+      textarea.add-info__textarea(placeholder="Текст объявления", v-model="info.description")
   .add-info__buttons
     app-btn.add-info__btn(text="Добавить", @handleClick="addInfo")
     app-btn.add-info__btn(
@@ -14,14 +14,27 @@
 
 <script>
 import appBtn from "../button";
+import $axios from "../../request";
+import store from "../../store";
 
 export default {
   components: {
     appBtn,
   },
+  data() {
+    return {
+      info: {
+        description: "",
+      }
+    };
+  },
   methods: {
-    addInfo() {
-      console.log("Добавить объявление");
+    async addInfo() {
+      const response = await $axios.post("/info/add/", this.info);
+
+      console.log(response);
+
+      store.dispatch("info/setInfo");
     },
   },
 };

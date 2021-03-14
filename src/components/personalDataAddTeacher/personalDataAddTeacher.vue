@@ -101,9 +101,7 @@ export default {
   methods: {
     async addTeacher() {
       try {
-        const response = await $axios.post("/register/teacher", this.user);
-
-        console.log(response);
+        await $axios.post("/register/teacher", this.user);
       } catch (error) {
         console.log(error.response.data.error);
       } finally {

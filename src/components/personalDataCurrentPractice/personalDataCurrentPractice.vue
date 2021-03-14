@@ -2,12 +2,12 @@
 .current-practice
   section-title(title="Текущая практика")
   .current-practice__data
-    .current-practice__title Преддипломная практика
-    .current-practice__date 31.12.2020 — 27.01.2021
+    .current-practice__title Преддипломная
 </template>
 
 <script>
 import sectionTitle from "../sectionTitle";
+import { mapState } from "vuex";
 
 export default {
   name: "personalDataCurrentPractice",
@@ -16,6 +16,11 @@ export default {
   },
   props: {
     user: Object
+  },
+  computed: {
+    ...mapState("user", {
+      practice: state => state.user.id_practice,
+    })
   }
 };
 </script>

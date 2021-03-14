@@ -1,8 +1,13 @@
 <template lang="pug">
 .task-container
-  splide(:options="options" :slides="tasks").home-task__list
+  splide(:options="options", :slides="tasks").home-task__list
     splide-slide(v-for="task in tasks", :key="task.id")
-      task.task(:taskName="task.name", :taskType="task.type", :task="task" link="/task")
+      task.task(
+        :taskName="task.name",
+        :taskType="task.type",
+        :task="task",
+        link="/task"
+      )
 </template>
 
 <script>
@@ -29,13 +34,13 @@ export default {
           right: "2.08vw",
         },
       },
-      tasks: {},
+      tasks: [],
     };
   },
   methods: {
     async getTasks() {
       const response = await $axios.get("/task/all");
-      console.log(response);
+
       this.tasks = response.data;
     },
   },
@@ -47,11 +52,6 @@ export default {
 
 <style lang="scss">
 .home-task__list {
-
-  & .splide__list {
-    margin-left: -20px;
-  }
-
   & .splide__slide {
     margin-right: 15px;
   }

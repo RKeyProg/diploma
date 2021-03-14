@@ -79,6 +79,10 @@
 .current-task__btn {
 	padding: 1vh 45px;
 	margin-left: 2.08vw;
+
+	&:last-child {
+		margin-left: 15px;
+	}
 }
 
 .current-task__textarea {

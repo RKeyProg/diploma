@@ -21,7 +21,7 @@
     @handleClick="changeTask"
   )
   app-btn.current-task__btn(v-else, text="Приступить")
-  app-btn.current-task__btn(text="Назад" @click="")
+  app-btn.current-task__btn(text="Назад", @handleClick="back")
 </template>
 
 <script>
@@ -53,17 +53,16 @@ export default {
   },
   methods: {
     async changeTask() {
-      console.log(this.task.description);
-      const response = await $axios.post(
-        `/task/edit/${this.task.id}`,
-        this.currentTask
-      );
-      console.log(response);
+      await $axios.post(`/task/edit/${this.task.id}`, this.currentTask);
+    },
+    back() {
+      this.$router.replace("/tasks");
     },
   },
   mounted() {
-    console.log(this.task);
-  }
+    this.currentTask.description = this.task.description;
+    this.currentTask.help = this.task.help;
+  },
 };
 </script>
 

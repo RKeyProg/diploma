@@ -81,6 +81,14 @@ const routes = [{
       default: () => import("../views/Group.vue"),
       sideBar: sideBar
     }
+  },
+  {
+    path: "/studentData",
+    name: "StudentData",
+    components: {
+      default: () => import("../views/StudentData.vue"),
+      sideBar: sideBar
+    }
   }
 ];
 

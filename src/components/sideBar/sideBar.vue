@@ -13,7 +13,7 @@ div
         router-link.side-bar__logo(to="/")
           svg.side-bar__logo-img(
             viewBox="0 0 50.001 50.001",
-            preserveAspectRatio="none"
+            preserveAspe ctRatio="none"
           )
             use(xlink:href=`../../images/icons/logo.svg#logo`)
       .side-bar__title Минский #[br] радиотехнический #[br] колледж
@@ -33,7 +33,7 @@ div
                 use(xlink:href=`../../images/icons/gear.svg#gear`)
             .links-list__item-name Ресурсный центр
         li.links-list__item
-          a.links-list__link(href="#")
+          a.links-list__link(href="http://it-school.mrk-bsuir.by/" target="blank")
             .links-list__icon
               svg.links-list__itschool-comp(
                 viewBox="0 0 211.001 161.001",
@@ -51,7 +51,7 @@ div
                 )
             .links-list__item-name IT школа МРК
         li.links-list__item
-          a.links-list__link(href="#")
+          a.links-list__link(href="http://moodle.mrk-bsuir.by/" target="blank")
             .links-list__icon
               svg.links-list__courses(
                 viewBox="0 0 80 81",
@@ -70,21 +70,21 @@ div
             .links-list__item-name Учебные курсы
       ul.side-bar__socials-list
         li.socials-list__item
-          a.socials-list__link(href="#")
+          a.socials-list__link(href="https://twitter.com/home" target="blank")
             svg.socials-list__icon(
               viewBox="0 0 512.001 512.001",
               preserveAspectRatio="none"
             )
               use(xlink:href=`../../images/icons/twitter.svg#twitter`)
         li.socials-list__item
-          a.socials-list__link(href="#")
+          a.socials-list__link(href="https://www.facebook.com/" target="blank")
             svg.socials-list__icon(
               viewBox="0 0 512.001 512.001",
               preserveAspectRatio="none"
             )
               use(xlink:href=`../../images/icons/facebook.svg#facebook`)
         li.socials-list__item
-          a.socials-list__link(href="#")
+          a.socials-list__link(href="https://www.instagram.com/" target="blank")
             svg.socials-list__icon(
               viewBox="0 0 512.001 512.001",
               preserveAspectRatio="none"
