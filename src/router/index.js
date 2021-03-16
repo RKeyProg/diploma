@@ -99,7 +99,6 @@ const router = new VueRouter({
 });
 
 const guard = axios.create({
-  // baseURL: "https://webdev-api.loftschool.com/"
   baseURL: "http://172.20.10.4:8000/api"
 });
 

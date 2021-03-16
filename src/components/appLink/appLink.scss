@@ -6,6 +6,10 @@
 
 	&__img {
 		fill: #FF4081;
+
+		&.active {
+			fill: #3F51B5;
+		}
 	}
 
 	@include phones {

@@ -35,6 +35,10 @@
 		min-width: 100%;
 		width: calc(100vw - 17px);
 	}
+
+	&.active {
+		background: #FF4081;
+	}
 }
 
 .task__container-image {

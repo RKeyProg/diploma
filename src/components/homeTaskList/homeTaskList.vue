@@ -1,12 +1,13 @@
 <template lang="pug">
 .task-container
-  splide(:options="options", :slides="tasks").home-task__list
+  splide.home-task__list(:options="options", :slides="tasks")
     splide-slide(v-for="task in tasks", :key="task.id")
-      task.task(
+      task(
         :taskName="task.name",
         :taskType="task.type",
         :task="task",
-        link="/task"
+        link="/task",
+        :active="task.status"
       )
 </template>
 
@@ -14,6 +15,7 @@
 import task from "../homeTask";
 import { Splide, SplideSlide } from "@splidejs/vue-splide";
 import $axios from "../../request";
+import { mapState, mapActions } from "vuex";
 
 export default {
   components: {
@@ -38,11 +40,34 @@ export default {
     };
   },
   methods: {
+    ...mapActions({
+      setActiveTask: "task/setActiveTask",
+      etCurrentTask: "task/setCurrentTask",
+    }),
     async getTasks() {
       const response = await $axios.get("/task/all");
+      const tasks = response.data;
 
-      this.tasks = response.data;
+      if (this.post === "student") {
+        const activeTask = await $axios.get(`/task/active/${this.userId}`);
+
+        this.setActiveTask(activeTask.data[0]);
+
+        tasks.forEach(el => {
+          if (el.id === activeTask.data[0].id) {
+            el.status = "active";
+          }
+        });
+      }
+
+      this.tasks = tasks;
     },
+  },
+  computed: {
+    ...mapState("user", {
+      post: (state) => state.post,
+      userId: (state) => state.user.id,
+    }),
   },
   async mounted() {
     this.getTasks();

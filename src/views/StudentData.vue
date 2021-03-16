@@ -1,10 +1,10 @@
 <template lang="pug">
 .account-container
   homeHeader(activePage="4")
-  personal-data-header(:user="currentStudent", post="Учащийся" noControls)
+  personal-data-header(:user="currentStudent", post="Учащийся", noControls)
   .for-student
     personal-data-current-practice.personal-data__row
-    personal-data-current-task.personal-data__row
+    personal-data-current-task(:activeTask="thisStudentActiveTask").personal-data__row
 </template>
 
 <script>
@@ -14,6 +14,7 @@ import personalDataCurrentPractice from "../components/personalDataCurrentPracti
 import personalDataCurrentTask from "../components/personalDataCurrentTask";
 import personalDataChanges from "../components/personalDataChanges";
 import { mapState } from "vuex";
+import $axios from "../request";
 
 export default {
   name: "PersonalAccount",
@@ -24,10 +25,22 @@ export default {
     personalDataCurrentTask,
     personalDataChanges,
   },
+  data() {
+    return {
+      thisStudentActiveTask: {},
+    }
+  },
   computed: {
     ...mapState("student", {
-      currentStudent: state => state.currentStudent,
+      currentStudent: (state) => state.currentStudent,
     }),
+  },
+  async mounted() {
+    const activeTask = await $axios.get(
+      `/task/active/${this.currentStudent.id}`
+    );
+
+    this.thisStudentActiveTask = activeTask.data[0];
   },
 };
 </script>

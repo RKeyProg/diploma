@@ -1,19 +1,25 @@
 <template lang="pug">
 .task
   home-header(activePage="2")
-  .task__title Спроектируйте персональный компьютер
+  .task__title {{ task.name }}
   current-task
 </template>
 
 <script>
 import homeHeader from "../components/homeHeader";
 import currentTask from "../components/currentTask";
+import { mapState } from "vuex";
 
 export default {
   name: "Task",
   components: {
     homeHeader,
     currentTask
+  },
+  computed: {
+    ...mapState("task", {
+      task: (state) => state.currentTask,
+    })
   },
 };
 </script>

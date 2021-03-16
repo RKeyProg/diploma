@@ -61,7 +61,7 @@ form(
             v-model="newPersonData.password_confirmation",
             smallSize
           )
-  div.personal-data__buttons(v-if="!noControls")
+  .personal-data__buttons(v-if="!noControls")
     transition(name="btn")
       .personal-data__buttons-group(v-if="!isEdit")
         app-btn.personal-data__btn(type="Edit", @wasClick="editPersonalData")
@@ -119,7 +119,7 @@ export default {
     isUser: {
       type: Boolean,
       default: false,
-    }
+    },
   },
   methods: {
     editPersonalData() {
@@ -129,7 +129,13 @@ export default {
       if ((await this.$validate()) === false) return;
 
       try {
+        console.log(this.newPersonData);
+
         store.dispatch("user/editData", await this.newPersonData);
+
+        this.preview = "";
+        this.newPersonData.password = "";
+        this.newPersonData.password_confirmation = "";
 
         this.isEdit = !this.isEdit;
       } catch (error) {
@@ -157,6 +163,8 @@ export default {
       this.newPersonData.phone = this.user.phone;
       this.newPersonData.email = this.user.email;
       this.newPersonData.photo = {};
+      this.newPersonData.password = "";
+      this.newPersonData.password_confirmation = "";
       this.preview = "";
     },
   },

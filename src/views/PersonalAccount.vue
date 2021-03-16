@@ -4,7 +4,7 @@
   personal-data-header(:user="getUser" isUser :post="getUserPost")
   .for-student(v-if="getUserPost == 'Учащийся'")
     personal-data-current-practice.personal-data__row
-    personal-data-current-task.personal-data__row
+    personal-data-current-task(:activeTask="activeTask").personal-data__row
     //- personal-data-changes.personal-data__row
   .for-admin(v-else-if="getUserPost == 'Администратор'")
     personal-data-management(:userPost="getUserPost")
@@ -21,6 +21,7 @@ import personalDataCurrentTask from "../components/personalDataCurrentTask";
 import personalDataChanges from "../components/personalDataChanges";
 import personalDataManagement from "../components/personalDataManagement";
 import store from "../store";
+import { mapState } from "vuex";
 
 export default {
   name: "PersonalAccount",
@@ -33,6 +34,9 @@ export default {
     personalDataManagement,
   },
   computed: {
+    ...mapState("task", {
+      activeTask: (state) => state.activeTask,
+    }),
     getUserPost() {
       const post = store.getters["user/userGetPost"];
       let postName = "";

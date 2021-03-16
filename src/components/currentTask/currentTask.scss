@@ -65,6 +65,7 @@
 
 .current-task__note {
 	flex: 1.5;
+	margin: 0;
 	padding: 20px 0;
 	font-weight: 500;
 	font-size: 16px;
@@ -109,5 +110,77 @@
 	@include phones {
 		font-size: 12px;
 		line-height: 14px;
+	}
+}
+
+.start-enter-active {
+	transition: all .5s ease .2s;
+}
+
+.start-enter,
+.start-leave-to {
+	opacity: 0;
+}
+
+.start-leave {
+	display: none;
+}
+
+.form {
+	padding: 0 2.08vw;
+	margin-bottom: 20px;
+}
+
+.form__data {
+	width: 100%;
+	background: #fff;
+	border-radius: 15px;
+	box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.25);
+	display: flex;
+	justify-content: center;
+	transition-property: height;
+	transition: height .5s ease;
+}
+
+.send-task__button {
+	padding: 20px;
+	position: relative;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	&-cross {
+		width: 50px;
+		height: 50px;
+		border-radius: 50%;
+		border: 2px solid #FF4081;
+
+		&::after,
+		&::before {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			content: '';
+			display: block;
+			width: 14px;
+			height: 2px;
+			background: #FF4081;
+		}
+
+		&::after {
+			transform: translate(-50%, -50%) rotate(90deg);
+		}
+
+		@include desktop {
+			width: 40px;
+			height: 40px;
+		}
+	}
+
+	&:hover {
+		cursor: pointer;
 	}
 }

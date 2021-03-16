@@ -1,5 +1,5 @@
 <template lang="pug">
-a.link-send(v-if="send && !external", @click.prevent="setTask")
+a.link-send(v-if="send && !external", @click.prevent="$emit('handleClick')")
   svg.link-send__img(viewBox="0 0 485.725 485.725")
     use(xlink:href=`../../images/icons/send.svg#send`)
 a.link-send(
@@ -13,8 +13,6 @@ router-link.link(v-else, :to="link") {{ text }}
 </template>
 
 <script>
-import { mapActions } from "vuex";
-
 export default {
   props: {
     link: {
@@ -33,19 +31,6 @@ export default {
       type: Boolean,
       default: false,
     },
-    task: {
-      type: Object,
-      default: null,
-    },
-  },
-  methods: {
-    ...mapActions({
-      setCurrentTask: "task/setCurrentTask",
-    }),
-    async setTask() {
-      this.$router.replace(this.link);
-      await this.setCurrentTask(this.task);
-    }
   },
 };
 </script>

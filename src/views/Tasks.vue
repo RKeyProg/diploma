@@ -1,10 +1,17 @@
 <template lang="pug">
 .tasks
   home-header(activePage="2")
-  add-task(:isTeacher="isTeacher" @addTask="getTasks")
-  splide(:options="options" :slides="tasks").task__list
+  add-task(:isTeacher="isTeacher", @addTask="getTasks")
+  splide.task__list(v-if="!taskIsEmpty" :options="options", :slides="tasks")
     splide-slide(v-for="task in tasks", :key="task.id")
-      task.task(:taskName="task.name", :taskType="task.type", :task="task" link="/task")
+      task.task(
+        :taskName="task.name",
+        :taskType="task.type",
+        :task="task",
+        link="/task",
+        :active="task.status"
+      )
+  .task__empty(v-else) Задания не добавлены
 </template>
 
 <script>
@@ -47,12 +54,26 @@ export default {
       if (store.state.user.post != "teacher") return false;
       return true;
     },
+    taskIsEmpty() {
+      if (this.task) return true;
+
+      return false;
+    }
   },
   methods: {
     async getTasks() {
       const response = await $axios.get("/task/all");
+      const tasks = response.data;
 
-      this.tasks = response.data;
+      if (store.state.user.post === "student") {
+        tasks.forEach((el) => {
+          if (el.id === store.state.task.activeTask.id) {
+            el.status = "active";
+          }
+        });
+      }
+
+      this.tasks = tasks;
     },
   },
   async created() {
@@ -119,5 +140,15 @@ export default {
     justify-content: space-between;
     align-items: stretch;
   }
+}
+
+.task__empty {
+  padding-top: 100px;
+  flex: 1;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  font-size: 30px;
+  color: #757575;
 }
 </style>

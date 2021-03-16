@@ -2,27 +2,48 @@
 .current-task
   section-title(title="Текущее задание")
   .current-task__data
-    .current-task__title Работа с Microsoft Excel
-    app-link(send :link="link")
+    .current-task__title {{ activeTask.name }}
+    app-link(send, :link="link" @handleClick="setTask")
 </template>
 
 <script>
 import sectionTitle from "../sectionTitle";
 import appLink from "../appLink";
+import { mapState, mapActions } from "vuex";
 
 export default {
   name: "personalDataCurrentTask",
   components: {
     sectionTitle,
-    appLink
+    appLink,
   },
   props: {
-    user: Object
+    user: Object,
+    activeTask: Object,
   },
   data() {
     return {
-      link: '/'
+      link: "/task",
+    };
+  },
+  methods: {
+    ...mapActions({
+      setCurrentTask: "task/setCurrentTask",
+      changeIsTeacherClick: "task/changeIsTeacherClick",
+    }),
+    setTask() {
+      if (this.post === "teacher") {
+        this.changeIsTeacherClick();
+      }
+
+      this.$router.replace(this.link);
+      this.setCurrentTask(this.activeTask);
     }
+  },
+  computed: {
+    ...mapState("user", {
+      post: (state) => state.post,
+    })
   }
 };
 </script>
