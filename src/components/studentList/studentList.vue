@@ -1,10 +1,13 @@
 <template lang="pug">
 .students
-  .students__title 8к2411
-  splide.student__list(:options="options")
-    splide-slide(v-for="student in this.students", :key="student.id")
-      a(@click.prevent="setStudent(student)")
-        student(:name="student.name", :photo="student.photo")
+  div(v-if="this.post !== 'admin'")
+    .students__title 8к2411
+    splide.student__list(v-if="this.students.length" :options="options")
+      splide-slide(v-for="student in this.students", :key="student.id")
+        a(@click.prevent="setStudent(student)")
+          student(:name="student.name", :photo="student.photo")
+    div(v-else).student__stub В группу не добавлены учащиеся
+  div(v-else).student__stub Группа не определена
 </template>
 
 <script>
@@ -40,6 +43,7 @@ export default {
   },
   computed: {
     ...mapState("user", {
+      post: (state) => state.post,
       group: (state) => state.user.id_group,
     }),
   },
@@ -54,9 +58,10 @@ export default {
     },
   },
   async mounted() {
-    const response = await $axios.get("/student/list");
-
-    this.students = response.data.students;
+    if (this.post !== "admin") {
+      const response = await $axios.get("/student/list");
+      this.students = response.data.students;
+    }
   },
 };
 </script>

@@ -29,8 +29,8 @@
 .contact__photo {
 	flex-shrink: 0;
 	overflow: hidden;
-	width: 150px;
-	height: 150px;
+	width: 130px;
+	height: 130px;
 	border-radius: 50%;
 	border: 1px solid #bdbdbd;
 	margin-right: 20px;
@@ -77,37 +77,37 @@
 
 .contact__name {
 	font-weight: 500;
-	font-size: 22px;
-	line-height: 24px;
+	font-size: 20px;
+	line-height: 22px;
 	color: #212121;
 	margin-bottom: 5px;
 
 	@include desktop {
-		font-size: 20px;
-		line-height: 22px;
+		font-size: 18px;
+		line-height: 20px;
 	}
 
 	@include phones {
-		font-size: 18px;
-		line-height: 20px;
+		font-size: 16px;
+		line-height: 18px;
 	}
 }
 
 .contact__post {
 	font-weight: 500;
-	font-size: 16px;
-	line-height: 18px;
+	font-size: 14px;
+	line-height: 16px;
 	color: #757575;
 	margin-bottom: 15px;
 
 	@include desktop {
-		font-size: 14px;
-		line-height: 16px;
+		font-size: 12px;
+		line-height: 14px;
 	}
 
 	@include phones {
-		font-size: 12px;
-		line-height: 14px;
+		font-size: 10px;
+		line-height: 12px;
 		margin-bottom: 10px;
 	}
 }
@@ -115,8 +115,8 @@
 .contact__phone,
 .contact__mail {
 	font-weight: 500;
-	font-size: 16px;
-	line-height: 18px;
+	font-size: 14px;
+	line-height: 16px;
 	margin-bottom: 5px;
 
 	& span {
@@ -135,12 +135,12 @@
 	}
 
 	@include desktop {
-		font-size: 14px;
-		line-height: 16px;
+		font-size: 12px;
+		line-height: 14px;
 	}
 
 	@include phones {
-		font-size: 12px;
-		line-height: 14px;
+		font-size: 10px;
+		line-height: 12px;
 	}
 }

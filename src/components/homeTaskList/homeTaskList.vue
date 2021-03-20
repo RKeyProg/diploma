@@ -1,7 +1,11 @@
 <template lang="pug">
 .task-container
-  splide.home-task__list(:options="options", :slides="tasks")
-    splide-slide(v-for="task in tasks", :key="task.id")
+  splide.home-task__list(
+    v-if="this.tasks.length && this.post !== 'admin'",
+    :options="options",
+    :slides="tasks"
+  )
+    splide-slide(v-for="task in tasksReverse", :key="task.id")
       task(
         :taskName="task.name",
         :taskType="task.type",
@@ -9,6 +13,7 @@
         link="/task",
         :active="task.status"
       )
+  div.home-task__stub(v-else) Задания не добавлены
 </template>
 
 <script>
@@ -45,24 +50,26 @@ export default {
       etCurrentTask: "task/setCurrentTask",
     }),
     async getTasks() {
-      const response = await $axios.get("/task/all");
-      const tasks = response.data;
+      if (this.post !== "admin") {
+        const response = await $axios.get("/task/all");
+        const tasks = response.data;
 
-      if (this.post === "student") {
-        const activeTask = await $axios.get(`/task/active/${this.userId}`);
+        if (this.post === "student") {
+          const activeTask = await $axios.get(`/task/active/${this.userId}`);
 
-        if (activeTask.data.length) {
-          this.setActiveTask(activeTask.data[0]);
+          if (activeTask.data.length) {
+            this.setActiveTask(activeTask.data[0]);
 
-          tasks.forEach((el) => {
-            if (el.id === activeTask.data[0].id) {
-              el.status = "active";
-            }
-          });
+            tasks.forEach((el) => {
+              if (el.id === activeTask.data[0].id) {
+                el.status = "active";
+              }
+            });
+          }
         }
-      }
 
-      this.tasks = tasks;
+        this.tasks = tasks;
+      }
     },
   },
   computed: {
@@ -70,6 +77,10 @@ export default {
       post: (state) => state.post,
       userId: (state) => state.user.id,
     }),
+    tasksReverse() {
+      const arr = this.tasks;
+      return arr.reverse();
+    },
   },
   async mounted() {
     this.getTasks();

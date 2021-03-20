@@ -2,8 +2,12 @@
 .curren-task
   section-title(title="Задание")
   .current-task__content(v-if="this.post !== 'teacher' || this.isTeacherClick")
-    .current-task__wording {{ this.task.description }}
-    pre.current-task__note {{ this.task.help }}
+    .current-task__wording 
+      div(v-if="this.task.description") {{ this.task.description }}
+      div(v-else) Формулировка задания не добавлена
+    .current-task__note 
+      pre(v-if="this.task.help") {{ this.task.help }}
+      pre(v-else) Примечание задания не добавлено
   .current-task__content(v-else)
     .current-task__wording
       textarea.current-task__textarea(
@@ -28,7 +32,7 @@
         )
         app-btn.current-task__btn(
           v-if="post === 'teacher' && isTeacherClick",
-          text="Подтвердить",
+          text="Зачесть",
           @handleClick="acceptTask"
         )
         app-btn.current-task__btn(
@@ -39,11 +43,16 @@
         app-btn.current-task__btn(text="Назад", @handleClick="back")
   transition(name="start")
     .active-task(v-if="isTaskActive && this.task.type !== 'visual'")
-      form.form
-        label.form__data
-          .send-task__button
-            .send-task__button-cross
-          app-btn(type="File", isMultiple, @change="addFile")
+      .answer__add-files-container
+        form.form
+          label.form__data
+            .send-task__button
+              .send-task__button-cross
+            app-btn(type="File", isMultiple, @change="addFile")
+        .answer-container(v-if="this.files.length")
+          ul.answer-files__list
+            li(v-for="(file, index) in files", :key="index")
+              app-link(file, disabled) {{ file.name }}
       .buttons
         app-btn.current-task__btn(
           v-if="post !== 'teacher'",
@@ -104,12 +113,17 @@ export default {
     }),
     async changeTask() {
       try {
-        const response = await $axios.post(`/task/edit/${this.task.id}`, this.currentTask);
-        
+        const response = await $axios.post(
+          `/task/edit/${this.task.id}`,
+          this.currentTask
+        );
+
         this.showTooltip({
           text: response.data.message,
           type: "success",
         });
+
+        this.$router.replace("/tasks");
       } catch (error) {
         this.showTooltip({
           text: error.response.data.message,
@@ -124,7 +138,10 @@ export default {
       try {
         const response = await $axios.post("/task/start", this.task);
 
-        console.log(response.data);
+        this.showTooltip({
+          text: response.data.message,
+          type: "success",
+        });
 
         if (this.task.type === "visual") {
           this.$router.replace("/visualizationTask");
@@ -133,7 +150,10 @@ export default {
         this.isTask = !this.isTask;
         this.setActiveTask(this.task);
       } catch (error) {
-        console.log(error.response.data.message);
+        this.showTooltip({
+          text: error.response.data.message,
+          type: "error",
+        });
       }
     },
     addFile() {
@@ -145,11 +165,26 @@ export default {
     },
     async getEnd() {
       this.sendAnswer(this.files);
+      this.files = [];
     },
     async acceptTask() {
-      await $axios.get(`/task/accept/answer/${this.currentStudent.id}`);
+      try {
+        const response = await $axios.get(
+          `/task/accept/answer/${this.currentStudent.id}`
+        );
 
-      this.$router.replace("/group");
+        this.showTooltip({
+          text: response.data.message,
+          type: "success",
+        });
+
+        this.$router.replace("/group");
+      } catch (error) {
+        this.showTooltip({
+          text: error.response.data.message,
+          type: "error",
+        });
+      }
     },
   },
   async mounted() {

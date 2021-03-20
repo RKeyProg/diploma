@@ -5,7 +5,7 @@ a.link-send(v-if="send && !external", @click.prevent="$emit('handleClick')")
 a.link-send(v-else-if="send && external", target="_blank", :href="link")
   svg.link-send__img(viewBox="0 0 485.725 485.725")
     use(xlink:href=`../../images/icons/send.svg#send`)
-a.link-file(v-else-if="file", target="_blank", :href="link")
+a(v-else-if="file", :class="['link-file', {disabled: disabled}]" target="_blank", :href="link")
   svg.link-file__img(viewBox="0 0 367.6 367.6")
     use(xlink:href=`../../images/icons/file.svg#file`)
   .file-name
@@ -33,6 +33,10 @@ export default {
       default: false,
     },
     file: {
+      type: Boolean,
+      default: false,
+    },
+    disabled: {
       type: Boolean,
       default: false,
     }

@@ -2,8 +2,12 @@
 .tasks
   home-header(activePage="2")
   add-task(:isTeacher="isTeacher", @addTask="getTasks")
-  splide.task__list(v-if="!taskIsEmpty" :options="options", :slides="tasks")
-    splide-slide(v-for="task in tasks", :key="task.id")
+  splide.task__list(
+    v-if="!taskIsEmpty && this.post !== 'admin'",
+    :options="options",
+    :slides="tasks"
+  )
+    splide-slide(v-for="task in tasksReverse", :key="task.id")
       task.task(
         :taskName="task.name",
         :taskType="task.type",
@@ -21,6 +25,7 @@ import task from "../components/homeTask";
 import store from "../store";
 import $axios from "../request";
 import { Splide, SplideSlide } from "@splidejs/vue-splide";
+import { mapState } from "vuex";
 
 export default {
   name: "Tasks",
@@ -50,6 +55,9 @@ export default {
     };
   },
   computed: {
+    ...mapState("user", {
+      post: (state) => state.post,
+    }),
     isTeacher() {
       if (store.state.user.post != "teacher") return false;
       return true;
@@ -58,22 +66,31 @@ export default {
       if (this.task) return true;
 
       return false;
-    }
+    },
+    tasksReverse() {
+      const arr = this.tasks;
+      return arr.reverse();
+    },
   },
   methods: {
     async getTasks() {
-      const response = await $axios.get("/task/all");
-      const tasks = response.data;
+      if (this.post !== "admin") {
+        const response = await $axios.get("/task/all");
+        const tasks = response.data;
 
-      if (store.state.user.post === "student" && store.state.task.activeTask) {
-        tasks.forEach((el) => {
-          if (el.id === store.state.task.activeTask.id) {
-            el.status = "active";
-          }
-        });
+        if (
+          store.state.user.post === "student" &&
+          store.state.task.activeTask
+        ) {
+          tasks.forEach((el) => {
+            if (el.id === store.state.task.activeTask.id) {
+              el.status = "active";
+            }
+          });
+        }
+
+        this.tasks = tasks;
       }
-
-      this.tasks = tasks;
     },
   },
   async created() {
@@ -143,12 +160,23 @@ export default {
 }
 
 .task__empty {
-  padding-top: 100px;
-  flex: 1;
+  padding: 30px 0;
   display: flex;
-  align-items: flex-start;
   justify-content: center;
-  font-size: 30px;
-  color: #757575;
+  font-weight: 500;
+  font-size: 18px;
+  color: #212121;
+
+  @include desktop {
+    font-size: 16px;
+  }
+
+  @include tablets {
+    font-size: 14px;
+  }
+
+  @include phones {
+    font-size: 12px;
+  }
 }
 </style>

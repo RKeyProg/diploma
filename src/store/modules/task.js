@@ -27,7 +27,8 @@ export default {
 			commit("SET_ACTIVE_TASK", task);
 		},
 		async sendAnswer({
-			commit
+			commit,
+			dispatch
 		}, answer) {
 			const formData = new FormData();
 
@@ -38,9 +39,17 @@ export default {
 			try {
 				const response = await this.$axios.post("/task/send/answer", formData);
 
+				dispatch("tooltips/show", {
+					text: response.data.message,
+          type: "success",
+				}, {root: true})
+
 				commit("EDIT_ACTIVE_TASKS", response);
 			} catch (error) {
-				console.log("error");
+				dispatch("tooltips/show", {
+					text: error.response.data.message,
+          type: "error"
+				}, {root: true})
 			}
 		},
 		changeIsTeacherClick({

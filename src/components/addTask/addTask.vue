@@ -7,7 +7,7 @@ div(:class="['add-task__wrapper', { disabled: !isTeacher }]")
     transition(name="editor")
       .add-task__editor(v-if="isEdit")
         .editor__title Добавить задание
-        form.editor__form
+        form.editor__form(@submit.prevent="addTask")
           .editor__column
             .column__title Тип задания
             .editor__task-type
@@ -44,11 +44,7 @@ div(:class="['add-task__wrapper', { disabled: !isTeacher }]")
           .editor__column
             .column__title Подтвердить
             .editor__add-buttons
-              app-btn.editor__add-btn(
-                type="Edit",
-                @wasClick="addTask",
-                :isEdit="isEdit"
-              )
+              app-btn.editor__add-btn(type="Submit", :isEdit="isEdit")
               app-btn.editor__add-btn(
                 type="Close",
                 @wasClick="isEdit = !isEdit",
@@ -59,7 +55,7 @@ div(:class="['add-task__wrapper', { disabled: !isTeacher }]")
 <script>
 import appBtn from "../button";
 import $axios from "../../request";
-import { mapActions } from "vuex";
+import { mapState, mapActions } from "vuex";
 
 export default {
   components: {
@@ -77,8 +73,14 @@ export default {
       newTask: {
         name: "",
         type: "",
+        group: "",
       },
     };
+  },
+  computed: {
+    ...mapState("user", {
+      group: (state) => state.user.id_group,
+    }),
   },
   methods: {
     ...mapActions({
@@ -86,6 +88,8 @@ export default {
     }),
     async addTask() {
       try {
+        this.newTask.group = this.group;
+
         const response = await $axios.post("/task/add", this.newTask);
 
         this.showTooltip({
@@ -94,13 +98,13 @@ export default {
         });
 
         this.$emit("addTask");
+
+        this.isEdit = !this.isEdit;
       } catch (error) {
         this.showTooltip({
           text: error.response.data.message,
           type: "error",
         });
-      } finally {
-        this.isEdit = !this.isEdit;
       }
     },
   },

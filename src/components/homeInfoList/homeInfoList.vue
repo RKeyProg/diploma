@@ -1,8 +1,13 @@
 <template lang="pug">
 div
-  splide(:options="options" :slides="info")
-    splide-slide(v-for="item in info" :key="item.id").item
+  splide(
+    v-if="this.info.length && this.post !== 'admin'",
+    :options="options",
+    :slides="info"
+  )
+    splide-slide.item(v-for="item in info", :key="item.id")
       homeInfoItem(:date="item.created_at", :text="item.description")
+  .home-info__stub(v-else) Объявления не добавлены
 </template>
 
 <script>
@@ -10,6 +15,7 @@ import { Splide, SplideSlide } from "@splidejs/vue-splide";
 import homeInfoItem from "../homeInfoItem";
 import store from "../../store";
 import $axios from "../../request";
+import { mapState } from "vuex";
 
 export default {
   data() {
@@ -34,11 +40,18 @@ export default {
     Splide,
     SplideSlide,
   },
+  computed: {
+    ...mapState("user", {
+      post: (state) => state.post,
+    }),
+  },
   async mounted() {
-    const response = await $axios.get("/info/all");
+    if (this.post !== "admin") {
+      const response = await $axios.get("/info/all");
 
-    store.dispatch("info/setInfo", response.data);
-    this.info = response.data;
+      store.dispatch("info/setInfo", response.data);
+      this.info = response.data;
+    }
   },
 };
 </script>
