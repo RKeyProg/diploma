@@ -110,24 +110,24 @@
 
 .editor__title {
 	font-weight: normal;
-	font-size: 20px;
-	line-height: 23px;
+	font-size: 18px;
+	line-height: 22px;
 	color: #757575;
 	margin-bottom: 15px;
 
 	@include desktop {
-		font-size: 18px;
+		font-size: 16px;
 		line-height: 20px;
 	}
 
 	@include tablets {
-		font-size: 16px;
+		font-size: 14px;
 		line-height: 18px;
 	}
 
 	@include phones {
 		margin-bottom: 10px;
-		font-size: 14px;
+		font-size: 12px;
 		line-height: 16px;
 	}
 }
@@ -162,8 +162,8 @@
 		border-radius: 15px;
 		border: 1px solid #bdbdbd;
 		font-weight: normal;
-		font-size: 14px;
-		line-height: 16px;
+		font-size: 12px;
+		line-height: 14px;
 		padding: 7px 18px;
 		color: #757575;
 	}
@@ -177,14 +177,14 @@
 
 .column__title {
 	font-weight: normal;
-	font-size: 16px;
-	line-height: 18px;
+	font-size: 14px;
+	line-height: 16px;
 	color: #757575;
 	margin-bottom: 20px;
 
 	@include desktop {
-		font-size: 14px;
-		line-height: 16px;
+		font-size: 12px;
+		line-height: 14px;
 	}
 
 	@include tablets {
@@ -192,8 +192,8 @@
 	}
 
 	@include phones {
-		font-size: 12px;
-		line-height: 14px;
+		font-size: 10px;
+		line-height: 12px;
 		margin-bottom: 10px;
 	}
 }
@@ -248,13 +248,13 @@
 
 .editor__radio-name {
 	font-weight: normal;
-	font-size: 14px;
-	line-height: 16px;
+	font-size: 12px;
+	line-height: 14px;
 	color: #757575;
 
 	@include desktop {
-		font-size: 12px;
-		line-height: 14px;
+		font-size: 10px;
+		line-height: 12px;
 	}
 }
 

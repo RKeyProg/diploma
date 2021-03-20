@@ -26,6 +26,7 @@ import $axios from "../request";
 import appInput from "../components/input";
 import btn from "../components/button";
 import store from "../store";
+import { mapActions } from "vuex";
 
 export default {
   components: {
@@ -51,6 +52,9 @@ export default {
     };
   },
   methods: {
+    ...mapActions({
+      showTooltip: "tooltips/show",
+    }),
     async handleSubmit() {
       if ((await this.$validate()) === false) return;
 
@@ -66,7 +70,10 @@ export default {
         $axios.defaults.headers["Authorization"] = `Bearer ${token}`;
         this.$router.replace("/");
       } catch (error) {
-        console.log(error.response.data.error);
+        this.showTooltip({
+          text: error.response.data.message,
+          type: "error"
+        });
       } finally {
         this.isSubmitDisabled = false;
       }
@@ -89,20 +96,20 @@ export default {
 
 .h4 {
   font-weight: 500;
-  font-size: 24px;
+  font-size: 22px;
   color: #212121;
   margin-bottom: 20px;
 
   @include desktop {
-    font-size: 20px;
-  }
-
-  @include tablets {
     font-size: 18px;
   }
 
-  @include phones {
+  @include tablets {
     font-size: 16px;
+  }
+
+  @include phones {
+    font-size: 14px;
   }
 }
 

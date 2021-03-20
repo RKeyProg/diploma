@@ -16,25 +16,29 @@
         v-model="currentTask.help"
       )
   transition(name="start")
-    .buttons(v-if="!isTaskActive")
-      app-btn.current-task__btn(
-        v-if="post === 'teacher' && !isTeacherClick",
-        text="Сохранить",
-        @handleClick="changeTask"
-      )
-      app-btn.current-task__btn(
-        v-if="post === 'teacher' && isTeacherClick",
-        text="Проверить",
-        @handleClick="checkTask"
-      )
-      app-btn.current-task__btn(
-        v-if="post !== 'teacher'",
-        text="Приступить",
-        @handleClick="getStarted"
-      )
-      app-btn.current-task__btn(text="Назад", @handleClick="back")
+    .answer-container(v-if="!isTaskActive")
+      ul.files(v-if="post === 'teacher' && isTeacherClick")
+        li(v-for="(file, index) in answerFiles", :key="index")
+          app-link(file, :link="'http://172.20.10.4:8000/' + file.path") {{ file.name }}
+      .buttons
+        app-btn.current-task__btn(
+          v-if="post === 'teacher' && !isTeacherClick",
+          text="Сохранить",
+          @handleClick="changeTask"
+        )
+        app-btn.current-task__btn(
+          v-if="post === 'teacher' && isTeacherClick",
+          text="Подтвердить",
+          @handleClick="acceptTask"
+        )
+        app-btn.current-task__btn(
+          v-if="post !== 'teacher'",
+          text="Приступить",
+          @handleClick="getStarted"
+        )
+        app-btn.current-task__btn(text="Назад", @handleClick="back")
   transition(name="start")
-    .active-task(v-if="isTaskActive")
+    .active-task(v-if="isTaskActive && this.task.type !== 'visual'")
       form.form
         label.form__data
           .send-task__button
@@ -52,6 +56,7 @@
 <script>
 import sectionTitle from "../sectionTitle";
 import appBtn from "../button";
+import appLink from "../appLink";
 import { mapState, mapActions } from "vuex";
 import $axios from "../../request";
 
@@ -59,6 +64,7 @@ export default {
   components: {
     sectionTitle,
     appBtn,
+    appLink,
   },
   data() {
     return {
@@ -68,6 +74,7 @@ export default {
         description: "",
         help: "",
       },
+      answerFiles: {},
     };
   },
   computed: {
@@ -78,6 +85,9 @@ export default {
       task: (state) => state.currentTask,
       activeTask: (state) => state.activeTask,
       isTeacherClick: (state) => state.isTeacherClick,
+    }),
+    ...mapState("student", {
+      currentStudent: (state) => state.currentStudent,
     }),
     isTaskActive() {
       if (this.activeTask && this.task.id === this.activeTask.id) return true;
@@ -90,21 +100,41 @@ export default {
       setActiveTask: "task/setActiveTask",
       sendAnswer: "task/sendAnswer",
       changeIsTeacherClick: "task/changeIsTeacherClick",
+      showTooltip: "tooltips/show",
     }),
     async changeTask() {
-      await $axios.post(`/task/edit/${this.task.id}`, this.currentTask);
+      try {
+        const response = await $axios.post(`/task/edit/${this.task.id}`, this.currentTask);
+        
+        this.showTooltip({
+          text: response.data.message,
+          type: "success",
+        });
+      } catch (error) {
+        this.showTooltip({
+          text: error.response.data.message,
+          type: "error",
+        });
+      }
     },
     back() {
       this.$router.replace("/tasks");
     },
     async getStarted() {
-      this.isTask = !this.isTask;
+      try {
+        const response = await $axios.post("/task/start", this.task);
 
-      this.setActiveTask(this.task);
+        console.log(response.data);
 
-      const response = await $axios.post("/task/start", this.task);
+        if (this.task.type === "visual") {
+          this.$router.replace("/visualizationTask");
+        }
 
-      console.log(response.data);
+        this.isTask = !this.isTask;
+        this.setActiveTask(this.task);
+      } catch (error) {
+        console.log(error.response.data.message);
+      }
     },
     addFile() {
       const files = event.target.files;
@@ -116,15 +146,23 @@ export default {
     async getEnd() {
       this.sendAnswer(this.files);
     },
-    async checkTask() {
-      console.log("Проверено");
+    async acceptTask() {
+      await $axios.get(`/task/accept/answer/${this.currentStudent.id}`);
+
+      this.$router.replace("/group");
     },
   },
-  mounted() {
+  async mounted() {
     this.currentTask.description = this.task.description;
     this.currentTask.help = this.task.help;
 
-    console.log(this.isTeacherClick);
+    if (this.isTeacherClick && this.post === "teacher") {
+      const response = await $axios.get(
+        `/task/get/answer/${this.currentStudent.id}`
+      );
+
+      this.answerFiles = response.data;
+    }
   },
   destroyed() {
     if (this.isTeacherClick && this.post === "teacher") {

@@ -110,3 +110,25 @@ svg {
   max-height: 100%;
   object-fit: cover;
 }
+
+.notification {
+  transition: transform .3s ease;
+}
+
+.notify-container {
+  position: fixed;
+  z-index: 100;
+  top: 100%;
+  left: calc(50% + 227px / 2);
+  transform: translateX(-50%);
+
+  &.active {
+    .notification {
+      transform: translateY(-100%);
+    }
+  }
+
+  @include tablets {
+    left: 50%;
+  }
+}

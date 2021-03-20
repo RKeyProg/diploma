@@ -12,7 +12,8 @@
     )
     v-select(
       :options="component.examples",
-      :placeholder="component.placeholder"
+      :placeholder="component.placeholder",
+      @input="select($event, component.id)"
     )
   .pc__right-column
     ul.pc__components-list
@@ -50,6 +51,7 @@ export default {
             "Материнская плата 3",
             "Материнская плата 4",
           ],
+          activeExample: "",
           placeholder: "Выберите материнскую плату",
           object: "motherboard",
         },
@@ -65,6 +67,7 @@ export default {
             "Оперативная память 3",
             "Оперативная память 4",
           ],
+          activeExample: "",
           placeholder: "Выберите оперативную память",
           object: "ram",
         },
@@ -80,6 +83,7 @@ export default {
             "Процессор 3",
             "Процессор 4",
           ],
+          activeExample: "",
           placeholder: "Выберите процессор",
           object: "CPU",
         },
@@ -95,6 +99,7 @@ export default {
             "Блок питания 3",
             "Блок питания 4",
           ],
+          activeExample: "",
           placeholder: "Выберите блок питания",
           object: "powerBlock",
         },
@@ -110,6 +115,7 @@ export default {
             "Видеокарта 3",
             "Видеокарта 4",
           ],
+          activeExample: "",
           placeholder: "Выберите видеокарту",
           object: "videoCard",
         },
@@ -120,6 +126,7 @@ export default {
           desc:
             "Физически представляет собой базовую несущую конструкцию (шасси), которая предназначена для последующего наполнения аппаратным обеспечением с целью создания компьютера.",
           examples: ["Корпус 1", "Корпус 2", "Корпус 3", "Корпус 4"],
+          activeExample: "",
           placeholder: "Выберите корпус",
           object: "body",
         },
@@ -128,7 +135,7 @@ export default {
   },
   methods: {
     choiceComponent(id) {
-      this.componentsList.forEach(el => {
+      this.componentsList.forEach((el) => {
         el.isActive = false;
       });
 
@@ -138,9 +145,17 @@ export default {
       this.$emit("checkCompatibility");
     },
     checkComponent() {
-      this.componentsList.forEach(element => {
-        if (element.isActive) {
-          this.$emit("checkComponent", element.object);
+      this.componentsList.forEach((el) => {
+        if (el.isActive) {
+          this.$emit("checkComponent", el.object);
+        }
+      });
+    },
+    select(val, id) {
+      this.componentsList.forEach((el) => {
+        if (el.id === id) {
+          el.activeExample = val;
+          console.log(el);
         }
       });
     },

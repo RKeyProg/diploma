@@ -30,7 +30,7 @@ export default {
         arrows: false,
         pagination: false,
         rewind: true,
-        gap: "20px",
+        gap: "15px",
         padding: {
           left: "2.08vw",
           right: "2.08vw",
@@ -51,13 +51,15 @@ export default {
       if (this.post === "student") {
         const activeTask = await $axios.get(`/task/active/${this.userId}`);
 
-        this.setActiveTask(activeTask.data[0]);
+        if (activeTask.data.length) {
+          this.setActiveTask(activeTask.data[0]);
 
-        tasks.forEach(el => {
-          if (el.id === activeTask.data[0].id) {
-            el.status = "active";
-          }
-        });
+          tasks.forEach((el) => {
+            if (el.id === activeTask.data[0].id) {
+              el.status = "active";
+            }
+          });
+        }
       }
 
       this.tasks = tasks;

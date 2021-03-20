@@ -41,7 +41,8 @@ export default {
 		},
 		async editData({
 			commit,
-			rootState
+			rootState,
+			dispatch
 		}, newData) {
 			const formData = new FormData();
 
@@ -52,9 +53,17 @@ export default {
 			try {
 				const response = await this.$axios.post(`/${rootState.user.post}/edit`, formData);
 
+				dispatch("tooltips/show", {
+					text: response.data.message,
+          type: "success",
+				}, {root: true})
+
 				commit("SET_USER", response.data.user);
 			} catch (error) {
-				console.log("error");
+				dispatch("tooltips/show", {
+					text: error.response.data.message,
+          type: "error"
+				}, {root: true})
 			}
 		},
 	},

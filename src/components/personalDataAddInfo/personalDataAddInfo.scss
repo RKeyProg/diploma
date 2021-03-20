@@ -75,6 +75,10 @@
 		font-size: 12px;
 		line-height: 14px;
 	}
+
+	&.error {
+		border: 1px solid #FF4081;
+	}
 }
 
 .add-info__buttons {

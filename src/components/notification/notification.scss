@@ -1,0 +1,60 @@
+@import "../../mixins.scss";
+
+.inner-tooltip-container {
+  padding: 22px;
+  background: #3F51B5;
+  border-radius: 15px 15px 0 0;
+  border: 1px solid #bdbdbd;
+  border-bottom: 0;
+  min-width: 400px;
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  color: #fff;
+
+  &.warning {
+    background: #FF4081;
+  }
+
+  &.error {
+    background: #FF4081;
+  }
+
+  & svg {
+    fill: #fff;
+  }
+
+  @include tablets {
+    min-width: 300px;
+    max-width: 320px;
+  }
+}
+
+.tooltip__close {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  margin-left: 20px;
+
+  @include tablets {
+    width: 15px;
+    height: 15px;
+  }
+}
+
+.tooltip__text {
+  font-size: 18px;
+
+  @include desktop {
+    font-size: 16px;
+  }
+
+  @include tablets {
+    font-size: 14px;
+  }
+
+  @include phones {
+    font-size: 12px;
+  }
+}

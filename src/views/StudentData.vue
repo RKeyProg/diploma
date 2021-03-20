@@ -40,7 +40,9 @@ export default {
       `/task/active/${this.currentStudent.id}`
     );
 
-    this.thisStudentActiveTask = activeTask.data[0];
+    if (activeTask.data.length) {
+      this.thisStudentActiveTask = activeTask.data[0];
+    }
   },
 };
 </script>

@@ -2,9 +2,9 @@
 
 .task__container {
 	padding: 15px;
-	min-width: 470px;
-	width: 28.125vw;
-	min-height: 240px;
+	min-width: 430px;
+	width: 27.125vw;
+	min-height: 220px;
 	max-height: 300px;
 	height: 26.666vh;
 	border-radius: 15px;
@@ -33,7 +33,7 @@
 
 	@include phones {
 		min-width: 100%;
-		width: calc(100vw - 17px);
+		width: calc(100vw - 12px);
 	}
 
 	&.active {
@@ -42,19 +42,19 @@
 }
 
 .task__container-image {
-	width: 40px;
-	height: 40px;
+	width: 35px;
+	height: 35px;
 	fill: #fff;
 	align-self: flex-start;
 
 	@include desktop {
-		width: 35px;
-		height: 35px;
+		width: 30px;
+		height: 30px;
 	}
 
 	@include tablets {
-		width: 30px;
-		height: 30px;
+		width: 25px;
+		height: 25px;
 	}
 
 	@include phones {
@@ -64,47 +64,47 @@
 }
 
 .task__container-send {
-	width: 30px;
-	height: 30px;
+	width: 25px;
+	height: 25px;
 	fill: #FF4081;
 	align-self: flex-end;
 
 	@include desktop {
-		width: 25px;
-		height: 25px;
-	}
-
-	@include tablets {
 		width: 20px;
 		height: 20px;
 	}
 
-	@include phones {
+	@include tablets {
 		width: 15px;
 		height: 15px;
+	}
+
+	@include phones {
+		width: 10px;
+		height: 10px;
 	}
 }
 
 .task__container-title {
 	color: #fff;
 	font-weight: normal;
-	font-size: 22px;
-	line-height: 26px;
+	font-size: 18px;
+	line-height: 22px;
 	text-align: center;
 	padding: 10px 0;
 
 	@include desktop {
-		font-size: 18px;
+		font-size: 16px;
 		line-height: 20px;
 	}
 
 	@include tablets {
-		font-size: 16px;
+		font-size: 14px;
 		line-height: 18px;
 	}
 
 	@include phones {
-		font-size: 14px;
+		font-size: 12px;
 		line-height: 16px;
 	}
 }

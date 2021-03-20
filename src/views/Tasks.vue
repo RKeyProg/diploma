@@ -65,7 +65,7 @@ export default {
       const response = await $axios.get("/task/all");
       const tasks = response.data;
 
-      if (store.state.user.post === "student") {
+      if (store.state.user.post === "student" && store.state.task.activeTask) {
         tasks.forEach((el) => {
           if (el.id === store.state.task.activeTask.id) {
             el.status = "active";

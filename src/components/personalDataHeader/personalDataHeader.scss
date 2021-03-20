@@ -124,7 +124,7 @@
 .personal-data__title {
   text-align: end;
   font-weight: 500;
-  font-size: 21px;
+  font-size: 20px;
 
   @include desktop {
     font-size: 18px;
@@ -145,7 +145,7 @@
   flex-wrap: wrap;
 
   & span {
-    font-size: 18px;
+    font-size: 16px;
 
     &:first-child {
       font-weight: 500;
@@ -157,15 +157,15 @@
     }
 
     @include desktop {
-      font-size: 16px;
-    }
-
-    @include tablets {
       font-size: 14px;
     }
 
-    @include phones {
+    @include tablets {
       font-size: 12px;
+    }
+
+    @include phones {
+      font-size: 10px;
     }
   }
 

@@ -77,6 +77,7 @@
 import appInput from "../input";
 import appBtn from "../button";
 import $axios from "../../request";
+import { mapActions } from "vuex";
 
 export default {
   components: {
@@ -99,13 +100,24 @@ export default {
     };
   },
   methods: {
+    ...mapActions({
+      showTooltip: "tooltips/show",
+    }),
     async addTeacher() {
       try {
-        await $axios.post("/register/teacher", this.user);
+        const response = await $axios.post("/register/teacher", this.user);
+
+        this.showTooltip({
+          text: response.data.message,
+          type: "success"
+        });
+
+        this.$emit("addTeacher");
       } catch (error) {
-        console.log(error.response.data.error);
-      } finally {
-        this.isSubmitDisabled = false;
+        this.showTooltip({
+          text: error.response.data.message,
+          type: "error"
+        });
       }
     },
   },

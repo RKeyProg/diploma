@@ -12,20 +12,35 @@ div(:class="['add-task__wrapper', { disabled: !isTeacher }]")
             .column__title Тип задания
             .editor__task-type
               label
-                input(type="radio", value="intelligent" name="task-type" v-model="newTask.type")
+                input(
+                  type="radio",
+                  value="intelligent",
+                  name="task-type",
+                  v-model="newTask.type"
+                )
                 .editor__radio-view
                 .editor__radio-name Интеллектуальное
               label
-                input(type="radio", value="practical" name="task-type" v-model="newTask.type")
+                input(
+                  type="radio",
+                  value="practical",
+                  name="task-type",
+                  v-model="newTask.type"
+                )
                 .editor__radio-view
                 .editor__radio-name Практическое
               label
-                input(type="radio", value="visual" name="task-type" v-model="newTask.type")
+                input(
+                  type="radio",
+                  value="visual",
+                  name="task-type",
+                  v-model="newTask.type"
+                )
                 .editor__radio-view
                 .editor__radio-name 3D
           .editor__column
             .column__title Название
-            input(type="text" v-model="newTask.name")
+            input(type="text", v-model="newTask.name")
           .editor__column
             .column__title Подтвердить
             .editor__add-buttons
@@ -44,6 +59,7 @@ div(:class="['add-task__wrapper', { disabled: !isTeacher }]")
 <script>
 import appBtn from "../button";
 import $axios from "../../request";
+import { mapActions } from "vuex";
 
 export default {
   components: {
@@ -65,12 +81,27 @@ export default {
     };
   },
   methods: {
+    ...mapActions({
+      showTooltip: "tooltips/show",
+    }),
     async addTask() {
-      await $axios.post("/task/add", this.newTask);
+      try {
+        const response = await $axios.post("/task/add", this.newTask);
 
-      this.$emit("addTask");
+        this.showTooltip({
+          text: response.data.message,
+          type: "success",
+        });
 
-      this.isEdit = !this.isEdit;
+        this.$emit("addTask");
+      } catch (error) {
+        this.showTooltip({
+          text: error.response.data.message,
+          type: "error",
+        });
+      } finally {
+        this.isEdit = !this.isEdit;
+      }
     },
   },
 };

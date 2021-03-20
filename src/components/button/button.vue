@@ -49,7 +49,7 @@ export default {
     isMultiple: {
       type: Boolean,
       default: false,
-    }
+    },
   },
   methods: {
     ...mapActions({

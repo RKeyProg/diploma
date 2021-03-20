@@ -3,7 +3,7 @@ router-link.main-header__user(to="/personalAccount")
   .main-header__user-data
     .main-header__user-name {{ getUserName }}
     .main-header__user-group {{ getUserPost }}
-  avatar(user).photo
+  avatar.photo(:photo="getUserPhoto")
 </template>
 
 <script>
@@ -33,7 +33,10 @@ export default {
       }
 
       return postName;
-    }
+    },
+    getUserPhoto() {
+      return store.state.user.user.photo;
+    },
   },
 };
 </script>

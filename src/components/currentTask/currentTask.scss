@@ -72,6 +72,11 @@
 	line-height: 24px;
 	color: #757575;
 
+	@include tablets {
+		font-size: 14px;
+		line-height: 20px;
+	}
+
 	@include phones {
 		text-align: left;
 	}
@@ -79,10 +84,22 @@
 
 .current-task__btn {
 	padding: 1vh 45px;
-	margin-left: 2.08vw;
+	margin-right: 15px;
 
 	&:last-child {
-		margin-left: 15px;
+		margin-right: 0;
+	}
+
+	@include tablets {
+		padding: 1vh 30px;
+	}
+
+	@include tablets {
+		padding: 1vh 30px;
+	}
+
+	@include phones {
+		padding: 1vh 25px;
 	}
 }
 
@@ -182,5 +199,32 @@
 
 	&:hover {
 		cursor: pointer;
+	}
+}
+
+.answer-container {
+	padding: 0 2.08vw;
+}
+
+.files {
+	margin-left: 5px;
+	display: flex;
+	flex-wrap: wrap;
+	margin-bottom: 40px;
+	margin-right: -25px;
+
+	& li {
+		margin-right: 25px;
+		margin-bottom: 20px;
+	}
+
+	@include phones {
+		justify-content: center;
+	}
+}
+
+.active-task {
+	& .buttons {
+		padding: 0 2.08vw;
 	}
 }

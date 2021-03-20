@@ -19,7 +19,7 @@ div
       .side-bar__title Минский #[br] радиотехнический #[br] колледж
       ul.side-bar__list.links-list
         li.links-list__item
-          router-link.links-list__link(to="/visualizationTask")
+          a.links-list__link(href="https://www.mrk-bsuir.by/resource-center" target="blank")
             .links-list__icon
               svg.links-list__icon-border-img.links-list__gear-border(
                 viewBox="0 0 170.001 173.001",

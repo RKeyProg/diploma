@@ -41,7 +41,7 @@ div(v-else, :class="['task__container', { active: active }]")
 
 <script>
 import appLink from "../appLink";
-import { mapActions } from "vuex";
+import { mapState, mapActions } from "vuex";
 
 export default {
   components: {
@@ -77,13 +77,26 @@ export default {
       default: false,
     },
   },
+  computed: {
+    ...mapState("user", {
+      post: (state) => state.post,
+    }),
+    ...mapState("task", {
+      activeTask: (state) => state.activeTask,
+      currentTask: (state) => state.currentTask,
+    }),
+  },
   methods: {
     ...mapActions({
       setCurrentTask: "task/setCurrentTask",
     }),
     handleClick() {
-      this.$router.replace(this.link);
-      this.setCurrentTask(this.task);
+      if (this.taskType === "visual" && this.post === "student") {
+        this.$router.replace("/visualizationTask");
+      } else {
+        this.$router.replace(this.link);
+        this.setCurrentTask(this.task);
+      }
     },
   },
 };

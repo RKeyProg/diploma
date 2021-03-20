@@ -1,9 +1,10 @@
 <template lang="pug">
 .current-task
   section-title(title="Текущее задание")
-  .current-task__data
+  div(v-if="this.activeTask.id").current-task__data
     .current-task__title {{ activeTask.name }}
     app-link(send, :link="link" @handleClick="setTask")
+  div(v-else).current-task__empty Нет активного задания
 </template>
 
 <script>
@@ -44,7 +45,7 @@ export default {
     ...mapState("user", {
       post: (state) => state.post,
     })
-  }
+  },
 };
 </script>
 

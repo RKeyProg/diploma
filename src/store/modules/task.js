@@ -19,21 +19,17 @@ export default {
 		setCurrentTask({
 			commit
 		}, task) {
-			console.log(task);
 			commit("SET_TASK", task);
 		},
 		setActiveTask({
 			commit
 		}, task) {
-			console.log(task);
 			commit("SET_ACTIVE_TASK", task);
 		},
 		async sendAnswer({
 			commit
 		}, answer) {
 			const formData = new FormData();
-
-			console.log(answer);
 
 			Object.keys(answer).forEach(item => {
 				formData.append(item, answer[item]);
@@ -43,8 +39,6 @@ export default {
 				const response = await this.$axios.post("/task/send/answer", formData);
 
 				commit("EDIT_ACTIVE_TASKS", response);
-
-				console.log(response);
 			} catch (error) {
 				console.log("error");
 			}

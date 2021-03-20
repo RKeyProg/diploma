@@ -78,6 +78,7 @@ import avatar from "../avatar";
 import appBtn from "../button";
 import appInput from "../input";
 import store from "../../store";
+import { mapActions } from "vuex";
 
 export default {
   name: "personalDataHeader",
@@ -122,6 +123,9 @@ export default {
     },
   },
   methods: {
+    ...mapActions({
+      showTooltip: "tooltips/show",
+    }),
     editPersonalData() {
       this.isEdit = !this.isEdit;
     },
@@ -129,8 +133,6 @@ export default {
       if ((await this.$validate()) === false) return;
 
       try {
-        console.log(this.newPersonData);
-
         store.dispatch("user/editData", await this.newPersonData);
 
         this.preview = "";

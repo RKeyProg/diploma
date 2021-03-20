@@ -16,14 +16,17 @@
       personal-data-add-student(
         v-if="isStudentAdding",
         @changeIsStudentAdding="changeStudentAdingView"
+        @addStudent="changeStudentAdingView"
       )
       personal-data-add-teacher(
         v-else-if="isTeacherAdding",
         @changeIsTeacherAdding="changeTeacherAdingView"
+        @addTeacher="changeTeacherAdingView"
       )
       personal-data-add-info(
         v-else-if="isInfoAdding",
         @changeIsInfoAdding="changeInfoAdingView"
+        @addInfo="changeInfoAdingView"
       )
 </template>
 
