@@ -23,6 +23,8 @@ import pcTask from "../components/pcTask";
 import pcCompatibility from "../components/pcCompatibility";
 import pcComponent from "../components/pcComponent";
 import visualization from "../components/visualization";
+import $axios from "../request";
+import { mapActions } from "vuex";
 
 export default {
   name: "Visualization",
@@ -41,8 +43,32 @@ export default {
     };
   },
   methods: {
-    checkCompatibility() {
-      this.isCompatibility = true;
+    ...mapActions({
+      showTooltip: "tooltips/show",
+    }),
+    async checkCompatibility(specifications) {
+      try {
+        const response = await $axios.post("/task/pc/check", specifications);
+
+        if (response.data.result === "true") {
+          this.isCompatibility = true;
+
+          this.showTooltip({
+            text: response.data.message,
+            type: "success",
+          });
+        } else {
+          this.showTooltip({
+            text: response.data.message,
+            type: "error",
+          });
+        }
+      } catch (error) {
+        this.showTooltip({
+          text: error.response.data.message,
+          type: "error",
+        });
+      }
     },
     checkComponent(componentName) {
       this.currentComponent = componentName;

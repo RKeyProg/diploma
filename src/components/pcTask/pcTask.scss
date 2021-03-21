@@ -104,18 +104,30 @@
   align-items: flex-start;
 }
 
-.pc__components-list {
+.component__content {
+  display: flex;
+  flex-direction: column;
+}
+
+.pc__components-list, .pc__components-specifications-list {
   display: flex;
   flex-wrap: wrap;
   justify-self: flex-start;
-  margin-bottom: -15px;
+  margin-bottom: 20px;
+  padding-bottom: 5px;
+  border-bottom: 2px solid #bdbdbd;
 
   @include phones {
     margin-bottom: 20px;
   }
+
+  &:last-child {
+    border: 0;
+    margin-bottom: 50px;
+  }
 }
 
-.pc__components-item {
+.pc__components-item, .pc__components-specifications-item {
   margin-right: 15px;
   margin-bottom: 15px;
 
@@ -157,6 +169,16 @@
   }
 }
 
-.pc__component-open-btn {
-  margin-bottom: 15px;
+.specifications {
+  display: flex;
+  flex-direction: column;
+}
+
+.specification__pattern {
+  display: flex;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 500;
+  color: #757575;
+  margin-bottom: 20px;
 }

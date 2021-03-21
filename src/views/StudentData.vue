@@ -42,6 +42,8 @@ export default {
 
     if (activeTask.data.length) {
       this.thisStudentActiveTask = activeTask.data[0];
+    } else {
+      this.thisStudentActiveTask = null;
     }
   },
 };

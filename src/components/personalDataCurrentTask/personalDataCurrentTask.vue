@@ -1,10 +1,10 @@
 <template lang="pug">
 .current-task
   section-title(title="Текущее задание")
-  div(v-if="this.activeTask.id").current-task__data
+  div.current-task__data(v-if="this.activeTask")
     .current-task__title {{ activeTask.name }}
-    app-link(send, :link="link" @handleClick="setTask")
-  div(v-else).current-task__empty Нет активного задания
+    app-link(send, :link="link", @handleClick="setTask")
+  div.current-task__empty(v-else) Нет активного задания
 </template>
 
 <script>
@@ -37,14 +37,18 @@ export default {
         this.changeIsTeacherClick();
       }
 
-      this.$router.replace(this.link);
-      this.setCurrentTask(this.activeTask);
-    }
+      if (this.activeTask.type === "visual" && this.post === "student") {
+        this.$router.replace("/visualizationTask");
+      } else {
+        this.$router.replace(this.link);
+        this.setCurrentTask(this.task);
+      }
+    },
   },
   computed: {
     ...mapState("user", {
       post: (state) => state.post,
-    })
+    }),
   },
 };
 </script>

@@ -91,7 +91,11 @@ export default {
       setCurrentTask: "task/setCurrentTask",
     }),
     handleClick() {
-      if (this.taskType === "visual" && this.post === "student") {
+      if (
+        this.taskType === "visual" &&
+        this.activeTask.type === "visual" &&
+        this.post === "student"
+      ) {
         this.$router.replace("/visualizationTask");
       } else {
         this.$router.replace(this.link);

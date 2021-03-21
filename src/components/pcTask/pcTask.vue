@@ -10,24 +10,33 @@
       @handleClick="checkComponent",
       text="Открыть 3D модель"
     )
-    v-select(
-      :options="component.examples",
-      :placeholder="component.placeholder",
-      @input="select($event, component.id)"
-    )
   .pc__right-column
-    ul.pc__components-list
-      li.pc__components-item(v-for="component in componentsList")
-        button(
-          @click.prevent="choiceComponent(component.id)",
-          :class="{ active: component.isActive }"
-        ) {{ component.name }}
+    .component__content
+      ul.pc__components-list
+        li.pc__components-item(v-for="component in componentsList")
+          button(
+            @click.prevent="choiceComponent(component)",
+            :class="{ active: component.isActive }"
+          ) {{ component.name }}
+      .specifications 
+        .specification__pattern {{ activeComponent.specificationsPattern }}
+        ul.pc__components-specifications-list
+          li.pc__components-specifications-item(
+            v-for="(specification, key) in activeComponent.specifications",
+            :key="key"
+          )
+            button(
+              @click.prevent="choiceSpecificationt(key)",
+              :class="{ active: specification.isActive }"
+            ) {{ specification.name }}
     app-btn(@handleClick="checkCompatibility", text="Проверить совместимость")
 </template>
 
 <script>
 import appBtn from "../button";
 import vSelect from "vue-select";
+import $axios from "../../request";
+import { mapState } from "vuex";
 
 import "vue-select/dist/vue-select.css";
 
@@ -38,111 +47,53 @@ export default {
   },
   data() {
     return {
-      componentsList: [
-        {
-          id: 1,
-          name: "Материнская плата",
-          isActive: true,
-          desc:
-            "Печатная плата, являющаяся основой построения модульного устройства, например - компьютера. Системная плата содержит основную часть устройства, процессор и оперативную память дополнительные же или взаимозаменяемые платы называются платами расширений.",
-          examples: [
-            "Материнская плата 1",
-            "Материнская плата 2",
-            "Материнская плата 3",
-            "Материнская плата 4",
-          ],
-          activeExample: "",
-          placeholder: "Выберите материнскую плату",
-          object: "motherboard",
-        },
-        {
-          id: 2,
-          name: "Оперативная память",
-          isActive: false,
-          desc:
-            "Энергозависимая часть системы компьютерной памяти, в которой во время работы компьютера хранится выполняемый машинный код (программы), а также входные, выходные и промежуточные данные, обрабатываемые процессором. Оперативное запоминающее устройство (ОЗУ) — техническое устройство, реализующее функции оперативной памяти. ОЗУ может изготавливаться как отдельный внешний модуль или располагаться на одном кристалле с процессором, например, в однокристальных ЭВМ или однокристальных микроконтроллерах.",
-          examples: [
-            "Оперативная память 1",
-            "Оперативная память 2",
-            "Оперативная память 3",
-            "Оперативная память 4",
-          ],
-          activeExample: "",
-          placeholder: "Выберите оперативную память",
-          object: "ram",
-        },
-        {
-          id: 3,
-          name: "Процессор",
-          isActive: false,
-          desc:
-            "Электронный блок либо интегральная схема, исполняющая машинные инструкции (код программ), главная часть аппаратного обеспечения компьютера или программируемого логического контроллера. Иногда называют микропроцессором или просто процессором.",
-          examples: [
-            "Процессор 1",
-            "Процессор 2",
-            "Процессор 3",
-            "Процессор 4",
-          ],
-          activeExample: "",
-          placeholder: "Выберите процессор",
-          object: "CPU",
-        },
-        {
-          id: 4,
-          name: "Блок питания",
-          isActive: false,
-          desc:
-            "Устройство, предназначенное для формирования напряжений питания компьютерных систем. В некоторой степени блок питания также выполняет функции стабилизации и защиты от незначительных помех питающего напряжения.",
-          examples: [
-            "Блок питания 1",
-            "Блок питания 2",
-            "Блок питания 3",
-            "Блок питания 4",
-          ],
-          activeExample: "",
-          placeholder: "Выберите блок питания",
-          object: "powerBlock",
-        },
-        {
-          id: 5,
-          name: "Видеокарта",
-          isActive: false,
-          desc:
-            "Устройство, преобразующее графический образ, хранящийся как содержимое памяти компьютера (или самого адаптера), в форму, пригодную для дальнейшего вывода на экран монитора.",
-          examples: [
-            "Видеокарта 1",
-            "Видеокарта 2",
-            "Видеокарта 3",
-            "Видеокарта 4",
-          ],
-          activeExample: "",
-          placeholder: "Выберите видеокарту",
-          object: "videoCard",
-        },
-        {
-          id: 6,
-          name: "Корпус",
-          isActive: false,
-          desc:
-            "Физически представляет собой базовую несущую конструкцию (шасси), которая предназначена для последующего наполнения аппаратным обеспечением с целью создания компьютера.",
-          examples: ["Корпус 1", "Корпус 2", "Корпус 3", "Корпус 4"],
-          activeExample: "",
-          placeholder: "Выберите корпус",
-          object: "body",
-        },
-      ],
+      activeComponent: {},
     };
   },
+  computed: {
+    ...mapState("visual", {
+      componentsList: (state) => state.componentsList,
+    }),
+  },
   methods: {
-    choiceComponent(id) {
+    async choiceComponent(comp) {
+      this.getSpecifications(comp);
+
       this.componentsList.forEach((el) => {
         el.isActive = false;
       });
 
-      this.componentsList[id - 1].isActive = true;
+      this.componentsList[comp.id - 1].isActive = true;
+
+      this.activeComponent = this.componentsList[comp.id - 1];
     },
     checkCompatibility() {
-      this.$emit("checkCompatibility");
+      let specifications = {
+        id_motherboard: "",
+        id_cpu: "",
+        id_ram: "",
+        id_case: "",
+        id_power_supply: "",
+        id_graphics_card: "",
+      };
+
+      this.componentsList.forEach((el) => {
+        if (el.id === 1) {
+          specifications.id_motherboard = el.acitveSpecificationId;
+        } else if (el.id === 2) {
+          specifications.id_ram = el.acitveSpecificationId;
+        } else if (el.id === 3) {
+          specifications.id_cpu = el.acitveSpecificationId;
+        } else if (el.id === 4) {
+          specifications.id_power_supply = el.acitveSpecificationId;
+        } else if (el.id === 5) {
+          specifications.id_graphics_card = el.acitveSpecificationId;
+        } else if (el.id === 6) {
+          specifications.id_case = el.acitveSpecificationId;
+        }
+      });
+
+      this.$emit("checkCompatibility", specifications);
     },
     checkComponent() {
       this.componentsList.forEach((el) => {
@@ -151,14 +102,51 @@ export default {
         }
       });
     },
-    select(val, id) {
+    async getSpecifications(comp) {
+      if (Object.keys(comp.specifications).length === 0) {
+        const response = await $axios.get(comp.request);
+
+        let specifications = {};
+        let specRow = "";
+
+        for (const specId in response.data) {
+          for (const param in response.data[specId]) {
+            if (param !== "id") {
+              specRow += `${response.data[specId][param]} / `;
+            }
+          }
+          specifications[response.data[specId].id] = {
+            name: specRow.substring(0, specRow.length - 2),
+            isActive: false,
+          };
+          specRow = "";
+        }
+
+        comp.specifications = specifications;
+      }
+
+      this.activeComponent = comp;
+    },
+    choiceSpecificationt(key) {
+      for (const spec in this.activeComponent.specifications) {
+        this.activeComponent.specifications[spec].isActive = false;
+      }
+
+      this.activeComponent.specifications[key].isActive = true;
+
       this.componentsList.forEach((el) => {
-        if (el.id === id) {
-          el.activeExample = val;
-          console.log(el);
+        if (el.id === this.activeComponent.id) {
+          el.acitveSpecificationId = key;
         }
       });
     },
+  },
+  beforeMount() {
+    this.componentsList.forEach((el) => {
+      if (el.isActive) {
+        this.getSpecifications(el);
+      }
+    });
   },
 };
 </script>
