@@ -1,20 +1,22 @@
 <template lang="pug">
 .task-3d
   homeHeader(activePage="2")
-  pc-task(
-    v-if="!isCompatibility && !isComponent",
-    @checkCompatibility="checkCompatibility",
-    @checkComponent="checkComponent"
-  )
-  pc-compatibility(
-    v-else-if="isCompatibility",
-    @changeCompatibility="isCompatibility = false"
-  )
-  pc-component(
-    :class="['component', { hidden: !isComponent }]",
-    @changeComponent="isComponent = false",
-    :object="this.currentComponent"
-  )
+  div(v-if="!isComplited")
+    pc-task(
+      v-if="!isCompatibility && !isComponent",
+      @checkCompatibility="checkCompatibility",
+      @checkComponent="checkComponent"
+    )
+    pc-compatibility(
+      v-else-if="isCompatibility",
+      @changeCompatibility="isCompatibility = false"
+    )
+    pc-component(
+      :class="['component', { hidden: !isComponent }]",
+      @changeComponent="isComponent = false",
+      :object="this.currentComponent"
+    )
+  div.task__complited(v-else) Задание уже выполнено
 </template>
 
 <script>
@@ -24,7 +26,7 @@ import pcCompatibility from "../components/pcCompatibility";
 import pcComponent from "../components/pcComponent";
 import visualization from "../components/visualization";
 import $axios from "../request";
-import { mapActions } from "vuex";
+import { mapState, mapActions } from "vuex";
 
 export default {
   name: "Visualization",
@@ -45,6 +47,7 @@ export default {
   methods: {
     ...mapActions({
       showTooltip: "tooltips/show",
+      setAnswerStatus: "task/setAnswerStatus",
     }),
     async checkCompatibility(specifications) {
       try {
@@ -74,7 +77,28 @@ export default {
       this.currentComponent = componentName;
       this.isComponent = true;
     },
+    async isAnswerSend() {
+      const response = await $axios.get(`/task/exist/pc/${this.userId}`);
+
+      this.setAnswerStatus(response.data);
+    }
   },
+  computed: {
+    ...mapState("task", {
+      answerSendStatus: (state) => state.answerSendStatus,
+    }),
+    ...mapState("user", {
+      userId: (state) => state.user.id,
+    }),
+    isComplited() {
+      if (this.answerSendStatus) return true;
+
+      return false;
+    },
+  },
+  mounted() {
+    this.isAnswerSend();
+  }
 };
 </script>
 
@@ -149,6 +173,8 @@ export default {
 
 
 <style lang="scss" scoped>
+@import "../mixins.scss";
+
 .task-3d {
   padding: 2.77vh 0;
   height: 100%;
@@ -160,6 +186,27 @@ export default {
 .component {
   &.hidden {
     display: none;
+  }
+}
+
+.task__complited {
+  padding: 30px 0;
+  display: flex;
+  justify-content: center;
+  font-weight: 500;
+  font-size: 18px;
+  color: #212121;
+
+  @include desktop {
+    font-size: 16px;
+  }
+
+  @include tablets {
+    font-size: 14px;
+  }
+
+  @include phones {
+    font-size: 12px;
   }
 }
 </style>

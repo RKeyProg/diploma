@@ -21,9 +21,17 @@
       )
   transition(name="start")
     .answer-container(v-if="!isTaskActive")
-      ul.files(v-if="post === 'teacher' && isTeacherClick")
+      ul.files(
+        v-if="post === 'teacher' && isTeacherClick && this.task.type !== 'visual'"
+      )
         li(v-for="(file, index) in answerFiles", :key="index")
           app-link(file, :link="'http://172.20.10.4:8000/' + file.path") {{ file.name }}
+      ul.components(v-else-if="post === 'teacher' && this.task.type === 'visual'")
+        div.components__title Выбранные компоненты: 
+        li(v-for="(component, index) in answerComponents", :key="index")
+          div.components__answer
+            span {{ index }}:
+            span {{ component }}
       .buttons
         app-btn.current-task__btn(
           v-if="post === 'teacher' && !isTeacherClick",
@@ -84,6 +92,7 @@ export default {
         help: "",
       },
       answerFiles: {},
+      answerComponents: {},
     };
   },
   computed: {
@@ -192,11 +201,32 @@ export default {
     this.currentTask.help = this.task.help;
 
     if (this.isTeacherClick && this.post === "teacher") {
-      const response = await $axios.get(
-        `/task/get/answer/${this.currentStudent.id}`
-      );
+      if (this.task.type !== "visual") {
+        const response = await $axios.get(
+          `/task/get/answer/${this.currentStudent.id}`
+        );
 
-      this.answerFiles = response.data;
+        this.answerFiles = response.data;
+      } else {
+        const response = await $axios.get(
+          `/task/get/pc/${this.currentStudent.id}`
+        );
+
+        let components = {};
+        let compRow = "";
+
+        for (const id in response.data) {
+          for (const param in response.data[id]) {
+            if (param !== "id") {
+              compRow += `${response.data[id][param]} / `;
+            }
+          }
+          components[id] = compRow.substring(0, compRow.length - 2);
+          compRow = "";
+        }
+
+        this.answerComponents = components;
+      }
     }
   },
   destroyed() {

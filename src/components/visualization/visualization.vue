@@ -157,8 +157,11 @@ export default {
       while (this.scene.children.length > 0) {
         this.scene.remove(this.scene.children[0]);
       }
-      this.setLight();
-      this.setObject();
+
+      if (Object.keys(this.objectWay).length !== 0) {
+        this.setLight();
+        this.setObject();
+      }
     },
   },
   mounted() {

@@ -3,10 +3,12 @@ export default {
 	state: {
 		currentTask: {},
 		activeTask: null,
+		answerSendStatus: null,
 		isTeacherClick: false,
 	},
 	mutations: {
 		SET_TASK: (state, task) => (state.currentTask = task),
+		CHANGE_ANSWER_STATUS: (state, status) => (state.answerSendStatus = status),
 		SET_ACTIVE_TASK: (state, task) => (state.activeTask = task),
 		EDIT_ACTIVE_TASKS: () => {
 
@@ -56,6 +58,9 @@ export default {
 			commit
 		}) {
 			commit("CHANGE_IS_TEACHER_CLICK");
+		},
+		setAnswerStatus({ commit }, answerStatus) {
+			commit("CHANGE_ANSWER_STATUS", answerStatus);
 		}
 	}
 };

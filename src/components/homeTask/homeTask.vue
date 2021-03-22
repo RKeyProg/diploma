@@ -1,5 +1,5 @@
 <template lang="pug">
-div(v-else, :class="['task__container', { active: active }]")
+div(v-else, :class="['task__container', active]")
   .task__container-image(v-if="taskType === 'intelligent'")
     svg.task__container-icon(
       viewBox="0 0 512.001 512.001",
@@ -73,8 +73,8 @@ export default {
       default: null,
     },
     active: {
-      type: Boolean,
-      default: false,
+      type: String,
+      default: "",
     },
   },
   computed: {
@@ -93,6 +93,7 @@ export default {
     handleClick() {
       if (
         this.taskType === "visual" &&
+        this.activeTask &&
         this.activeTask.type === "visual" &&
         this.post === "student"
       ) {
@@ -110,6 +111,12 @@ export default {
 
 <style lang="scss">
 .task__container.active {
+  & .link-send__img {
+    fill: #fff !important;
+  }
+}
+
+.task__container.answered {
   & .link-send__img {
     fill: #fff !important;
   }

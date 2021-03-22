@@ -41,7 +41,7 @@ export default {
         this.$router.replace("/visualizationTask");
       } else {
         this.$router.replace(this.link);
-        this.setCurrentTask(this.task);
+        this.setCurrentTask(this.activeTask);
       }
     },
   },

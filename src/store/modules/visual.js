@@ -87,6 +87,7 @@ export default {
 				request: "object/case",
 			},
 		],
+		isComplited: false,
 	},
 	mutations: {
 		SET_TASK: (state, task) => (state.task = task),

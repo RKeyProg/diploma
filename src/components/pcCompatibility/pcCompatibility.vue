@@ -26,6 +26,7 @@
 import vSelect from "vue-select";
 import appBtn from "../button";
 import visualization from "../visualization";
+import { mapActions } from "vuex";
 
 import "vue-select/dist/vue-select.css";
 
@@ -48,7 +49,6 @@ export default {
         "Видеокарта",
         "Оперативная память",
         "Блок питания",
-        "Жесткий диск",
       ],
       examplesRight: [
         "Материнская плата",
@@ -56,7 +56,6 @@ export default {
         "Видеокарта",
         "Оперативная память",
         "Блок питания",
-        "Жесткий диск",
         "Корпус",
       ],
       leftObject: {},
@@ -115,6 +114,9 @@ export default {
     };
   },
   methods: {
+    ...mapActions({
+      showTooltip: "tooltips/show",
+    }),
     connectComponents() {
       const leftObj = this.leftObject;
       const rightObj = this.rightObject;
@@ -122,8 +124,18 @@ export default {
       if (leftObj.compatibillity == rightObj.name) {
         const index = this.examplesLeft.indexOf(leftObj.nameRus);
         this.examplesLeft.splice(index, 1);
+
+        this.showTooltip({
+          text: "Компоненты успешно соединены",
+          type: "success",
+        });
+
+        this.leftObject = {};
       } else {
-        console.log("Нельзя");
+        this.showTooltip({
+          text: "Выбранные компоненты нельзя соединить. Попробуйте еще раз",
+          type: "error",
+        });
       }
     },
     selectedLeft(val) {
@@ -144,7 +156,12 @@ export default {
   watch: {
     examplesLeft: function () {
       if (!this.examplesLeft.length) {
-        console.log("успех");
+        this.$router.replace("/tasks");
+
+        this.showTooltip({
+          text: "Задание выполнено успешно",
+          type: "success",
+        });
       }
     },
   },
