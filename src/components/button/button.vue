@@ -18,6 +18,12 @@ button.btn-type.btn-type_exit(
 )
   svg.btn-type__img(viewBox="0 0 329.26933 329")
     use(xlink:href=`../../images/icons/close.svg#close`)
+button.btn-type.btn-type_delete(
+  v-else-if="type === 'Delete'",
+  @click.prevent="editClick"
+)
+  svg.btn-type__img(viewBox="0 0 329.26933 329")
+    use(xlink:href=`../../images/icons/close.svg#close`)
 button.btn-type.btn-type_exit(v-else-if="type === 'Exit'", @click.prevent="logout")
   svg.btn-type__img(viewBox="0 0 512.001 512.001")
     use(xlink:href=`../../images/icons/logout.svg#logout`)

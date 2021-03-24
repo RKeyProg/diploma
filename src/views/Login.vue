@@ -15,9 +15,6 @@
         :errorMessage="validation.firstError('user.password')"
       )
     btn(text="Войти", :disabled="isSubmitDisabled")
-    .param
-      a.link-remember(href="#") Забыли пароль?
-      app-input(fieldType="checkBox", checked, title="Запомнить пароль")
 </template>
 
 <script>

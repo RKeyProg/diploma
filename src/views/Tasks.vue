@@ -3,7 +3,7 @@
   home-header(activePage="2")
   add-task(:isTeacher="isTeacher", @addTask="getTasks")
   splide.task__list(
-    v-if="!taskIsEmpty && this.post !== 'admin'",
+    v-if="!taskIsEmpty && !isTasksEmpty && this.post !== 'admin'",
     :options="options",
     :slides="tasks"
   )
@@ -13,7 +13,8 @@
         :taskType="task.type",
         :task="task",
         link="/task",
-        :active="task.status"
+        :active="task.status",
+        @deleteTask="getTasks"
       )
   .task__empty(v-else) Задания не добавлены
 </template>
@@ -52,6 +53,7 @@ export default {
         },
       },
       tasks: [],
+      isTasksEmpty: false,
     };
   },
   computed: {
@@ -90,6 +92,15 @@ export default {
         }
 
         this.tasks = tasks;
+      }
+    },
+  },
+  watch: {
+    tasks: function () {
+      if (!this.tasks.length) {
+        this.isTasksEmpty = true;
+      } else {
+        this.isTasksEmpty = false;
       }
     },
   },

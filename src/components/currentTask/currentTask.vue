@@ -16,7 +16,7 @@
       )
     .current-task__note
       textarea.current-task__textarea(
-        placeholder="Формулировка задания",
+        placeholder="Примечание",
         v-model="currentTask.help"
       )
   transition(name="start")
@@ -26,7 +26,7 @@
       )
         li(v-for="(file, index) in answerFiles", :key="index")
           app-link(file, :link="'http://172.20.10.4:8000/' + file.path") {{ file.name }}
-      ul.components(v-else-if="post === 'teacher' && this.task.type === 'visual'")
+      ul.components(v-else-if="post === 'teacher' && this.task.type !== 'visual' && isTaskActive")
         div.components__title Выбранные компоненты: 
         li(v-for="(component, index) in answerComponents", :key="index")
           div.components__answer
@@ -167,7 +167,6 @@ export default {
     },
     addFile() {
       const files = event.target.files;
-      console.log(files);
       for (let i = 0; i < files.length; i++) {
         this.files.push(files[i]);
       }
@@ -178,7 +177,7 @@ export default {
     },
     async acceptTask() {
       try {
-        const response = await $axios.get(
+        const response = await $axios.post(
           `/task/accept/answer/${this.currentStudent.id}`
         );
 

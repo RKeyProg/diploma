@@ -99,6 +99,10 @@ export default {
 
         this.$emit("addTask");
 
+        this.newTask.name = "";
+        this.newTask.type = "";
+        this.newTask.group = "";
+
         this.isEdit = !this.isEdit;
       } catch (error) {
         this.showTooltip({

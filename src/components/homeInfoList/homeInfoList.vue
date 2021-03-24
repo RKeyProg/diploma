@@ -6,7 +6,12 @@ div
     :slides="info"
   )
     splide-slide.item(v-for="item in info", :key="item.id")
-      homeInfoItem(:date="item.created_at", :text="item.description")
+      homeInfoItem(
+        :date="item.created_at",
+        :text="item.description",
+        :id="item.id",
+        @deleteInfo="getInfo"
+      )
   .home-info__stub(v-else) Объявления не добавлены
 </template>
 
@@ -45,15 +50,28 @@ export default {
       post: (state) => state.post,
     }),
   },
-  async mounted() {
-    if (this.post !== "admin") {
-      const response = await $axios.get("/info/all");
+  methods: {
+    async getInfo() {
+      if (this.post !== "admin") {
+        const response = await $axios.get("/info/all");
 
-      store.dispatch("info/setInfo", response.data);
-      this.info = response.data;
-    }
+        store.dispatch("info/setInfo", response.data);
+        this.info = response.data;
+      }
+    },
+  },
+  mounted() {
+    this.getInfo();
   },
 };
 </script>
+
+<style lang="scss">
+.info__delete {
+  & .btn-type__img {
+    fill: #212121;
+  }
+}
+</style>
 
 <style lang="scss" scoped src="./homeInfoList.scss"></style>

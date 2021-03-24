@@ -67,6 +67,10 @@
 		background: #FF4081;
 	}
 
+	&_delete {
+		background: transparent;
+	}
+
 	@include tablets {
 		width: 22px;
 		height: 22px;

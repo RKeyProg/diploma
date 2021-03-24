@@ -1,6 +1,19 @@
 @import "../../mixins.scss";
 
+.home-task__wrap {
+	position: relative;
+	height: 100%;
+
+	&:hover {
+		& .task__delete {
+			opacity: 1;
+		}
+	}
+}
+
 .task__container {
+	position: relative;
+	z-index: 40;
 	padding: 15px;
 	min-width: 430px;
 	width: 27.125vw;
@@ -82,11 +95,6 @@
 		width: 15px;
 		height: 15px;
 	}
-
-	@include phones {
-		width: 10px;
-		height: 10px;
-	}
 }
 
 .task__container-title {
@@ -136,5 +144,20 @@
 
 	&:hover {
 		cursor: pointer;
+	}
+}
+
+.task__delete {
+	position: absolute;
+	top: 15px;
+	right: 15px;
+	z-index: 60;
+	transition: all .3s ease;
+	opacity: 0;
+
+	@include tablets {
+		top: 10px;
+		right: 10px;
+		opacity: 1;
 	}
 }

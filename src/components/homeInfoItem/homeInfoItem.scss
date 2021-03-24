@@ -1,6 +1,7 @@
 @import "../../mixins.scss";
 
 .container {
+	position: relative;
 	user-select: none;
 	margin: 0 1.736vw;
 	padding: 5px 0;
@@ -37,4 +38,10 @@
 	width: 100%;
 	color: #212121;
 	text-overflow: ellipsis;
+}
+
+.info__delete {
+	position: absolute;
+	top: 0;
+	right: 0;
 }

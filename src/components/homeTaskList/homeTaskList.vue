@@ -12,6 +12,7 @@
         :task="task",
         link="/task",
         :active="task.status"
+        @deleteTask="getTasks"
       )
   div.home-task__stub(v-else) Задания не добавлены
 </template>

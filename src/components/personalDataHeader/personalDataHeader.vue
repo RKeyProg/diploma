@@ -132,19 +132,13 @@ export default {
     async handleSubmit() {
       if ((await this.$validate()) === false) return;
 
-      try {
-        store.dispatch("user/editData", await this.newPersonData);
+      store.dispatch("user/editData", await this.newPersonData);
 
-        this.preview = "";
-        this.newPersonData.password = "";
-        this.newPersonData.password_confirmation = "";
+      this.preview = "";
+      this.newPersonData.password = "";
+      this.newPersonData.password_confirmation = "";
 
-        this.isEdit = !this.isEdit;
-      } catch (error) {
-        console.log(error.response.data.error);
-      } finally {
-        this.isSubmitDisabled = false;
-      }
+      this.isEdit = !this.isEdit;
     },
     handleChange(event) {
       const file = event.target.files[0];
