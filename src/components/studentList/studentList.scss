@@ -16,6 +16,11 @@
 		font-size: 18px;
 		line-height: 20px;
 	}
+	
+	@include phones {
+		font-size: 16px;
+		line-height: 20px;
+	}
 }
 
 .student__list {
@@ -45,5 +50,17 @@
 
 	@include phones {
 		font-size: 12px;
+	}
+}
+
+.buttons {
+	padding: 50px 2.08vw 0;
+}
+
+.student-back__btn {
+	margin-right: 10px;
+
+	&:last-child {
+		margin-right: 0;
 	}
 }

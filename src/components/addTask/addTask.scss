@@ -166,6 +166,10 @@
 		line-height: 14px;
 		padding: 7px 18px;
 		color: #757575;
+
+		&.errorMessage {
+			border-color: #FF4081;
+		}
 	}
 
 	@include phones {

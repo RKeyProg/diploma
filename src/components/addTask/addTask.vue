@@ -40,7 +40,7 @@ div(:class="['add-task__wrapper', { disabled: !isTeacher }]")
                 .editor__radio-name 3D
           .editor__column
             .column__title Название
-            input(type="text", v-model="newTask.name")
+            input(type="text", v-model="newTask.name" :class="{errorMessage: validation.firstError('newTask.name') }")
           .editor__column
             .column__title Подтвердить
             .editor__add-buttons
@@ -53,6 +53,7 @@ div(:class="['add-task__wrapper', { disabled: !isTeacher }]")
 </template>
 
 <script>
+import { Validator } from "simple-vue-validator";
 import appBtn from "../button";
 import $axios from "../../request";
 import { mapState, mapActions } from "vuex";
@@ -60,6 +61,12 @@ import { mapState, mapActions } from "vuex";
 export default {
   components: {
     appBtn,
+  },
+  mixins: [require("simple-vue-validator").mixin],
+  validators: {
+    "newTask.name"(value) {
+      return Validator.value(value).required("Заполните поле");
+    },
   },
   props: {
     isTeacher: {
@@ -87,6 +94,8 @@ export default {
       showTooltip: "tooltips/show",
     }),
     async addTask() {
+      if ((await this.$validate()) === false) return;
+
       try {
         this.newTask.group = this.group;
 

@@ -26,10 +26,12 @@
       )
         li(v-for="(file, index) in answerFiles", :key="index")
           app-link(file, :link="'http://172.20.10.4:8000/' + file.path") {{ file.name }}
-      ul.components(v-else-if="post === 'teacher' && this.task.type !== 'visual' && isTaskActive")
-        div.components__title Выбранные компоненты: 
+      ul.components(
+        v-else-if="post === 'teacher' && this.task.type === 'visual' && Object.keys(this.answerComponents).length"
+      )
+        .components__title Выбранные компоненты:
         li(v-for="(component, index) in answerComponents", :key="index")
-          div.components__answer
+          .components__answer
             span {{ index }}:
             span {{ component }}
       .buttons

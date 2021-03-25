@@ -27,6 +27,12 @@
 	@include phones {
 		font-size: 10px;
 	}
+
+	&:hover {
+		& .info__delete {
+			opacity: 1;
+		}
+	}
 }
 
 .date {
@@ -41,7 +47,15 @@
 }
 
 .info__delete {
+	transition: all .3s ease;
+	opacity: 0;
 	position: absolute;
 	top: 0;
 	right: 0;
+
+	@include tablets {
+		top: 0px;
+		right: 5px;
+		opacity: 1;
+	}
 }

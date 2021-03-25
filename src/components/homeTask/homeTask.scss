@@ -46,7 +46,7 @@
 
 	@include phones {
 		min-width: 100%;
-		width: calc(100vw - 12px);
+		width: calc(100vw - 4.16vw);
 	}
 
 	&.active {

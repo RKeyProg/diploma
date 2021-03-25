@@ -4,6 +4,7 @@
   splide.materials__list(:options="options")
     splide-slide
       task.task(
+        material
         taskName="Анкета - оценка удовлетворенности работодателя",
         taskType="clipboard",
         link="https://www.mrk-bsuir.by/files/upload/anketa_-_ocenka_udovletvorennosti_rabotodatelya.doc",
@@ -11,30 +12,35 @@
       )
     splide-slide
       task.task(
+        material
         taskName="Пример письма на практику",
         taskType="letter",
         link="https://www.mrk-bsuir.by/files/upload/primer_pisma_na_praktiku.doc"
       )
     splide-slide
       task.task(
+        material
         taskName="Пример письма на распределение",
         taskType="letter",
         link="https://www.mrk-bsuir.by/files/upload/primer_pisma_na_raspredelenie.doc"
       )
     splide-slide
       task.task(
+        material
         taskName="Методические рекомендации",
         taskType="manual",
         link="https://www.mrk-bsuir.by/files/upload/metod_recom_mrk_2020.pdf"
       )
     splide-slide
       task.task(
+        material
         taskName="Договор на практику 2020 бюджет",
         taskType="contract",
         link="https://www.mrk-bsuir.by/files/upload/dogovor_na_praktiku_2020_byudzhet_1.doc"
       )
     splide-slide
       task.task(
+        material
         taskName="Договор на практику 2020 внебюджет",
         taskType="contract",
         link="https://www.mrk-bsuir.by/files/upload/dogovor_na_praktiku_2020_vnebyudzhet_0.doc"

@@ -1,7 +1,7 @@
 <template lang="pug">
 .task-3d
   homeHeader(activePage="2")
-  div(v-if="!isComplited")
+  div
     pc-task(
       v-if="!isCompatibility && !isComponent",
       @checkCompatibility="checkCompatibility",
@@ -16,7 +16,6 @@
       @changeComponent="isComponent = false",
       :object="this.currentComponent"
     )
-  div.task__complited(v-else) Задание уже выполнено
 </template>
 
 <script>
@@ -47,7 +46,6 @@ export default {
   methods: {
     ...mapActions({
       showTooltip: "tooltips/show",
-      setAnswerStatus: "task/setAnswerStatus",
     }),
     async checkCompatibility(specifications) {
       try {
@@ -77,11 +75,6 @@ export default {
       this.currentComponent = componentName;
       this.isComponent = true;
     },
-    async isAnswerSend() {
-      const response = await $axios.get(`/task/exist/pc/${this.userId}`);
-
-      this.setAnswerStatus(response.data);
-    }
   },
   computed: {
     ...mapState("task", {
@@ -96,9 +89,6 @@ export default {
       return false;
     },
   },
-  mounted() {
-    this.isAnswerSend();
-  }
 };
 </script>
 

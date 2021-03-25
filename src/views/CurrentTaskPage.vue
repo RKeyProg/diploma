@@ -49,5 +49,9 @@ export default {
   @include tablets {
     font-size: 18px;
   }
+
+  @include phones {
+    font-size: 16px;
+  }
 }
 </style>

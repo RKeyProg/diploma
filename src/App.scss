@@ -112,7 +112,7 @@ svg {
 }
 
 .notification {
-  transition: transform .3s ease;
+  transition: transform .5s ease;
 }
 
 .notify-container {
@@ -120,11 +120,11 @@ svg {
   z-index: 100;
   top: 100%;
   left: calc(50% + 227px / 2);
-  transform: translateX(-50%);
+  transform: translate(-50%, 200%);
 
   &.active {
     .notification {
-      transform: translateY(-100%);
+      transform: translateY(-300%);
     }
   }
 
