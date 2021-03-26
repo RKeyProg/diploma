@@ -37,3 +37,16 @@
 	justify-content: space-between;
 	padding: 0 2.08vw;
 }
+
+.start-enter-active {
+	transition: all .5s ease .2s;
+}
+
+.start-enter,
+.start-leave-to {
+	opacity: 0;
+}
+
+.start-leave {
+	display: none;
+}

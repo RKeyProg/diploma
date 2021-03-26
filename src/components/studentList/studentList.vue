@@ -13,11 +13,7 @@
       v-else-if="this.post === 'admin' && this.group.students.length",
       :options="options"
     )
-      splide-slide(
-        v-for="student in this.group.students",
-        :key="student.id",
-        @deleteStudent="deleteStudent"
-      )
+      splide-slide(v-for="student in this.group.students", :key="student.id")
         a(@click.prevent="setStudent(student)")
           student(:name="student.name", :photo="student.photo")
         appBtn.student__delete(
@@ -29,7 +25,7 @@
       app-btn.student-back__btn(
         v-if="this.post === 'admin'",
         text="Удалить группу",
-        @handleClick="$emit('deleteGroup')"
+        @handleClick="deleteGroup"
       )
       app-btn.student-back__btn(
         v-if="this.post === 'admin'",
@@ -118,8 +114,15 @@ export default {
         });
       }
     },
+    deleteGroup() {
+      this.$emit("deleteGroup", this.group.groupId);
+    },
   },
   mounted() {
+    if (this.post === "admin") {
+      this.students = this.group.students;
+    }
+
     this.getStudents();
   },
 };

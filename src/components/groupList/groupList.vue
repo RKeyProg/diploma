@@ -1,18 +1,20 @@
 <template lang="pug">
 div
-  .groups(v-if="!isGroupSelected")
-    .groups-list__title Список всех групп
-    splide.group__list(v-if="this.groups.length", :options="options")
-      splide-slide(v-for="group in this.groups", :key="group.id")
-        button(@click.prevent="selectGroup(group.id)") {{ group.group_name }}
-  .students(v-else)
-    studentList(
-      :group="selectedGroup",
-      :groupName="selectedGroup.group",
-      @goBack="goBack",
-      @deleteGroup="deleteGroup",
-      @refreshStudentList="getStudentList"
-    )
+  transition(name="start")
+    .groups(v-if="!isGroupSelected")
+      .groups-list__title Список всех групп
+      splide.group__list(v-if="this.groups.length", :options="options")
+        splide-slide(v-for="group in this.groups", :key="group.id")
+          button(@click.prevent="selectGroup(group.id)") {{ group.group_name }}
+  transition(name="start") 
+    .students(v-if="isGroupSelected")
+      studentList(
+        :group="selectedGroup",
+        :groupName="selectedGroup.group",
+        @goBack="goBack",
+        @deleteGroup="deleteGroup",
+        @refreshStudentList="refreshStudentList"
+      )
 </template>
 
 <script>
@@ -52,17 +54,13 @@ export default {
     ...mapActions({
       showTooltip: "tooltips/show",
     }),
-    selectGroup(id) {
-      this.getStudentList(id);
-
-      this.isGroupSelected = !this.isGroupSelected;
-    },
-    async getStudentList(id) {
+    async selectGroup(id) {
       try {
         const response = await $axios.get(`/student/list?id=${id}`);
 
         this.selectedGroup = response.data;
 
+        this.isGroupSelected = !this.isGroupSelected;
       } catch (error) {
         this.showTooltip({
           text: error.response.data.message,
@@ -85,8 +83,38 @@ export default {
     goBack() {
       this.isGroupSelected = !this.isGroupSelected;
     },
-    deleteGroup() {
-      console.log("Удалить");
+    async deleteGroup(id) {
+      const answer = { id: id };
+
+      try {
+        const response = await $axios.post("/group/delete/", answer);
+
+        this.showTooltip({
+          text: response.data.message,
+          type: "success",
+        });
+
+        this.getGroupList();
+
+        this.goBack();
+      } catch (error) {
+        this.showTooltip({
+          text: error.response.data.message,
+          type: "error",
+        });
+      }
+    },
+    async refreshStudentList(id) {
+      try {
+        const response = await $axios.get(`/student/list?id=${id}`);
+
+        this.selectedGroup = response.data;
+      } catch (error) {
+        this.showTooltip({
+          text: error.response.data.message,
+          type: "error",
+        });
+      }
     },
   },
   mounted() {
@@ -141,6 +169,10 @@ export default {
 
     &:hover {
       color: #ff4081;
+    }
+
+    & button {
+      margin-bottom: 15px;
     }
   }
 }

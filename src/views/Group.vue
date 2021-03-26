@@ -1,7 +1,7 @@
 <template lang="pug">
 .group
   homeHeader(activePage="4")
-  student-list(v-if="this.post !== 'admin'" :groupName="groupName")
+  student-list(v-if="this.post !== 'admin'", :groupName="groupName")
   group-list(v-else)
 </template>
 
@@ -16,7 +16,7 @@ export default {
   components: {
     homeHeader,
     studentList,
-    groupList
+    groupList,
   },
   data() {
     return {
